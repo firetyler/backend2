@@ -22,7 +22,7 @@ class DatabaseConnector:
         self.password = configs.get("spring.datasource.password").data
 
         # Parse db_url to get host, port, dbname
-        # Example format expected: jdbc:postgresql://localhost:5432/yourdbname
+    
         if db_url.startswith("jdbc:postgresql://"):
             db_url = db_url.replace("jdbc:postgresql://", "")
         host_port_db = db_url.split(":")
