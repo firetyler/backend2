@@ -1,25 +1,40 @@
 package com.example.backend.Domain;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 
 
 @Entity
 public class Data {
     
     @Id
-    @GeneratedValue
-    private String id;  // Använd String som ID
+    @GeneratedValue(strategy = GenerationType.IDENTITY)  // Auto-generate the ID
+    private long id;  // Använd String som ID
 
+    private String name ;
+     @Column(length = 1000)
     private String input;
+    @Column(length = 1000)
     private String output;
+    
+
+ 
 
     // Getters och setters
-    public String getId() {
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

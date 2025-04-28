@@ -101,9 +101,10 @@ def think(prompt):
 
 
 class AetherAgent:
-    def __init__(self):
+    def __init__(self, db_connector):
         self.memory = AetherMemory()
         self.name = "Aether"  # Identity
+        self.db_connector = db_connector  # Pass in the database connector instance
 
     def learn_name(self, user_input):
         if "your name is" in user_input.lower():
@@ -142,6 +143,7 @@ class AetherAgent:
                 reply = "I don't know my name yet. You can tell me!"
             self.memory.add(f"User asked my name. I replied: {reply}")
             print(f"\nAETHER: {reply}")
+            self.db_connector.insert_conversation(self.name, user_input, reply)  # Save to DB
             return
 
         # 3. Otherwise normal memory + thinking
@@ -173,12 +175,15 @@ class AetherAgent:
 
         reflection = f"Goal: {user_input}\nThought: {thought}\nAction: {action_result}"
         self.memory.add(reflection)
+
+        # Save conversation to DB
+        self.db_connector.insert_conversation(self.name, user_input, action_result)  # Save to DB
         print("\nReflection stored.")
 
 
 if __name__ == "__main__":
     db_con = DatabaseConnector()
-    agent = AetherAgent()
+    agent = AetherAgent(db_con)
     print("\nAether is ready. Ask your questions or give it tasks.")
     while True:
         try:

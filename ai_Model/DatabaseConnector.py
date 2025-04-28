@@ -1,54 +1,91 @@
-from jproperties import Properties
 import psycopg2
 import os
+from jproperties import Properties
 
 class DatabaseConnector:
-    def __init__(self, properties_path="application.properties"):
-        # Check if properties file exists
-        if not os.path.exists(properties_path):
-            print(f"Error: The properties file does not exist at: {properties_path}")
-            return
+    def __init__(self, properties_filename="application.properties"):
+        # Get current script directory dynamically
+        script_directory = os.path.dirname(os.path.realpath(__file__))
+        properties_path = os.path.join(script_directory, properties_filename)
 
-        # Load the application.properties file
+        if not os.path.exists(properties_path):
+            raise FileNotFoundError(f"Properties file does not exist: {properties_path}")
+
+        # Load the properties file
         configs = Properties()
         with open(properties_path, "rb") as config_file:
             configs.load(config_file)
 
-        # Read properties
+        # Fetch database connection parameters
         db_url = configs.get("spring.datasource.url").data
         self.user = configs.get("spring.datasource.username").data
         self.password = configs.get("spring.datasource.password").data
 
-        # Parse database URL (example: jdbc:postgresql://localhost:5432/mydatabase)
-        db_host_port = db_url.split("//")[1]
-        self.host, port_dbname = db_host_port.split(":")
-        self.port, self.dbname = port_dbname.split("/")
+        # Parse db_url to get host, port, dbname
+        # Example format expected: jdbc:postgresql://localhost:5432/yourdbname
+        if db_url.startswith("jdbc:postgresql://"):
+            db_url = db_url.replace("jdbc:postgresql://", "")
+        host_port_db = db_url.split(":")
+        self.host = host_port_db[0]
+        port_dbname = host_port_db[1].split("/")
+        self.port = port_dbname[0]
+        self.dbname = port_dbname[1]
+
+        print(f"DatabaseConnector initialized: host={self.host}, port={self.port}, dbname={self.dbname}, user={self.user}")
 
     def connect(self):
         try:
-        # Return psycopg2 connection object
             conn = psycopg2.connect(
-            dbname=self.dbname,
-            user=self.user,
-            password=self.password,
-            host=self.host,
-            port=self.port
-        )
-            print("Database connected successfully!")
+                dbname=self.dbname,
+                user=self.user,
+                password=self.password,
+                host=self.host,
+                port=self.port
+            )
             return conn
         except Exception as e:
             print(f"Error connecting to database: {e}")
             return None
 
-# Example usage
-if __name__ == "__main__":
-    # Adjust the path to the correct location of your application.properties
-    db = DatabaseConnector(properties_path="C:/Users/olive/Documents/java/backend/backend/src/main/resources/application.properties")
-    if db:  # Check if db is initialized correctly
-        conn = db.connect()
+    def insert_conversation(self, name, input, output):
+        conn = self.connect()
+        if conn:
+            try:
+                cursor = conn.cursor()
+                insert_query = """
+                INSERT INTO data (name, input, output)
+                VALUES (%s, %s, %s);
+                """
+                cursor.execute(insert_query, (name, input, output))
+                conn.commit()
+                print("Conversation saved successfully.")
+            except Exception as e:
+                print(f"Error inserting into database: {e}")
+            finally:
+                cursor.close()
+                conn.close()
+    
+    def update_column_types(self):
+        conn = self.connect()
+        if conn:
+            try:
+                cursor = conn.cursor()
 
-        print("Connected to database!")
+                # Alter columns to TEXT type
+                alter_queries = [
+                 
+                    "ALTER TABLE data ALTER COLUMN input TYPE TEXT;",
+                    "ALTER TABLE data ALTER COLUMN output TYPE TEXT;"
+                ]
+                
+                for query in alter_queries:
+                    cursor.execute(query)
 
-        # Always remember to close when done
-        conn.close()
-        print("Connection closed.")
+                # Commit the changes
+                conn.commit()
+                print("Columns updated successfully.")
+            except Exception as e:
+                print(f"Error updating columns: {e}")
+            finally:
+                cursor.close()
+                conn.close()
