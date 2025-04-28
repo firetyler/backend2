@@ -25,14 +25,20 @@ class DatabaseConnector:
         self.port, self.dbname = port_dbname.split("/")
 
     def connect(self):
+        try:
         # Return psycopg2 connection object
-        return psycopg2.connect(
+            conn = psycopg2.connect(
             dbname=self.dbname,
             user=self.user,
             password=self.password,
             host=self.host,
             port=self.port
         )
+            print("Database connected successfully!")
+            return conn
+        except Exception as e:
+            print(f"Error connecting to database: {e}")
+            return None
 
 # Example usage
 if __name__ == "__main__":

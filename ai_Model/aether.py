@@ -1,10 +1,14 @@
 import numpy as np
+import sys
 import faiss
 import torch
 import wikipedia
 import os
 import re
 from transformers import GPT2Tokenizer, GPT2LMHeadModel
+
+# Import the DatabaseConnector from the same directory
+from DatabaseConnector import DatabaseConnector
 
 # Avoid duplicate OpenMP errors
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
@@ -173,6 +177,7 @@ class AetherAgent:
 
 
 if __name__ == "__main__":
+    db_con = DatabaseConnector()
     agent = AetherAgent()
     print("\nAether is ready. Ask your questions or give it tasks.")
     while True:
@@ -185,3 +190,4 @@ if __name__ == "__main__":
         except KeyboardInterrupt:
             print("\nInterrupted. Exiting Aether.")
             break
+
