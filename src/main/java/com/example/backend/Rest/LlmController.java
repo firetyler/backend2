@@ -22,4 +22,5 @@ public class LlmController {
     public String generate(@RequestBody String promt) throws IOException, InterruptedException {
         return llmClient.generate(promt);
     }
+    
 }
