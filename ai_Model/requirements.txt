@@ -7,3 +7,4 @@ uuid
 wikipedia
 jproperties
 psycopg2-binary
+flask
