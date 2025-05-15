@@ -1,27 +1,23 @@
 package com.example.backend.Service;
-
-
 import org.springframework.stereotype.Service;
-
 import com.example.backend.Domain.Data;
 import com.example.backend.Repository.DataRepository;
 import com.example.backend.componets.PyhonLlmClient;
-
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class DataTestService {
+public class DataServiceGenerate {
     private final DataRepository dataRepository;
     private final PyhonLlmClient llm;
 
 
-    public DataTestService(DataRepository dataRepository, PyhonLlmClient llm) {
+    public DataServiceGenerate(DataRepository dataRepository, PyhonLlmClient llm) {
         this.dataRepository = dataRepository;
         this.llm = llm;
     }
 
-    public List<Data> createData(List<String> inputs) {
+    public List<Data> generateAndSave(List<String> inputs) {
         try {
             // Skapa en lista för att hålla alla Data-objekt
             List<Data> dataList = new ArrayList<>();
@@ -48,6 +44,9 @@ public class DataTestService {
     }
     public List<Data> getAllData() {
         return dataRepository.findAll();
+    }
+    public void saveData(Data data) {
+        dataRepository.save(data);  // Här sparar vi objektet till databasen
     }
 }
 

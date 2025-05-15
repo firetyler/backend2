@@ -102,38 +102,32 @@ def think(prompt):
 
 class AetherAgent:
     def __init__(self, db_connector):
-        self.memory = AetherMemory()
-        self.name = "Aether"  # Identity
-        self.db_connector = db_connector  # Pass in the database connector instance
+        self.db_connector = db_connector
+        self.name = None
+        self.memory = AetherMemory()  # Anta att du har en Memory-klass
 
-    def learn_name(self, user_input):
-        if "your name is" in user_input.lower():
-            parts = user_input.lower().split("your name is")
-            if len(parts) > 1:
-                guessed_name = parts[1].strip().split(" ")[0]
-                self.name = guessed_name.capitalize()
-                self.memory.add(f"My name is {self.name}.")
-                return f"Thanks! I'll remember my name is {self.name}."
+    def learn_name(self, text):
+        if "my name is" in text.lower():
+            name = text.split("my name is")[-1].strip().capitalize()
+            self.name = name
+            return f"Nice to meet you, {self.name}!"
         return None
 
     def find_name_in_memory(self):
-        memories = self.memory.texts
-        for mem in memories:
-            if "my name is" in mem.lower():
-                name = mem.split("is")[-1].strip().split(".")[0]
-                return name
-        return None
+        # Dummy fallback – använd egen logik om du vill
+        return "Aether"
 
     def run(self, user_input):
         print(f"\nGOAL: {user_input}")
-        
-        # 1. Learn name if user teaches
+
+        # 1. Learn name
         name_learned = self.learn_name(user_input)
         if name_learned:
             print(f"\nAETHER: {name_learned}")
-            return
-        
-        # 2. Answer 'your name' from memory immediately
+            self.db_connector.insert_conversation(self.name or "User", user_input, name_learned)
+            return name_learned
+
+        # 2. Respond to "your name"
         if "your name" in user_input.lower() or "what's your name" in user_input.lower():
             if not self.name:
                 self.name = self.find_name_in_memory()
@@ -143,12 +137,11 @@ class AetherAgent:
                 reply = "I don't know my name yet. You can tell me!"
             self.memory.add(f"User asked my name. I replied: {reply}")
             print(f"\nAETHER: {reply}")
-            self.db_connector.insert_conversation(self.name, user_input, reply)  # Save to DB
-            return
+            self.db_connector.insert_conversation(self.name or "User", user_input, reply)
+            return reply
 
-        # 3. Otherwise normal memory + thinking
+        # 3. Memory recall
         related = self.memory.search(user_input, k=3)
-
         if related:
             print("\nRecalled Memory:")
             for m in related:
@@ -156,12 +149,12 @@ class AetherAgent:
         else:
             print("\nNo memory found.")
 
+        # 4. Thought and tools
         context = "\n".join(related[:2])
         prompt = f"{context}\nThought: To achieve '{user_input}', I should"
         thought = think(prompt)
         print("\nThought:\n", thought)
 
-        # 4. Tools if needed
         goal_lower = user_input.lower()
         if "calculate" in goal_lower:
             expression = goal_lower.replace("calculate", "").strip()
@@ -173,12 +166,13 @@ class AetherAgent:
 
         print("\nAction Result:\n", action_result)
 
+        # 5. Save memory and conversation
         reflection = f"Goal: {user_input}\nThought: {thought}\nAction: {action_result}"
         self.memory.add(reflection)
+        self.db_connector.insert_conversation(self.name or "User", user_input, action_result)
 
-        # Save conversation to DB
-        self.db_connector.insert_conversation(self.name, user_input, action_result)  # Save to DB
         print("\nReflection stored.")
+        return action_result  # ✅ VIKTIGT: detta returneras
 
 
 if __name__ == "__main__":

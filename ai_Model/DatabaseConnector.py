@@ -47,7 +47,7 @@ class DatabaseConnector:
             print(f"Error connecting to database: {e}")
             return None
 
-    def insert_conversation(self, name, input, output):
+    def insert_conversation(self, name, input, output= "default"):
         conn = self.connect()
         if conn:
             try:
@@ -89,3 +89,20 @@ class DatabaseConnector:
             finally:
                 cursor.close()
                 conn.close()
+
+
+    def fetch_history(self):
+        conn = self.connect()
+        if conn:
+            try:
+                cursor = conn.cursor()
+                cursor.execute("SELECT name, input, output FROM data;")
+                rows = cursor.fetchall()
+                return [{"name": row[0], "input": row[1], "output": row[2]} for row in rows]  # Return data as a list of dicts
+            except Exception as e:
+                print(f"Error fetching history: {e}")
+                return []
+            finally:
+                cursor.close()
+                conn.close()
+        return []   
