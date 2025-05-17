@@ -47,34 +47,38 @@ class AetherMemory:
             return []
         emb = self.embed(query)
         D, I = self.index.search(np.array([emb]), k)
-        return [self.texts[i] for i in I[0] if i < len(self.texts)]
+        results = []
+        for i in I[0]:
+             if 0 <= i < len(self.texts):
+                 results.append(self.texts[i])
+        return results
 
     def fetch_all_memories(self):
         return self.texts
 
 
 def calculator_tool(input_str):
-    # Only allow safe characters
-    allowed_chars = re.compile(r"^[\d\s\.\+\-\*/\(\)]+$")  # Includes -, decimals, parentheses, etc.
-    input_str = input_str.replace('–', '-')  # Replace en dash if user types it
-    input_str = input_str.replace('−', '-')  # Replace minus sign symbol with real dash
+        # Only allow safe characters
+        allowed_chars = re.compile(r"^[\d\s\.\+\-\*/\(\)]+$")  # Includes -, decimals, parentheses, etc.
+        input_str = input_str.replace('–', '-')  # Replace en dash if user types it
+        input_str = input_str.replace('−', '-')  # Replace minus sign symbol with real dash
 
-    if not allowed_chars.match(input_str):
-        return "Invalid characters in expression."
+        if not allowed_chars.match(input_str):
+            return "Invalid characters in expression."
 
-    try:
-        result = eval(input_str)
-        return f"Calculated result: {result}"
-    except Exception as e:
-        return f"Error evaluating expression: {e}"
+        try:
+            result = eval(input_str)
+            return f"Calculated result: {result}"
+        except Exception as e:
+            return f"Error evaluating expression: {e}"
 
 
 def wikipedia_tool(query):
-    try:
-        summary = wikipedia.summary(query, sentences=2)
-        return f"Wikipedia result: {summary}"
-    except Exception as e:
-        return f"Wikipedia error: {e}"
+        try:
+            summary = wikipedia.summary(query, sentences=2)
+            return f"Wikipedia result: {summary}"
+        except Exception as e:
+            return f"Wikipedia error: {e}"
 
 
 def think(prompt):
@@ -88,31 +92,48 @@ def think(prompt):
     attention_mask = torch.ones(inputs.shape, dtype=torch.long).to(device)
 
     with torch.no_grad():
-        # Använd fp16 om CUDA finns
+            # Använd fp16 om CUDA finns
         if device.type == "cuda":
             with torch.autocast("cuda", dtype=torch.float16):
+                    output = model.generate(
+                        inputs,
+                        attention_mask=attention_mask,
+                        max_new_tokens=80,  # 🔧 Mindre = snabbare
+                        top_k=30,           # 🔧 Mindre = mindre slump
+                        top_p=0.90,
+                        pad_token_id=tokenizer.eos_token_id,
+                        do_sample=True
+                    )
+        else:
                 output = model.generate(
                     inputs,
                     attention_mask=attention_mask,
-                    max_new_tokens=80,  # 🔧 Mindre = snabbare
-                    top_k=30,           # 🔧 Mindre = mindre slump
+                    max_new_tokens=80,
+                    top_k=30,
                     top_p=0.90,
                     pad_token_id=tokenizer.eos_token_id,
                     do_sample=True
                 )
-        else:
-            output = model.generate(
-                inputs,
-                attention_mask=attention_mask,
-                max_new_tokens=80,
-                top_k=30,
-                top_p=0.90,
-                pad_token_id=tokenizer.eos_token_id,
-                do_sample=True
-            )
 
     return tokenizer.decode(output[0], skip_special_tokens=True)
 
+def extract_search_term(text):
+        """
+        Attempts to extract a clean search term from a user's question.
+        Removes common question phrases and trailing punctuation.
+        """
+        text = text.strip().lower()
+        question_starters = [
+            r"what is", r"who is", r"where is", r"when is", r"why is", r"how is",
+            r"what's", r"who's", r"where's", r"when's", r"how's",
+            r"tell me about", r"give me information about", r"do you know",
+            r"can you tell me about", r"i want to know about", r"explain", r"define"
+        ]
+        for starter  in question_starters:
+            pattern  = rf"^{starter}\s+"
+            text = re.sub(pattern, "", text)
+        text = text.strip(" ?")       
+        return text  # fallback
 
 
 class AetherAgent:
@@ -165,19 +186,34 @@ class AetherAgent:
             print("\nNo memory found.")
 
         # 4. Thought and tools
-        context = "\n".join(related[:2])
-        prompt = f"{context}\nThought: To achieve '{user_input}', I should"
-        thought = think(prompt)
+        context = "\n".join(related[:2]) if related else "No relevant memory."
+        reasoning_prompt = f"""
+        You are an intelligent AI assistant named Aether.
+        User said: "{user_input}"
+        Memory:
+        {context}
+        Step-by-step, think about what the user is really asking for.
+        Then decide if you need to use a tool (calculator, Wikipedia), or if you can answer directly using reasoning.
+        Thought:
+        """
+
+
+
+        thought = think(reasoning_prompt)
         print("\nThought:\n", thought)
 
-        goal_lower = user_input.lower()
-        if "calculate" in goal_lower:
-            expression = goal_lower.replace("calculate", "").strip()
+
+        thought_lower = thought.lower()
+        if "use calculator" in thought_lower or "calculate" in thought_lower:
+            expression = re.findall(r"[-+*/().\d\s]+", user_input)
+            expression = expression[0] if expression else user_input
             action_result = calculator_tool(expression)
-        elif any(q in goal_lower for q in ["who", "what", "where", "when", "why", "how"]):
-            action_result = wikipedia_tool(user_input)
+        elif "search wikipedia" in thought_lower or "look up" in thought_lower or "wikipedia" in thought_lower:
+            search_term = extract_search_term(user_input)
+            print(f"🔍 Wikipedia search term: {search_term}")
+            action_result = wikipedia_tool(search_term)
         else:
-            action_result = "No tool used."
+             action_result = f"Based on reasoning: {thought}"
 
         print("\nAction Result:\n", action_result)
 
@@ -185,7 +221,6 @@ class AetherAgent:
         reflection = f"Goal: {user_input}\nThought: {thought}\nAction: {action_result}"
         self.memory.add(reflection)
         self.db_connector.insert_conversation(self.name or "User", user_input, action_result)
-
         print("\nReflection stored.")
         return action_result  # ✅ VIKTIGT: detta returneras
 
