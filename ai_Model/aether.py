@@ -18,7 +18,8 @@ print("Loading GPT-2 Medium model...")
 tokenizer = GPT2Tokenizer.from_pretrained("gpt2-medium")
 model = GPT2LMHeadModel.from_pretrained("gpt2-medium")
 model.eval()
-
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+model.to(device)
 # Ensure pad_token_id is set
 tokenizer.pad_token = tokenizer.eos_token
 MAX_INPUT_LENGTH = 1024
@@ -80,24 +81,38 @@ def think(prompt):
     print("Thinking...")
 
     inputs = tokenizer.encode(prompt, return_tensors="pt")
-
     if inputs.shape[1] > MAX_INPUT_LENGTH:
         inputs = inputs[:, -MAX_INPUT_LENGTH:]
 
-    attention_mask = torch.ones(inputs.shape, dtype=torch.long)
+    inputs = inputs.to(device)  # Skicka till GPU om tillgängligt
+    attention_mask = torch.ones(inputs.shape, dtype=torch.long).to(device)
 
     with torch.no_grad():
-        output = model.generate(
-            inputs,
-            attention_mask=attention_mask,
-            max_new_tokens=100,
-            pad_token_id=tokenizer.eos_token_id,
-            do_sample=True,
-            top_k=50,
-            top_p=0.95
-        )
+        # Använd fp16 om CUDA finns
+        if device.type == "cuda":
+            with torch.autocast("cuda", dtype=torch.float16):
+                output = model.generate(
+                    inputs,
+                    attention_mask=attention_mask,
+                    max_new_tokens=80,  # 🔧 Mindre = snabbare
+                    top_k=30,           # 🔧 Mindre = mindre slump
+                    top_p=0.90,
+                    pad_token_id=tokenizer.eos_token_id,
+                    do_sample=True
+                )
+        else:
+            output = model.generate(
+                inputs,
+                attention_mask=attention_mask,
+                max_new_tokens=80,
+                top_k=30,
+                top_p=0.90,
+                pad_token_id=tokenizer.eos_token_id,
+                do_sample=True
+            )
 
     return tokenizer.decode(output[0], skip_special_tokens=True)
+
 
 
 class AetherAgent:
