@@ -106,3 +106,67 @@ class DatabaseConnector:
                 cursor.close()
                 conn.close()
         return []   
+    
+
+
+
+
+# detta är nytt 
+
+
+    def create_preferences_table(self):
+        """Skapa en tabell för användarpreferenser om den inte finns."""
+        conn = self.connect()
+        if conn:
+            try:
+                cursor = conn.cursor()
+                cursor.execute("""
+                CREATE TABLE IF NOT EXISTS user_preferences (
+                    id SERIAL PRIMARY KEY,
+                    key TEXT UNIQUE,
+                    value TEXT
+                );
+                """)
+                conn.commit()
+            except Exception as e:
+                print(f"Error creating preferences table: {e}")
+            finally:
+                cursor.close()
+                conn.close()
+
+    def insert_user_preference(self, key, value):
+        """Lägg till eller uppdatera en användarpreferens."""
+        conn = self.connect()
+        if conn:
+            try:
+                cursor = conn.cursor()
+                insert_query = """
+                INSERT INTO user_preferences (key, value)
+                VALUES (%s, %s)
+                ON CONFLICT(key) DO UPDATE SET value=EXCLUDED.value;
+                """
+                cursor.execute(insert_query, (key, value))
+                conn.commit()
+                print(f"Preference '{key}' saved successfully.")
+            except Exception as e:
+                print(f"Error inserting preference: {e}")
+            finally:
+                cursor.close()
+                conn.close()
+
+    def fetch_user_preferences(self):
+        """Hämta alla användarpreferenser."""
+        conn = self.connect()
+        if conn:
+            try:
+                cursor = conn.cursor()
+                cursor.execute("SELECT key, value FROM user_preferences;")
+                rows = cursor.fetchall()
+                return {row[0]: row[1] for row in rows}  # Returnera preferenser som en dictionary
+            except Exception as e:
+                print(f"Error fetching preferences: {e}")
+                return {}
+            finally:
+                cursor.close()
+                conn.close()
+        return {}

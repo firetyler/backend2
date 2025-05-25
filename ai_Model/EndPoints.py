@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from aether import AetherAgent
+from aether2 import AetherAgent
 from DatabaseConnector import DatabaseConnector
 
 app = Flask(__name__)
