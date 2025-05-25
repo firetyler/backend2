@@ -169,11 +169,13 @@ class AetherAgent:
         self.memory = AetherMemory()
         self.name = self.load_name()
         self.user_preferences = self.load_preferences()
-        
+       
+        self.tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
+        self.embedding = nn.Embedding(self.tokenizer.vocab_size, 256).to(self.device)
         self.model = StackedTransformer(embed_size=256, num_layers=4, heads=8, forward_expansion=4, dropout=0.1)
         self.model.to(self.device)
 
-        self.tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
+        
 
     def load_name(self):
         try:
@@ -255,22 +257,24 @@ class AetherAgent:
         except FileNotFoundError:
             print(f"❌ Filen {filename} hittades inte!")
 
-    def generate_text(self, prompt, max_length=50):
+    def generate_text(self, prompt, max_length=50): 
         self.model.eval()
         input_ids = self.tokenizer.encode(prompt, return_tensors="pt").to(self.device)
-        
+
         for _ in range(max_length):
+            embedded = self.embedding(input_ids)  # Gör detta varje gång input_ids uppdateras
             seq_len = input_ids.size(1)
             mask = generate_square_subsequent_mask(seq_len).to(self.device)
             with torch.no_grad():
-                outputs = self.model(input_ids, mask=mask)
+                outputs = self.model(embedded, mask=mask)
             next_token_logits = outputs[:, -1, :]
             next_token_id = torch.argmax(next_token_logits, dim=-1).unsqueeze(0)
+
             input_ids = torch.cat((input_ids, next_token_id), dim=1)
-            
+
             if next_token_id.item() in [self.tokenizer.sep_token_id, self.tokenizer.eos_token_id]:
                 break
-        
+
         generated_text = self.tokenizer.decode(input_ids[0], skip_special_tokens=True)
         return generated_text
 
