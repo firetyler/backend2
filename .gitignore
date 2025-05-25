@@ -31,3 +31,13 @@ build/
 
 ### VS Code ###
 
+# Ignorera träningsdata
+*.json
+# Eller specifikt för din träningsdatafil
+ai_Model/chat_training_data.json
+
+# Ignorera träningsmodeller (resultat)
+*.pth
+ai_Model/*.pth
+
+aether_chat_trained.pth
