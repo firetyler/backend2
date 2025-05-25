@@ -122,9 +122,10 @@ class DatabaseConnector:
                 cursor = conn.cursor()
                 cursor.execute("""
                 CREATE TABLE IF NOT EXISTS user_preferences (
-                    id SERIAL PRIMARY KEY,
-                    key TEXT UNIQUE,
-                    value TEXT
+                id SERIAL PRIMARY KEY,
+                name TEXT UNIQUE,
+                text TEXT,
+                user_info TEXT DEFAULT 'default'
                 );
                 """)
                 conn.commit()
@@ -134,25 +135,26 @@ class DatabaseConnector:
                 cursor.close()
                 conn.close()
 
-    def insert_user_preference(self, key, value):
+    def insert_user_preference(self, name, text, user_info="default"):
         """Lägg till eller uppdatera en användarpreferens."""
         conn = self.connect()
         if conn:
             try:
                 cursor = conn.cursor()
                 insert_query = """
-                INSERT INTO user_preferences (key, value)
-                VALUES (%s, %s)
-                ON CONFLICT(key) DO UPDATE SET value=EXCLUDED.value;
+                INSERT INTO user_preferences (name, text, user_info)
+                VALUES (%s, %s, %s)
+                ON CONFLICT(name) DO UPDATE SET text = EXCLUDED.text, user_info = EXCLUDED.user_info;
                 """
-                cursor.execute(insert_query, (key, value))
+                cursor.execute(insert_query, (name, text, user_info))
                 conn.commit()
-                print(f"Preference '{key}' saved successfully.")
+                print(f"✅ Preference '{name}' saved successfully.")
             except Exception as e:
-                print(f"Error inserting preference: {e}")
+                print(f"❌ Error inserting preference: {e}")
             finally:
                 cursor.close()
                 conn.close()
+
 
     def fetch_user_preferences(self):
         """Hämta alla användarpreferenser."""
@@ -160,9 +162,9 @@ class DatabaseConnector:
         if conn:
             try:
                 cursor = conn.cursor()
-                cursor.execute("SELECT key, value FROM user_preferences;")
+                cursor.execute("SELECT name, text, user_info  FROM user_preferences;")
                 rows = cursor.fetchall()
-                return {row[0]: row[1] for row in rows}  # Returnera preferenser som en dictionary
+                return [{"name": row[0], "text": row[1], "user_info": row[2]} for row in rows] # Returnera preferenser som en dictionary
             except Exception as e:
                 print(f"Error fetching preferences: {e}")
                 return {}

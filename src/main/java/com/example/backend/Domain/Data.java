@@ -14,9 +14,9 @@ public class Data {
     private long id;  // Använd String som ID
 
     private String name ;
-     @Column(length = 1000)
+     @Column(length = 100000)
     private String input;
-    @Column(length = 1000)
+    @Column(length = 100000)
     private String output;
     
 

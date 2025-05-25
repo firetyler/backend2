@@ -6,9 +6,8 @@ import numpy as np
 import faiss
 import json
 import os
-
 import wikipedia
-
+from transformers import AutoTokenizer
 from DatabaseConnector import DatabaseConnector
 
 # 1. Positionella inbäddningar (stöder variabel längd)
@@ -71,27 +70,28 @@ class TransformerBlock(nn.Module):
 
 # 4. Staplad transformer-modell med flexibel input
 class StackedTransformer(nn.Module):
-    def __init__(self, embed_size, num_layers, heads, forward_expansion, dropout):
+    def __init__(self, embed_size, num_layers, heads, forward_expansion, dropout, vocab_size=30522):
         super(StackedTransformer, self).__init__()
         self.embed_size = embed_size
+        self.token_embedding = nn.Embedding(vocab_size, embed_size)
         self.position_encoding = PositionalEncoding(embed_size)
         self.layers = nn.ModuleList([
             TransformerBlock(embed_size, heads, dropout, forward_expansion) for _ in range(num_layers)
         ])
         self.dropout = nn.Dropout(dropout)
+        # Viktigt output-lager som mappar embed_size till vocab_size
+        self.fc_out = nn.Linear(embed_size, vocab_size)
 
     def forward(self, x, mask):
-        if x.dim() == 2:
-            x = x.unsqueeze(-1).expand(-1, -1, self.embed_size)
-        seq_length = x.shape[1]  # Dynamiskt justera efter input-längd
-        max_seq_len = min(seq_length, self.position_encoding.pe.shape[1])  # Anpassa efter max positionella inbäddningar
-
-        x = self.position_encoding(x[:, :max_seq_len])  # Anpassa positionella inbäddningar
+        x = self.token_embedding(x)
+        seq_length = x.shape[1]
+        x = self.position_encoding(x[:, :seq_length])
         for layer in self.layers:
-            x = layer(x, mask[:, :max_seq_len])  # Se till att masken matchar input-längd
-        return x
-
-
+            x = layer(x, mask[:, :seq_length])
+        x = self.dropout(x)
+        logits = self.fc_out(x)  # (batch_size, seq_len, vocab_size)
+        return logits
+        
 # 5. Minneshantering med FAISS
 class AetherMemory:
     def __init__(self):
@@ -116,41 +116,40 @@ class AetherMemory:
         emb = self.embed(query)
         D, I = self.index.search(np.array([emb]), k)
         return [self.texts[i] for i in I[0] if 0 <= i < len(self.texts)]
-    
+
     def fetch_all_memories(self):
         return self.texts
-    def calculator_tool(input_str):
-        # Only allow safe characters
-        allowed_chars = re.compile(r"^[\d\s\.\+\-\*/\(\)]+$")  # Includes -, decimals, parentheses, etc.
-        input_str = input_str.replace('–', '-')  # Replace en dash if user types it
-        input_str = input_str.replace('−', '-')  # Replace minus sign symbol with real dash
 
+    def calculator_tool(self, input_str):
+        allowed_chars = re.compile(r"^[\d\s\.\+\-\*/\(\)]+$")
+        input_str = input_str.replace('–', '-').replace('−', '-')
         if not allowed_chars.match(input_str):
             return "Invalid characters in expression."
-
         try:
             result = eval(input_str)
             return f"Calculated result: {result}"
         except Exception as e:
             return f"Error evaluating expression: {e}"
-        
-    def wikipedia_tool(query):
+
+    def wikipedia_tool(self, query):
         try:
             summary = wikipedia.summary(query, sentences=2)
             return f"Wikipedia result: {summary}"
         except Exception as e:
             return f"Wikipedia error: {e}"
-    
-# 6. AetherAgent med flexibel input
+
+# 6. AetherAgent
 class AetherAgent:
     def __init__(self, db_connector):
+       # device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.db_connector = db_connector
         self.memory = AetherMemory()
         self.name = self.load_name()
         self.user_preferences = self.load_preferences()
-        self.model = StackedTransformer(embed_size=256, num_layers=6, heads=8, forward_expansion=4, dropout=0.1)
-    
-    
+        self.model = StackedTransformer(embed_size=256, num_layers=400, heads=8, forward_expansion=4, dropout=0.1)
+       # self.model.to(device)
+        self.tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
+
     def load_name(self):
         try:
             with open("aether_name.json", "r") as file:
@@ -158,27 +157,131 @@ class AetherAgent:
                 return data.get("name", "Aether")
         except FileNotFoundError:
             return "Aether"
+
+    def save_name(self, new_name):
+        with open("aether_name.json", "w") as file:
+            json.dump({"name": new_name}, file)
+        self.name = new_name
+
+    def preprocess_data(self, training_data):
+        processed_data = []
+        for text_input, expected_output in training_data:
+            input_tokens = self.tokenizer(text_input, return_tensors="pt")["input_ids"]
+            output_tokens = self.tokenizer(expected_output, return_tensors="pt")["input_ids"]
+            processed_data.append((input_tokens, output_tokens))
+        return processed_data
+
+    def train_model(self, filename="None", epochs=15):
+        if not filename: 
+             filename = "ai_Model/chat_training_data.json"
+        print(f"📂 Laddar träningsdata från: {filename}")
+        try:
+            with open(filename, 'r', encoding="utf-8") as f:
+                training_data = json.load(f)
+                print(f"✅ Träningsdata laddad, antal poster: {len(training_data)}")
+        except:
+            print("❌ Kunde inte läsa träningsdata!")
+            return
+        
+        # Extrahera chat_data från varje post
+        training_data = []
+        for item in training_data:
+            chat = item.get("chat_data", None)
+            if chat:
+                question = chat.get("question", "")
+                answer = chat.get("answer", "")
+                if question and answer:
+                    training_data.append((question, answer))
+
+
+
+
+        training_tokens = self.preprocess_data(training_data)
+        optimizer = torch.optim.Adam(self.model.parameters(), lr=0.001)
+        loss_function = nn.CrossEntropyLoss()
+
+        for epoch in range(epochs):
+            total_loss = 0.0
+            for input_tokens, target_tokens in training_tokens:
+                optimizer.zero_grad()
+                predictions = self.model(input_tokens, mask=torch.ones_like(input_tokens))
+                loss = loss_function(predictions.squeeze(), target_tokens.squeeze())
+                loss.backward()
+                optimizer.step()
+                total_loss += loss.item()
+            print(f"✅ Epoch {epoch + 1}/{epochs} — Loss: {total_loss:.4f}")
+
     def load_preferences(self):
         if hasattr(self.db_connector, "fetch_user_preferences"):
-             return self.db_connector.fetch_user_preferences()
+            return self.db_connector.fetch_user_preferences()
         else:
             print("❌ `fetch_user_preferences()` saknas i `DatabaseConnector`")
             return {}
-        
+
+    def save_model(self, filename="aether_trained_model.pth"):
+        torch.save(self.model.state_dict(), filename)
+        print(f"✅ Modellens viktningar har sparats i {filename}")
+
+    def load_model(self, filename="aether_trained_model.pth"):
+        try:
+            self.model.load_state_dict(torch.load(filename))
+            self.model.eval()
+            print(f"✅ Tränade viktningar har laddats från {filename}")
+        except FileNotFoundError:
+            print(f"❌ Filen {filename} hittades inte!")
+
     def run(self, user_input):
         print(f"\nGOAL: {user_input}")
 
-    # 🔧 Convert input to tensor
-        input_ids = torch.tensor([ord(c) for c in user_input]).unsqueeze(0).float()
-        mask = torch.ones_like(input_ids)
+    # Specialfall
+        if user_input.lower().strip() == "train model":
+            print("🧠 Startar träning av modellen...")
+            self.train_model(filename="ai_Model/chat_training_data.json", epochs=15)
+            self.save_model("ai_Model/aether_chat_trained.pth")
+            print("✅ Träning klar och modellen sparad!")
+            return
+
+
+
+
+        if "your name" in user_input.lower() or "what's your name" in user_input.lower():
+            reply = f"My name is {self.name}."
+            self.memory.add(f"User asked my name. I replied: {reply}")
+            print(f"\nAETHER: {reply}")
+            self.db_connector.insert_conversation(self.name or "User", user_input, reply)
+            return reply
+
+        if "show memories" in user_input.lower():
+            return "\n".join(self.memory.fetch_all_memories()) or "No memories."
+
+        if "calculate" in user_input.lower() or "solve" in user_input.lower():
+            expression = user_input.lower().replace("calculate", "").replace("solve", "").strip()
+            result = self.memory.calculator_tool(expression)
+            print(f"\nAETHER: {result}")
+            self.db_connector.insert_conversation("User", user_input, result)
+            return result
+
+        if "wikipedia" in user_input.lower() or "search wiki" in user_input.lower():
+            query = user_input.lower().replace("wikipedia", "").replace("search wiki", "").strip()
+            result = self.memory.wikipedia_tool(query)
+            print(f"\nAETHER: {result}")
+            self.db_connector.insert_conversation("User", user_input, result)
+            return result
+
+        tokens = self.tokenizer(user_input, return_tensors="pt")
+        input_ids = tokens["input_ids"]
+        mask = torch.ones(input_ids.shape, dtype=torch.int64)  # Mask av 1:or, ingen maskering
 
         response = self.model(input_ids, mask)
+        if response is None:
+            return "Sorry, something went wrong with the model output."
 
-    # 🔧 Clamp values within Unicode range before using `chr()`
-        response_numpy = response.squeeze().detach().numpy().flatten()
-        clamped_response = np.clip(response_numpy, 1, 0x10FFFF).astype(int)
+        print("input_ids shape:", input_ids.shape)
+        print("response shape:", response.shape)
 
-        generated_text = ''.join([chr(c) for c in clamped_response]).replace('\x00', '')
+    # response shape: (batch_size, seq_len, vocab_size)
+        response_ids = response.argmax(dim=-1)  # argmax på sista dim (vocab)
+        generated_text = self.tokenizer.decode(response_ids[0], skip_special_tokens=True)
 
         print("\nGenerated Response:\n", generated_text)
         self.memory.add(user_input)
@@ -190,6 +293,9 @@ class AetherAgent:
 if __name__ == "__main__":
     db_con = DatabaseConnector()
     agent = AetherAgent(db_con)
+    agent.train_model(filename="chat_training_data.json", epochs=10)
+    agent.save_model("aether_chat_trained.pth")
+
     print("\nAether is ready. Ask your questions or give it tasks.")
     while True:
         try:
