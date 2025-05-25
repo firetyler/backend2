@@ -35,7 +35,7 @@ build/
 *.json
 # Eller specifikt för din träningsdatafil
 ai_Model/chat_training_data.json
-
+ai_Model/training_data_10000.json
 # Ignorera träningsmodeller (resultat)
 *.pth
 ai_Model/*.pth
