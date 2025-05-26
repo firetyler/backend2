@@ -1,3 +1,4 @@
+import os
 import torch
 import torch.nn as nn
 import math
@@ -6,7 +7,7 @@ import numpy as np
 import faiss
 import json
 import wikipedia
-
+from torch.utils.data import Dataset,DataLoader
 # --- Enkel Tokenizer ---
 class SimpleTokenizer:
     def __init__(self):
@@ -28,7 +29,7 @@ class SimpleTokenizer:
     def decode(self, token_ids):
         return " ".join([self.idx2word.get(i, "<UNK>") for i in token_ids if i > 2])
 
-# --- Hjälpfunktion för mask ---
+# --- Mask för self-attention ---
 def generate_square_subsequent_mask(sz):
     mask = torch.triu(torch.ones(sz, sz), diagonal=1).bool()
     return mask
@@ -36,7 +37,7 @@ def generate_square_subsequent_mask(sz):
 # --- Positionell kodning ---
 class PositionalEncoding(nn.Module):
     def __init__(self, embed_size, max_len=5000):
-        super(PositionalEncoding, self).__init__()
+        super().__init__()
         pe = torch.zeros(max_len, embed_size)
         position = torch.arange(0, max_len).unsqueeze(1)
         div_term = torch.exp(torch.arange(0, embed_size, 2) * -(math.log(10000.0) / embed_size))
@@ -50,7 +51,7 @@ class PositionalEncoding(nn.Module):
 # --- Self-Attention ---
 class SelfAttention(nn.Module):
     def __init__(self, embed_size, heads):
-        super(SelfAttention, self).__init__()
+        super().__init__()
         self.head_dim = embed_size // heads
         self.heads = heads
         assert self.head_dim * heads == embed_size
@@ -58,7 +59,7 @@ class SelfAttention(nn.Module):
         self.values = nn.Linear(self.head_dim, self.head_dim, bias=False)
         self.keys = nn.Linear(self.head_dim, self.head_dim, bias=False)
         self.queries = nn.Linear(self.head_dim, self.head_dim, bias=False)
-        self.fc_out = nn.Linear(heads * self.head_dim, embed_size)
+        self.fc_out = nn.Linear(embed_size, embed_size)
 
     def forward(self, values, keys, query, mask):
         N = query.shape[0]
@@ -81,14 +82,13 @@ class SelfAttention(nn.Module):
         out = out.reshape(N, query_len, self.heads * self.head_dim)
         return self.fc_out(out)
 
-# --- Transformer Block ---
+# --- Transformerblock ---
 class TransformerBlock(nn.Module):
     def __init__(self, embed_size, heads, forward_expansion, dropout):
         super().__init__()
         self.attention = SelfAttention(embed_size, heads)
         self.norm1 = nn.LayerNorm(embed_size)
         self.norm2 = nn.LayerNorm(embed_size)
-
         self.feed_forward = nn.Sequential(
             nn.Linear(embed_size, forward_expansion * embed_size),
             nn.ReLU(),
@@ -102,7 +102,7 @@ class TransformerBlock(nn.Module):
         forward = self.feed_forward(x)
         return self.dropout(self.norm2(forward + x))
 
-# --- Stacked Transformer ---
+# --- Stackad Transformer ---
 class StackedTransformer(nn.Module):
     def __init__(self, embed_size, vocab_size, num_layers, heads, forward_expansion, dropout):
         super().__init__()
@@ -121,7 +121,7 @@ class StackedTransformer(nn.Module):
             x = layer(x, x, x, mask)
         return self.fc_out(x)
 
-# --- Minneshantering ---
+# --- Minnesmodul ---
 class AetherMemory:
     def __init__(self):
         self.memories = []
@@ -153,14 +153,25 @@ class AetherMemory:
         except Exception as e:
             return f"Wikipedia lookup failed: {e}"
 
-# --- Dummy DatabaseConnector ---
+# --- Dummy-databas ---
 class DatabaseConnector:
     def insert_conversation(self, user, input_text, output_text):
         pass
-
     def fetch_user_preferences(self):
         return {}
+class ChatDataset(Dataset):
+    def __init__(self, data, tokenizer):
+        self.data = data
+        self.tokenizer = tokenizer
 
+    def __len__(self):
+        return len(self.data)
+
+    def __getitem__(self, idx):
+        input_text, target_text = self.data[idx]
+        input_ids = self.tokenizer.encode(input_text)
+        target_ids = self.tokenizer.encode(target_text)
+        return input_ids, target_ids
 # --- AetherAgent ---
 class AetherAgent:
     def __init__(self, db_connector):
@@ -172,26 +183,79 @@ class AetherAgent:
         self.model = None
         self.embedding_dim = 256
 
-    def preprocess_data(self, training_data):
+    def load_config(self, path):
+        try:
+            with open(path, "r") as f:
+                return json.load(f)
+        except Exception as e:
+            print(f"❌ Kunde inte läsa configfilen: {e}")
+            return {}
+
+    def preprocess_data(self, training_data, config):
         all_texts = [q for q, _ in training_data] + [a for _, a in training_data]
         self.tokenizer.build_vocab(all_texts)
+
+        num_layers = config.get("num_layers", 4)
+        heads = config.get("heads", 8)
+        forward_expansion = config.get("forward_expansion", 4)
+        dropout = config.get("dropout", 0.1)
+        embed_size = config.get("embedding_dim", 256)
+
         self.model = StackedTransformer(
-            embed_size=self.embedding_dim,
+            embed_size=embed_size,
             vocab_size=self.tokenizer.vocab_size,
-            num_layers=4,
-            heads=8,
-            forward_expansion=4,
-            dropout=0.1
+            num_layers=num_layers,
+            heads=heads,
+            forward_expansion=forward_expansion,
+            dropout=dropout
         ).to(self.device)
 
-        data = []
-        for text_input, expected_output in training_data:
-            x = torch.tensor([self.tokenizer.encode(text_input)], dtype=torch.long).to(self.device)
-            y = torch.tensor([self.tokenizer.encode(expected_output)], dtype=torch.long).to(self.device)
-            data.append((x, y))
-        return data
+        inputs = []
+        targets = []
 
-    def train_model(self, filename="ai_Model/chat_training_data.json", epochs=10):
+        for text_input, expected_output in training_data:
+            x = self.tokenizer.encode(text_input)
+            y = self.tokenizer.encode(expected_output)
+            inputs.append(torch.tensor(x, dtype=torch.long))
+            targets.append(torch.tensor(y, dtype=torch.long))
+
+    # Hitta maxlängd för input och output
+        max_len_x = max([len(seq) for seq in inputs])
+        max_len_y = max([len(seq) for seq in targets])
+
+    # Pad sequences
+        def pad_sequence(seq, max_len):
+            return torch.cat([seq, torch.zeros(max_len - len(seq), dtype=torch.long)])
+
+        inputs_padded = [pad_sequence(seq, max_len_x) for seq in inputs]
+        targets_padded = [pad_sequence(seq, max_len_y) for seq in targets]
+
+    # Flytta till device och lägg ihop i batcher (listor av tuples)
+        data = [(seq_x.unsqueeze(0).to(self.device), seq_y.unsqueeze(0).to(self.device)) for seq_x, seq_y in zip(inputs_padded, targets_padded)]
+
+        return data
+    def initialize_model(self, config):
+        num_layers = config.get("num_layers", 4)
+        heads = config.get("heads", 8)
+        forward_expansion = config.get("forward_expansion", 4)
+        dropout = config.get("dropout", 0.1)
+        embed_size = config.get("embedding_dim", 256)
+
+        self.model = StackedTransformer(
+            embed_size=embed_size,
+            vocab_size=self.tokenizer.vocab_size,
+            num_layers=num_layers,
+            heads=heads,
+            forward_expansion=forward_expansion,
+            dropout=dropout
+        ).to(self.device)
+
+    def train_model(self, filename="ai_Model/chat_training_data.json", config_path="ai_Model/config.json"):
+        config = self.load_config(config_path)
+        epochs = config.get("epochs", 10)
+        lr = config.get("learning_rate", 0.001)
+        batch_size = config.get("batch_size", 32)
+
         try:
             with open(filename, 'r', encoding="utf-8") as f:
                 raw_data = json.load(f)
@@ -199,10 +263,23 @@ class AetherAgent:
             print(f"Failed to load training data: {e}")
             return
 
-        training_data = [(d['chat_data']['question'], d['chat_data']['answer']) for d in raw_data if 'chat_data' in d]
-        token_data = self.preprocess_data(training_data)
+         
+        training_data = [(d['input'], d['output']) for d in raw_data if 'input' in d and 'output' in d]
 
-        optimizer = torch.optim.Adam(self.model.parameters(), lr=0.001)
+        if not training_data:
+            print("❌ Inga träningsdata hittades i filen. Kontrollera att filen innehåller korrekt träningsdata.")
+            return
+
+        token_data = self.preprocess_data(training_data, config)
+
+        if not token_data:
+            print("❌ Preprocesseringen gav inga token-data. Kontrollera preprocess_data-funktionen och träningsdataformatet.")
+            return
+        #dataloder
+        dataset = self.ChatDataset(training_data, self.tokenizer)
+        dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True, num_workers=4, collate_fn=self.collate_fn)
+        #loop
+        optimizer = torch.optim.Adam(self.model.parameters(), lr=lr)
         criterion = nn.CrossEntropyLoss()
 
         for epoch in range(epochs):
@@ -215,7 +292,10 @@ class AetherAgent:
                 loss.backward()
                 optimizer.step()
                 total_loss += loss.item()
-            print(f"Epoch {epoch+1}: Loss = {total_loss:.4f}")
+        
+            avg_loss = total_loss / len(token_data)
+            print(f"Epoch {epoch + 1}: Loss = {avg_loss:.4f}")
+
 
     def save_model(self, filename="aether_model.pth"):
         torch.save(self.model.state_dict(), filename)
@@ -228,7 +308,7 @@ class AetherAgent:
 
     def generate_text(self, prompt, max_length=50):
         if self.model is None:
-            print("Model not initialized.")
+            print("Model not initialized. Call `train_model()` or `load_model()` before generating text.")
             return ""
         self.model.eval()
         input_ids = torch.tensor([self.tokenizer.encode(prompt)], dtype=torch.long).to(self.device)
@@ -246,6 +326,10 @@ class AetherAgent:
 
     def run(self, user_input):
         print(f"GOAL: {user_input}")
+        corrected_input = user_input.lower().replace("wahts", "what's")
+
+        if "what's your name ?" in corrected_input or "what is your name" in corrected_input:
+            return "My name is Aether."
 
         if user_input.lower().strip() == "train model":
             self.train_model()
@@ -254,41 +338,55 @@ class AetherAgent:
 
         if "calculate" in user_input.lower():
             expression = user_input.lower().replace("calculate", "").strip()
-            result = self.memory.calculator_tool(expression)
-            print(result)
-            return result
+            return self.memory.calculator_tool(expression)
 
         if "wikipedia" in user_input.lower():
             query = user_input.lower().replace("wikipedia", "").strip()
-            result = self.memory.wikipedia_tool(query)
-            print(result)
-            return result
+            return self.memory.wikipedia_tool(query)
 
         generated = self.generate_text(user_input)
-        print(f"Aether: {generated}")
         self.memory.add(user_input)
+        self.db_connector.insert_conversation(name="User", input=user_input, output="")
+        self.db_connector.insert_conversation(name="Aether", input="", output=generated)
         return generated
 
-# --- Kör Aether ---
+# --- Kör agenten ---
 if __name__ == "__main__":
     db = DatabaseConnector()
     agent = AetherAgent(db)
 
-    # Första gången:
-    # agent.train_model("ai_Model/chat_training_data.json", epochs=10)
-    # agent.save_model()
-
+    config = agent.load_config("ai_Model/config.json")
+    
     try:
-        agent.load_model()
+        with open(config.get("train_data_path", "ai_Model/chat_training_data.json"), "r", encoding="utf-8") as f:
+            raw_data = json.load(f)
+        training_data = [(d['input'], d['output']) for d in raw_data if 'input' in d and 'output' in d]
+        all_texts = [q for q, _ in training_data] + [a for _, a in training_data]
+        agent.tokenizer.build_vocab(all_texts)
     except Exception as e:
-        print("❌ Modell måste tränas först. Skriv 'train model' i prompten.")
+        print("Failed to build vocab:", e)
 
-    print("Aether är redo. Fråga något!")
+    # Initiera och ladda modell
+    agent.initialize_model(config)
+    print("Current working directory:", os.getcwd())
+    print("Files in current directory:", os.listdir())
+    try:
+        agent.load_model(filename=config["model_path"])
+        print("✅ Modell laddad.")
+    except:
+        print("⚠️ Kunde inte ladda modell – tränar ny modell...")
+        agent.train_model(config_path="ai_Model/config.json")
+        agent.save_model(filename=config["model_path"])
+
+    print("🤖 Aether är redo. Fråga något!")
+
     while True:
         try:
             user_input = input("\n> ")
             if user_input.lower() in ["exit", "quit"]:
                 break
-            agent.run(user_input)
+            output = agent.run(user_input)
+            print("Svar:", output)
         except KeyboardInterrupt:
+            print("\n👋 Avslutar...")
             break

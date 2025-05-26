@@ -5,6 +5,17 @@ from DatabaseConnector import DatabaseConnector
 app = Flask(__name__)
 db_connector = DatabaseConnector()
 agent = AetherAgent(db_connector)
+config = agent.load_config("ai_Model/config.json")  # justera sökvägen om nödvändigt
+agent.tokenizer.build_vocab(["Hello world", "My name is AI", "What's your name?"])
+agent.initialize_model(config)
+
+try:
+    agent.load_model()
+    print("✅ Modell laddad.")
+except:
+    print("⚠️ Modell ej hittad – tränar ny modell...")
+    agent.train_model()
+    agent.save_model()
 
 @app.route("/generate", methods=["POST"])
 
