@@ -892,3 +892,75 @@
 2025-05-27 22:05:53,637 | INFO | DatabaseConnector | Conversation saved successfully.
 2025-05-27 22:05:53,682 | INFO | DatabaseConnector | Database connection established.
 2025-05-27 22:05:53,685 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 22:16:15,803 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 22:16:16,057 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 22:16:25,661 | INFO | aether2 | GOAL: what´s is the capital of sweden ?
+2025-05-27 22:16:25,665 | WARNING | aether2 | Unrecognized word: 'what', replacing with <UNK>
+2025-05-27 22:16:25,666 | WARNING | aether2 | Unrecognized word: 's', replacing with <UNK>
+2025-05-27 22:16:25,666 | WARNING | aether2 | Unrecognized word: 'the', replacing with <UNK>
+2025-05-27 22:16:25,666 | WARNING | aether2 | Unrecognized word: 'capital', replacing with <UNK>
+2025-05-27 22:16:25,666 | WARNING | aether2 | Unrecognized word: 'of', replacing with <UNK>
+2025-05-27 22:16:25,667 | WARNING | aether2 | Unrecognized word: 'sweden', replacing with <UNK>
+2025-05-27 22:24:20,475 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 22:24:20,666 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 22:24:46,033 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 22:24:46,319 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 22:25:08,074 | INFO | aether2 | GOAL: whats your name ?
+2025-05-27 22:25:08,077 | WARNING | aether2 | Unrecognized word: 'whats', replacing with <UNK>
+2025-05-27 22:25:08,078 | WARNING | aether2 | Unrecognized word: 'your', replacing with <UNK>
+2025-05-27 22:25:08,078 | WARNING | aether2 | Unrecognized word: 'name', replacing with <UNK>
+2025-05-27 22:29:40,440 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 22:29:40,644 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 22:37:32,824 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 22:37:33,035 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 22:37:39,633 | INFO | aether2 | GOAL: wahts your name
+2025-05-27 22:37:39,636 | WARNING | aether2 | Unrecognized word: 'wahts', replacing with <UNK>
+2025-05-27 22:37:39,636 | WARNING | aether2 | Unrecognized word: 'your', replacing with <UNK>
+2025-05-27 22:37:39,636 | WARNING | aether2 | Unrecognized word: 'name', replacing with <UNK>
+2025-05-27 22:37:40,503 | WARNING | aether2 | Unrecognized word: 'wahts', replacing with <UNK>
+2025-05-27 22:37:40,503 | WARNING | aether2 | Unrecognized word: 'your', replacing with <UNK>
+2025-05-27 22:37:40,503 | WARNING | aether2 | Unrecognized word: 'name', replacing with <UNK>
+2025-05-27 22:37:40,508 | INFO | aether2 | Memory added: 'wahts your name...'
+2025-05-27 22:37:40,562 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 22:37:40,564 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 22:37:40,708 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 22:37:40,710 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 22:37:40,750 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 22:37:40,752 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 22:39:48,169 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 22:39:48,375 | INFO | SimpleTokenizer |  Vocab saved to tokenizer_vocab.json
+2025-05-27 22:40:02,400 | INFO | aether2 | GOAL: wahts your name
+2025-05-27 22:40:02,404 | WARNING | SimpleTokenizer | Unrecognized word: 'wahts', replacing with <UNK>
+2025-05-27 22:40:02,404 | WARNING | SimpleTokenizer | Unrecognized word: 'your', replacing with <UNK>
+2025-05-27 22:40:02,404 | WARNING | SimpleTokenizer | Unrecognized word: 'name', replacing with <UNK>
+2025-05-27 22:40:03,313 | WARNING | SimpleTokenizer | Unrecognized word: 'wahts', replacing with <UNK>
+2025-05-27 22:40:03,313 | WARNING | SimpleTokenizer | Unrecognized word: 'your', replacing with <UNK>
+2025-05-27 22:40:03,314 | WARNING | SimpleTokenizer | Unrecognized word: 'name', replacing with <UNK>
+2025-05-27 22:40:03,318 | INFO | aether2 | Memory added: 'wahts your name...'
+2025-05-27 22:40:03,368 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 22:40:03,371 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 22:40:03,417 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 22:40:03,420 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 22:40:03,468 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 22:40:03,470 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 22:56:26,594 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 22:56:50,429 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 22:56:50,612 | INFO | SimpleTokenizer |  Vocab saved to tokenizer_vocab.json
+2025-05-27 22:57:15,054 | INFO | aether2 | GOAL: wahts your name
+2025-05-27 22:57:27,331 | INFO | aether2 | GOAL: whats your name ?
+2025-05-27 22:58:05,347 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 22:58:05,537 | INFO | SimpleTokenizer |  Vocab saved to tokenizer_vocab.json
+2025-05-27 22:58:10,721 | INFO | aether2 | GOAL: whats your name ?
+2025-05-27 22:58:10,724 | WARNING | SimpleTokenizer | Unrecognized word: 'whats', replacing with <UNK>
+2025-05-27 22:58:10,724 | WARNING | SimpleTokenizer | Unrecognized word: 'your', replacing with <UNK>
+2025-05-27 22:58:10,724 | WARNING | SimpleTokenizer | Unrecognized word: 'name', replacing with <UNK>
+2025-05-27 22:58:11,612 | WARNING | SimpleTokenizer | Unrecognized word: 'whats', replacing with <UNK>
+2025-05-27 22:58:11,612 | WARNING | SimpleTokenizer | Unrecognized word: 'your', replacing with <UNK>
+2025-05-27 22:58:11,612 | WARNING | SimpleTokenizer | Unrecognized word: 'name', replacing with <UNK>
+2025-05-27 22:58:11,617 | INFO | AetherMemory | Memory added: 'whats your name ?...'
+2025-05-27 22:58:11,668 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 22:58:11,670 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 22:58:11,816 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 22:58:11,819 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 22:58:11,858 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 22:58:11,861 | INFO | DatabaseConnector | Conversation saved successfully.
