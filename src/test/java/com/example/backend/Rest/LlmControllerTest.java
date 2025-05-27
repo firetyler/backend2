@@ -54,7 +54,7 @@ public class LlmControllerTest {
         // Antag att getAll returnerar en lista av tidigare inputs eller liknande
         when(llmService.getAll()).thenReturn(java.util.List.of("Fråga 1", "Fråga 2"));
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/llm/all"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/llm/history"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0]").value("Fråga 1"))
                 .andExpect(jsonPath("$[1]").value("Fråga 2"));

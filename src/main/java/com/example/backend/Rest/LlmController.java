@@ -30,9 +30,9 @@ public class LlmController {
         data.setInput(input);
         data.setOutput(response);
 
-        dataService.saveData(data); // sparar till databasen
+        Data savedData = dataService.saveData(data); // sparar till databasen
 
-        return data; // returnerar som JSON
+        return savedData; // returnerar som JSON
     }
 
     // Skickar en lista med prompts och sparar dem i databasen

@@ -45,8 +45,8 @@ public class DataServiceGenerate {
     public List<Data> getAllData() {
         return dataRepository.findAll();
     }
-    public void saveData(Data data) {
-        dataRepository.save(data);  // Här sparar vi objektet till databasen
+    public Data saveData(Data data) {
+        return dataRepository.save(data);  // Här sparar vi objektet till databasen
     }
 }
 
