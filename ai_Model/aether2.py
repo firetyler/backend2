@@ -1,5 +1,6 @@
 from collections import Counter
 import os
+import sys
 import unicodedata
 import torch
 import torch.nn as nn
@@ -11,7 +12,7 @@ import json
 import wikipedia
 from torch.utils.data import Dataset,DataLoader
 
-
+sys.stdout.reconfigure(encoding='utf-8')  # Forces UTF-8 output
 from DatabaseConnector import DatabaseConnector
 from logger_setup import get_logger
 from code_executor import CodeExecutor
@@ -516,63 +517,79 @@ class AetherAgent:
         ).to(self.device)
 
     def train_model(self, filename="ai_Model/chat_training_data.json", config_path="ai_Model/config.json"):
+        """Train the AI model using data from JSON files."""
+        
+        #  Load configuration
         config = self.load_config(config_path)
         epochs = config.get("epochs", 10)
         lr = config.get("learning_rate", 0.001)
         batch_size = config.get("batch_size", 32)
         filenames = config.get("train_data_paths", ["ai_Model/chat_training_data.json"])
-    
-        training_data  = []
+
+        #  Load training data properly
+        training_data = []
         for filename in filenames:
             try:
                 with open(filename, 'r', encoding="utf-8") as f:
                     raw_data = json.load(f)
+                    
+                    if not raw_data:
+                        logger.warning(f" No training data found in {filename}. Skipping...")
+                        continue
+                    
                     valid_data = [(d['input'], d['output']) for d in raw_data if 'input' in d and 'output' in d]
                     training_data.extend(valid_data)
             except Exception as e:
-                logger.error(f"Failed to load training data: {e}")
+                logger.error(f"Failed to load training data from {filename}: {e}")
                 return
-
-         
-        training_data = [(d['input'], d['output']) for d in raw_data if 'input' in d and 'output' in d]
-
+            
         if not training_data:
-            logger.error("No training data found in the file. Please ensure the file contains valid training data.")
+            logger.error("No valid training data loaded. Aborting training...")
             return
 
-        token_data = self.preprocess_data(training_data, config)
-        #dataloder
+        #  Prepare dataset & DataLoader
         dataset = self.ChatDataset(training_data, self.tokenizer)
         dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True, num_workers=0, collate_fn=self.collate_fn)
+
+        #  Initialize optimizer and loss function
         optimizer = torch.optim.Adam(self.model.parameters(), lr=lr)
         criterion = nn.CrossEntropyLoss()
         self.model.train()
-        checkpoint_path = "checkpoint_latest.pth"   # Namn på checkpoint-fil
+
+        #  Handle checkpoints correctly
+        checkpoint_path = "checkpoint_latest.pth"
         start_epoch = 0
         if os.path.exists(checkpoint_path):
-            logger.info(f"Found checkpoint: Loading from {checkpoint_path}...")
-            start_epoch = self.load_checkpoint(checkpoint_path, optimizer,config)
+            logger.info(f" Found checkpoint: Loading from {checkpoint_path}...")
+            start_epoch = self.load_checkpoint(checkpoint_path, optimizer, config)
         else:
-            logger.warning(f"Checkpoint not found at {checkpoint_path} – training new model from scratch...")
-            start_epoch = 0
-            for epoch in range(start_epoch ,epochs):
-                total_loss = 0.0
-                for x, y in dataloader:
-                    x = x.to(self.device)
-                    y = y.to(self.device)
+            logger.warning(f"No checkpoint found – starting training from scratch...")
+            start_epoch = 0  # Ensure training starts at the correct epoch
+        
+        #  Run training loop
+        logger.info(f"Starting model training for {epochs} epochs...")
+        for epoch in range(start_epoch, epochs):
+            total_loss = 0.0
+            for x, y in dataloader:
+                x = x.to(self.device)
+                y = y.to(self.device)
 
-                    optimizer.zero_grad()
-                    mask = generate_square_subsequent_mask(x.size(1)).to(self.device)
-                    out = self.model(x, mask)
-                    loss = criterion(out.view(-1, out.size(-1)), y.view(-1))
-                    loss.backward()
-                    optimizer.step()
-                    total_loss += loss.item()
-            
-                avg_loss = total_loss / len(dataloader)
-                logger.info(f"Epoch {epoch + 1}: Loss = {avg_loss:.4f}")
+                optimizer.zero_grad()
+                mask = generate_square_subsequent_mask(x.size(1)).to(self.device)
+                out = self.model(x, mask)
+                loss = criterion(out.view(-1, out.size(-1)), y.view(-1))
 
-                self.save_checkpoint(epoch + 1, optimizer, checkpoint_path)
+                loss.backward()
+                optimizer.step()
+                total_loss += loss.item()
+
+            avg_loss = total_loss / len(dataloader)
+            logger.info(f"Epoch {epoch + 1}: Loss = {avg_loss:.4f}")
+
+            # Save checkpoint after each epoch
+            self.save_checkpoint(epoch + 1, optimizer, checkpoint_path)
+
+        logger.info("Training complete! Model saved successfully.")
 
     def collate_fn(self, batch):
         inputs, targets = zip(*batch)
@@ -683,6 +700,7 @@ class AetherAgent:
         if user_input.lower().strip() == "train model":
             self.train_model()
             self.save_model()
+            print("✅ Training finished")
             return "Model trained and saved."
 
         if "calculate" in user_input.lower():
@@ -696,7 +714,7 @@ class AetherAgent:
         if lowered in ["try again", "that's wrong", "incorrect", "answer again", "that doesn't sound right"]:
             if self.memory.memories:
                 last_prompt = self.memory.memories[-1]
-                logger.info(f"🔁 User requested retry for: {last_prompt}")
+                logger.info(f" User requested retry for: {last_prompt}")
                 regenerated = self.generate_text(last_prompt)
                 self.db_connector.insert_conversation(name="Aether", input="", output=regenerated)
                 return regenerated
