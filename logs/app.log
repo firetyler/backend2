@@ -964,3 +964,5 @@
 2025-05-27 22:58:11,819 | INFO | DatabaseConnector | Conversation saved successfully.
 2025-05-27 22:58:11,858 | INFO | DatabaseConnector | Database connection established.
 2025-05-27 22:58:11,861 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 22:59:53,629 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 22:59:53,836 | INFO | SimpleTokenizer |  Vocab saved to tokenizer_vocab.json
