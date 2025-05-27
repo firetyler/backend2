@@ -1,86 +1,86 @@
 import random
 import json
 
-# Alternativ och kategorier
-alternativ = {
-    1: ["positiv", "negativ", "neutral"],
-    2: ["Elektronik", "Kläder", "Böcker", "Hem & Trädgård", "Sport & Fritid"],
-    3: [],  # Fråga-svar-par (skapas nedan)
-    4: ["Retur", "Leverans", "Produktfråga", "Betalning", "Support"],
-    5: ["svenska", "engelska", "spanska", "tyska", "franska"],
-    6: ["spam", "ej spam"]
+# Options and Categories
+options = {
+    1: ["positive", "negative", "neutral"],
+    2: ["Electronics", "Clothing", "Books", "Home & Garden", "Sports & Leisure"],
+    3: [],  # Question-answer pairs (created below)
+    4: ["Return", "Delivery", "Product Inquiry", "Payment", "Support"],
+    5: ["Swedish", "English", "Spanish", "German", "French"],
+    6: ["spam", "not spam"]
 }
 
-# Exempeldata
-texter = [
-    "Det här är den bästa produkten jag någonsin köpt.",
-    "Varför fungerar inte min orderstatuslänk?",
-    "Hur lång är leveranstiden till Sverige?",
-    "Fantastisk service, tack så mycket!",
-    "Produkten gick sönder efter en vecka.",
-    "Hej, kan jag få tillbaka mina pengar?",
+# Sample data
+texts = [
+    "This is the best product I have ever bought.",
+    "Why isn't my order status link working?",
+    "How long is the delivery time to Sweden?",
+    "Fantastic service, thank you so much!",
+    "The product broke after a week.",
+    "Hi, can I get my money back?",
     "Where is my package?",
-    "Este producto es increíble.",
-    "Ich brauche Hilfe mit meiner Bestellung.",
-    "Livraison rapide et sans problème."
+    "This product is amazing.",
+    "I need help with my order.",
+    "Fast and hassle-free delivery."
 ]
 
-svar = [
-    "Din beställning behandlas just nu.",
-    "Du kan returnera produkten inom 30 dagar.",
-    "Vi beklagar besväret, vi återkommer så snart vi kan.",
-    "Produkten bör levereras inom 3–5 arbetsdagar.",
-    "Vänligen kontakta vår support för vidare hjälp.",
-    "Tack för att du kontaktade oss!"
+answers = [
+    "Your order is currently being processed.",
+    "You can return the product within 30 days.",
+    "We apologize for the inconvenience, we will get back to you as soon as we can.",
+    "The product should be delivered within 3–5 business days.",
+    "Please contact our support for further assistance.",
+    "Thank you for reaching out to us!"
 ]
 
-# Skapa 10 000 dataposter
+# Create 10,000 data entries
 data = []
 for _ in range(10000):
     item = {}
 
-    # 1. Textklassificering
+    # 1. Text classification
     item["text_classification"] = {
-        "text": random.choice(texter),
-        "label": random.choice(alternativ[1])
+        "text": random.choice(texts),
+        "label": random.choice(options[1])
     }
 
-    # 2. Produktdata
+    # 2. Product data
     item["product_data"] = {
-        "title": f"Produkt {random.randint(1000,9999)}",
-        "category": random.choice(alternativ[2]),
+        "title": f"Product {random.randint(1000,9999)}",
+        "category": random.choice(options[2]),
         "price": round(random.uniform(10, 5000), 2),
-        "description": random.choice(texter)
+        "description": random.choice(texts)
     }
 
-    # 3. Chattdata
+    # 3. Chat data
     item["chat_data"] = {
-        "question": random.choice(texter),
-        "answer": random.choice(svar)
+        "question": random.choice(texts),
+        "answer": random.choice(answers)
     }
 
     # 4. FAQ
     item["faq"] = {
-        "question": random.choice(texter),
-        "category": random.choice(alternativ[4])
+        "question": random.choice(texts),
+        "category": random.choice(options[4])
     }
 
-    # 5. Språkidentifiering
+    # 5. Language detection
     item["language_detection"] = {
-        "text": random.choice(texter),
-        "language": random.choice(alternativ[5])
+        "text": random.choice(texts),
+        "language": random.choice(options[5])
     }
 
-    # 6. Spamklassificering
+    # 6. Spam classification
     item["spam_detection"] = {
-        "message": random.choice(texter),
-        "label": random.choice(alternativ[6])
+        "message": random.choice(texts),
+        "label": random.choice(options[6])
     }
 
     data.append(item)
 
-# Spara till JSON-fil
-with open("training_data_10000.json", "w", encoding="utf-8") as f:
+# Save to JSON file
+with open("training_data_10000_en.json", "w", encoding="utf-8") as f:
     json.dump(data, f, ensure_ascii=False, indent=2)
 
-print("JSON-fil skapad: training_data_10000.json")
+print("JSON file created: training_data_10000_en.json")

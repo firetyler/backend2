@@ -1,74 +1,82 @@
-from flask import Flask, request, jsonify
+from flask import Flask, json, request, jsonify
 from aether2 import AetherAgent
 from DatabaseConnector import DatabaseConnector
 
 app = Flask(__name__)
+
+# Initialize Database Connection
 db_connector = DatabaseConnector()
+
+#  Load Config
+config = AetherAgent(db_connector).load_config("ai_Model/config.json")
+
+# Initialize AetherAgent with Training Data
 agent = AetherAgent(db_connector)
-config = agent.load_config("ai_Model/config.json")  # justera sökvägen om nödvändigt
-agent.tokenizer.build_vocab(["Hello world", "My name is AI", "What's your name?"])
+try:
+    with open(config.get("train_data_path", "ai_Model/chat_training_data.json"), "r", encoding="utf-8") as f:
+        raw_data = json.load(f)
+    training_data = [(d['input'], d['output']) for d in raw_data if 'input' in d and 'output' in d]
+    all_texts = [q for q, _ in training_data] + [a for _, a in training_data]
+    agent.tokenizer.build_vocab(all_texts)
+except Exception as e:
+    print(f"Failed to load training data: {e}")
+
+# Initialize Model Based on Config
 agent.initialize_model(config)
 
+# Load Model or Train if Missing
 try:
     agent.load_model()
-    print("✅ Modell laddad.")
-except:
-    print("⚠️ Modell ej hittad – tränar ny modell...")
+    print(" Model loaded.")
+except Exception as e:
+    print(f"Model not found – training new model... ({e})")
     agent.train_model()
     agent.save_model()
 
+# Route for Text Generation
 @app.route("/generate", methods=["POST"])
-
 def generate():
     try:
         data = request.get_json()
         user_input = data.get("prompt", "")
-        
+
         if not user_input:
             return jsonify({"error": "No prompt provided"}), 400
 
         print(f"Received input: {user_input}")
 
-        # Viktigt: Får tillbaka en sträng
-        agent_response = agent.run(user_input)  
+        agent_response = agent.run(user_input)
 
         if not agent_response:
             return jsonify({"error": "Agent failed to generate a response"}), 500
 
-        # Spara till databas
         db_connector.insert_conversation("User", user_input, agent_response)
 
         return jsonify({"response": agent_response}), 200
 
     except Exception as e:
-        print(f"Error occurred: {str(e)}")
-        return jsonify({"error": "An error occurred while processing the request."}), 500
+        print(f" Error occurred: {str(e)}")
+        return jsonify({"error": str(e)}), 500  # 
     
-    
-@app.route('/history', methods=['GET'])
-def history():
-    history_data = db_connector.fetch_history()
-    if not history_data:
-        return jsonify({"error": "No history found"}), 404
-    return jsonify(history_data), 200
-
-
+#  Route for Asking Questions
 @app.route("/ask", methods=["POST"])
 def ask():
-    data = request.get_json()
-    user_input = data.get("prompt", "")
-    if not user_input:
-        return jsonify({"error": "No prompt provided"}), 400
+    try:
+        data = request.get_json()
+        user_input = data.get("prompt", "")
+        if not user_input:
+            return jsonify({"error": "No prompt provided"}), 400
 
-    agent_response = agent.run(user_input)
-    if not agent_response:
-        return jsonify({"error": "Agent failed to generate a response"}), 500
+        agent_response = agent.run(user_input)
+        if not agent_response:
+            return jsonify({"error": "Agent failed to generate a response"}), 500
 
-    db_connector.insert_conversation("User", user_input, agent_response)
-    return jsonify({"input": user_input, "output": agent_response}), 200
+        db_connector.insert_conversation("User", user_input, agent_response)
+        return jsonify({"input": user_input, "output": agent_response}), 200
+    except Exception as e:
+        print(f"Error occurred: {str(e)}")
+        return jsonify({"error": str(e)}), 500  #  Always return JSON
 
-
-
-
+#  Run Flask App
 if __name__ == "__main__":
     app.run(port=5000)

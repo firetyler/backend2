@@ -3,7 +3,7 @@ import subprocess
 import os
 
 class CodeExecutor:
-    def __init__(self, config_path="code_exec_config.json"):
+    def __init__(self, config_path="ai_Model/code_exec_config.json"):
         with open(config_path, "r") as f:
             self.config = json.load(f)
 

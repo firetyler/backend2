@@ -1,5 +1,6 @@
 from collections import Counter
 import os
+import unicodedata
 import torch
 import torch.nn as nn
 import math
@@ -10,21 +11,23 @@ import json
 import wikipedia
 from torch.utils.data import Dataset,DataLoader
 
-from ai_Model import DatabaseConnector
-from ai_Model.code_executor import CodeExecutor
-from ai_Model.logger_setup import get_logger
+
+from DatabaseConnector import DatabaseConnector
+from logger_setup import get_logger
+from code_executor import CodeExecutor
 
 logger = get_logger("aether2")
 # --- Enkel Tokenizer ---
 class SimpleTokenizer:
-    def __init__(self,min_freq=1):
+    def __init__(self, min_freq=1,vocab_file=None):
         self.word2idx = {"<PAD>": 0, "<SOS>": 1, "<EOS>": 2, "<UNK>": 3}
         self.idx2word = {0: "<PAD>", 1: "<SOS>", 2: "<EOS>", 3: "<UNK>"}
         self.vocab_size = 4
         self.min_freq = min_freq
 
     def _clean_text(self, text):
-        # Ta bort punktuation och gör lowercase
+        # Normalisera unicode, ta bort punktuation och gör lowercase
+        text = unicodedata.normalize("NFKD", text)
         text = text.lower()
         text = re.sub(r"[^a-z0-9\s]", "", text)
         return text
@@ -39,14 +42,41 @@ class SimpleTokenizer:
                 self.word2idx[word] = self.vocab_size
                 self.idx2word[self.vocab_size] = word
                 self.vocab_size += 1
+        logger.debug(f"Vocab built with {self.vocab_size} words!")
+        self.save_vocab("tokenizer_vocab.json")
+   
+
+    def update_vocab(filename, new_words):
+        with open(filename, "r", encoding="utf-8") as f:
+            vocab = json.load(f)
+
+        max_index = max(map(int, vocab["idx2word"].keys())) + 1
+
+        for word in new_words:
+            if word not in vocab["word2idx"]:
+                vocab["word2idx"][word] = max_index
+                vocab["idx2word"][str(max_index)] = word
+                max_index += 1
+
+        with open(filename, "w", encoding="utf-8") as f:
+            json.dump(vocab, f, indent=4)
+        print(f" Vocab uppdaterad! Nya ord: {new_words}")
+
+    
 
     def encode(self, text):
         cleaned = self._clean_text(text)
-        tokens = [self.word2idx.get(w, 3) for w in cleaned.split()]
-        return [1] + tokens + [2]  # <SOS> och <EOS>
-
+        tokens = []
+        for w in cleaned.split():
+            if w in self.word2idx:
+                tokens.append(self.word2idx[w])
+            else:
+                logger.warning(f"Unrecognized word: '{w}', replacing with <UNK>")
+                tokens.append(self.word2idx["<UNK>"])
+        return [self.word2idx["<SOS>"]] + tokens + [self.word2idx["<EOS>"]]
     def decode(self, token_ids):
-        return " ".join([self.idx2word.get(i, "<UNK>") for i in token_ids if i > 2])
+        # Ignorera bara <PAD> token (0)
+        return " ".join([self.idx2word.get(i, "<UNK>") for i in token_ids if i != self.word2idx["<PAD>"]])
     
     def encode_batch(self, texts, max_len=None):
         batch_encoded = [self.encode(text) for text in texts]
@@ -55,11 +85,28 @@ class SimpleTokenizer:
         padded_batch = []
         for seq in batch_encoded:
             if len(seq) < max_len:
-                seq += [0] * (max_len - len(seq))  # Padding med <PAD>
+                seq += [self.word2idx["<PAD>"]] * (max_len - len(seq))  # Padding med <PAD>
             else:
                 seq = seq[:max_len]
             padded_batch.append(seq)
         return padded_batch
+    def save_vocab(self, filename="tokenizer_vocab.json"):
+        """Sparar vokabulären till en JSON-fil."""
+        with open(filename, "w", encoding="utf-8") as f:
+            json.dump({"word2idx": self.word2idx, "idx2word": self.idx2word}, f)
+        logger.info(f" Vocab saved to {filename}")
+    def load_vocab(self, filename):
+        """Laddar vokabulären från en JSON-fil."""
+        try:
+            with open(filename, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                self.word2idx = data["word2idx"]
+                self.idx2word = {int(k): v for k, v in data["idx2word"].items()}
+                self.vocab_size = len(self.word2idx)
+            logger.debug(f"Vocab loaded from {filename} ({self.vocab_size} words)")
+        except FileNotFoundError:
+            logger.warning(f" Vocab file {filename} not found. Using default.")
+
 #TODO fix if brocken
 # --- Mask för self-attention ---
 def generate_square_subsequent_mask(sz):
@@ -241,7 +288,7 @@ class AetherMemory:
         vector = self.text_to_vector(text)
         self.memories.append(text)
         self.index.add(np.array([vector]))
-        logger.info(f"✅ Memory added: '{text[:50]}...'")
+        logger.info(f"Memory added: '{text[:50]}...'")
 
     def fetch_all_memories(self):
         return self.memories.copy()
@@ -268,43 +315,68 @@ class AetherMemory:
     
     def calculator_tool(self, expression):
         try:
-            logger.info(f"🧮 Evaluating expression: {expression}")
+            logger.info(f" Evaluating expression: {expression}")
             safe_expr = re.sub(r"[^0-9+\-*/(). ]", "", expression)
             result = eval(safe_expr, {"__builtins__": {}})
-            logger.info(f"✅ Calculation result: {result}")
+            logger.info(f"Calculation result: {result}")
             return f"Result: {eval(safe_expr)}"
         except Exception as e:
-            logger.error(f"❌ Error evaluating expression '{expression}': {e}")
+            logger.error(f" Error evaluating expression '{expression}': {e}")
             return f"Error in calculation: {e}"
 
     def wikipedia_tool(self, query):
         try:
             summary = wikipedia.summary(query, sentences=2)
-            logger.info(f"📚 Wikipedia result for '{query}': {summary[:100]}...")
+            logger.info(f"Wikipedia result for '{query}': {summary[:100]}...")
             return wikipedia.summary(query, sentences=2)
         
         except wikipedia.exceptions.DisambiguationError as e:
-            logger.warning(f"⚠️ Multiple results for '{query}': {e.options[:3]}")
+            logger.warning(f" Multiple results for '{query}': {e.options[:3]}")
             return f"Disambiguation error: Try one of: {', '.join(e.options[:3])}"
         except wikipedia.exceptions.PageError:
-            logger.error(f"❌ No page found for '{query}'")
+            logger.error(f" No page found for '{query}'")
             return f"No Wikipedia page found for: {query}"
         except Exception as e:
-            logger.error(f"❌ Wikipedia lookup failed for '{query}': {e}")
+            logger.error(f" Wikipedia lookup failed for '{query}': {e}")
             return f"Wikipedia lookup failed: {e}"
         
+
+class ChatDataset(Dataset):
+    def __init__(self, data, tokenizer, max_len=128):
+        self.data = data  # list of (input_text, output_text) tuples
+        self.tokenizer = tokenizer
+        self.max_len = max_len
+
+    def __len__(self):
+        return len(self.data)
+
+    def __getitem__(self, idx):
+        input_text, output_text = self.data[idx]
+        
+        # Tokenisera input och output och konvertera till tensorer
+        input_tokens = torch.tensor(self.tokenizer.encode(input_text), dtype=torch.long)
+        output_tokens = torch.tensor(self.tokenizer.encode(output_text), dtype=torch.long)
+        
+        return input_tokens, output_tokens
+
+
+
+
+
 # --- AetherAgent ---
 class AetherAgent:
     def __init__(self, db_connector):
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.db_connector = db_connector
-        self.memory = AetherMemory()
         self.name = "Aether"
         self.tokenizer = SimpleTokenizer()
         self.model = None
-        self.embedding_dim = 256
         self.code_executor = CodeExecutor()
-        
+        self.embed_model = None
+        self.embed_size = 256  # Mock for embed_model.embed_size
+        self.embed_model = AdvancedSentenceTransformer(vocab_size=self.tokenizer.vocab_size).to(self.device)
+        self.memory = AetherMemory(self.embed_model, self.tokenizer, self.device)
+        self.ChatDataset = ChatDataset
     def handle_code_question(self, language, code):
         return self.code_executor.run_code(code, language)
     def load_config(self, path):
@@ -312,7 +384,7 @@ class AetherAgent:
             with open(path, "r") as f:
                 return json.load(f)
         except Exception as e:
-            logger.error(f"❌ Kunde inte läsa configfilen: {e}")
+            logger.error(f" Could not read the config file.: {e}")
             return {}
     def save_checkpoint(self, epoch, optimizer, filename):
         checkpoint = {
@@ -322,20 +394,67 @@ class AetherAgent:
             'tokenizer': self.tokenizer.word2idx
         }
         torch.save(checkpoint, filename)
-        logger.info(f"Checkpoint sparad: {filename}")
+        logger.info(f"Checkpoint saved: {filename}")
 
-    def load_checkpoint(self, filename, optimizer):
+ 
+    def load_checkpoint(self, filename, optimizer, config):
         if os.path.isfile(filename):
             checkpoint = torch.load(filename, map_location=self.device)
-            self.model.load_state_dict(checkpoint['model_state_dict'])
+
+            # Ladda tokenizern från sparad vokabulär först
+            self.tokenizer.load_vocab(config.get("tokenizer_vocab_path", "tokenizer_vocab.json"))
+            logger.info(f"Tokenizer vocab loaded from file with size {self.tokenizer.vocab_size}")
+
+            # 🔄 Om checkpoint innehåller en äldre vokabulär, behåll den senaste istället
+            if 'tokenizer' in checkpoint:
+                if len(checkpoint['tokenizer']) > len(self.tokenizer.word2idx):
+                    logger.warning(" Checkpoint tokenizer has more entries, updating...")
+                    self.tokenizer.word2idx = checkpoint['tokenizer']
+                    self.tokenizer.idx2word = {idx: word for word, idx in self.tokenizer.word2idx.items()}
+                    self.tokenizer.vocab_size = len(self.tokenizer.word2idx)
+                    logger.info(f" Tokenizer updated from checkpoint with vocab size {self.tokenizer.vocab_size}")
+                else:
+                    logger.info("Keeping latest tokenizer vocabulary.")
+            else:
+                logger.error(" Tokenizer vocab not found in checkpoint.")
+                return 0
+
+            # Initialisera modellen med värden från config-filen
+            vocab_size = self.tokenizer.vocab_size
+            logger.info(f"Setting vocab_size to {vocab_size} before loading checkpoint.")
+
+            self.model = StackedTransformer(
+                embed_size=config.get("embedding_dim", 256),
+                vocab_size=vocab_size,  # Anpassa vocab_size dynamiskt
+                num_layers=config.get("num_layers", 4),
+                heads=config.get("heads", 8),
+                forward_expansion=config.get("forward_expansion", 4),
+                dropout=config.get("dropout", 0.1)
+            ).to(self.device)
+
+            #  Ladda modellens state_dict men filtrera inkompatibla delar
+            model_dict = self.model.state_dict()
+            pretrained_dict = {
+                k: v for k, v in checkpoint['model_state_dict'].items()
+                if k in model_dict and model_dict[k].shape == v.shape
+            }
+            model_dict.update(pretrained_dict)
+            self.model.load_state_dict(model_dict)
+
             optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
-            self.tokenizer.word2idx = checkpoint.get('tokenizer', self.tokenizer.word2idx)
-            self.tokenizer.idx2word = {v: k for k, v in self.tokenizer.word2idx.items()}
-            logger.info(f"Checkpoint laddad från {filename}, startar från epoch {checkpoint['epoch']}")
-            return checkpoint['epoch']
+            start_epoch = checkpoint.get('epoch', 0) + 1
+            logger.info(f"Checkpoint loaded from {filename}, starting from epoch {start_epoch}")
+
+            # Spara tokenizer-vokabulären så att den är tillgänglig nästa gång
+            self.tokenizer.save_vocab(config.get("tokenizer_vocab_path", "tokenizer_vocab.json"))
+
+            return start_epoch
         else:
-            logger.warning(f"Ingen checkpoint-fil hittades: {filename}")
-            return 0 
+            logger.warning(f" No checkpoint file found: {filename}")
+            return 0
+
+
+
            
     def preprocess_data(self, training_data, config):
         all_texts = [q for q, _ in training_data] + [a for _, a in training_data]
@@ -418,52 +537,68 @@ class AetherAgent:
         training_data = [(d['input'], d['output']) for d in raw_data if 'input' in d and 'output' in d]
 
         if not training_data:
-            logger.error("❌ Inga träningsdata hittades i filen. Kontrollera att filen innehåller korrekt träningsdata.")
+            logger.error("No training data found in the file. Please ensure the file contains valid training data.")
             return
 
         token_data = self.preprocess_data(training_data, config)
-
-        if not training_data:
-            logger.error("❌ Inga träningsdata hittades i filen. Kontrollera att filen innehåller korrekt träningsdata.")
-            return
         #dataloder
         dataset = self.ChatDataset(training_data, self.tokenizer)
-        dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True, num_workers=4, collate_fn=self.collate_fn)
-        #loop
+        dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True, num_workers=0, collate_fn=self.collate_fn)
         optimizer = torch.optim.Adam(self.model.parameters(), lr=lr)
         criterion = nn.CrossEntropyLoss()
         self.model.train()
         checkpoint_path = "checkpoint_latest.pth"   # Namn på checkpoint-fil
         start_epoch = 0
         if os.path.exists(checkpoint_path):
-            start_epoch = self.load_checkpoint(checkpoint_path, optimizer)
+            logger.info(f"Found checkpoint: Loading from {checkpoint_path}...")
+            start_epoch = self.load_checkpoint(checkpoint_path, optimizer,config)
+        else:
+            logger.warning(f"Checkpoint not found at {checkpoint_path} – training new model from scratch...")
+            start_epoch = 0
+            for epoch in range(start_epoch ,epochs):
+                total_loss = 0.0
+                for x, y in dataloader:
+                    x = x.to(self.device)
+                    y = y.to(self.device)
 
-        for epoch in range(start_epoch ,epochs):
-            total_loss = 0.0
-            for x, y in dataloader:
-                x = x.to(self.device)
-                y = y.to(self.device)
+                    optimizer.zero_grad()
+                    mask = generate_square_subsequent_mask(x.size(1)).to(self.device)
+                    out = self.model(x, mask)
+                    loss = criterion(out.view(-1, out.size(-1)), y.view(-1))
+                    loss.backward()
+                    optimizer.step()
+                    total_loss += loss.item()
+            
+                avg_loss = total_loss / len(dataloader)
+                logger.info(f"Epoch {epoch + 1}: Loss = {avg_loss:.4f}")
 
-                optimizer.zero_grad()
-                mask = generate_square_subsequent_mask(x.size(1)).to(self.device)
-                out = self.model(x, mask)
-                loss = criterion(out.view(-1, out.size(-1)), y.view(-1))
-                loss.backward()
-                optimizer.step()
-                total_loss += loss.item()
-        
-            avg_loss = total_loss / len(dataloader)
-            logger.info(f"Epoch {epoch + 1}: Loss = {avg_loss:.4f}")
-
-            self.save_checkpoint(epoch + 1, optimizer, checkpoint_path)
+                self.save_checkpoint(epoch + 1, optimizer, checkpoint_path)
 
     def collate_fn(self, batch):
-        # collate_fn som paddar sekvenser till samma längd
         inputs, targets = zip(*batch)
-        inputs_padded = torch.nn.utils.rnn.pad_sequence(inputs, batch_first=True, padding_value=0)
-        targets_padded = torch.nn.utils.rnn.pad_sequence(targets, batch_first=True, padding_value=0)
+    
+    # Hitta maxlängden bland både inputs och targets
+        max_len = max(
+        max(len(seq) for seq in inputs),
+        max(len(seq) for seq in targets)
+        )
+    
+        def pad_sequences(sequences, max_len):
+            padded_seqs = []
+            for seq in sequences:
+                seq_tensor = seq.detach().clone()
+                pad_size = max_len - len(seq)
+                if pad_size > 0:
+                    padding = torch.zeros(pad_size, dtype=torch.long)
+                    seq_tensor = torch.cat([seq_tensor, padding])
+                padded_seqs.append(seq_tensor)
+            return torch.stack(padded_seqs)
+    
+        inputs_padded = pad_sequences(inputs, max_len)
+        targets_padded = pad_sequences(targets, max_len)
+    
         return inputs_padded, targets_padded
-
+    
     def save_model(self, filename="aether_model.pth"):
         torch.save(self.model.state_dict(), filename)
 
@@ -473,47 +608,77 @@ class AetherAgent:
         self.model.load_state_dict(torch.load(filename, map_location=self.device))
         self.model.eval()
 
+    import json
+
     def generate_text(self, prompt, max_length=50):
         if self.model is None:
             logger.warning("Model not initialized. Call `train_model()` or `load_model()` before generating text.")
-            return ""
+            return json.dumps({"error": "Model not initialized."})  #  JSON-format
+
         self.model.eval()
-        input_ids = torch.tensor([self.tokenizer.encode(prompt)], dtype=torch.long).to(self.device)
+        tokens = self.tokenizer.encode(prompt)
+        print(f"Tokenized input: {tokens}")
+
+        # ✅ Se till att tokenizern returnerar data
+        if len(tokens) == 0:
+            logger.error("Tokenizer returned an empty sequence!")
+            return json.dumps({"error": "Invalid input, couldn't process text."})  #  JSON-format
+
+        input_ids = torch.tensor([tokens], dtype=torch.long).to(self.device)
 
         for _ in range(max_length):
             mask = generate_square_subsequent_mask(input_ids.size(1)).to(self.device)
+            
             with torch.no_grad():
                 out = self.model(input_ids, mask)
+
             next_token_logits = out[:, -1, :]
             next_token_id = torch.argmax(next_token_logits, dim=-1).unsqueeze(0)
+
+            if next_token_id.item() not in self.tokenizer.word2idx.values():
+                logger.error("Next token ID is out of range!")
+                return json.dumps({"error": "Generated an invalid token."})  #  JSON-format
+
             input_ids = torch.cat((input_ids, next_token_id), dim=1)
             if next_token_id.item() == self.tokenizer.word2idx["<EOS>"]:
                 break
-        return self.tokenizer.decode(input_ids[0].tolist())
+
+        generated_text = self.tokenizer.decode(input_ids[0].tolist())
+
+        return json.dumps({"response": generated_text})  #  Returnera JSON-struktur
+
 
     def run(self, user_input):
         logger.info(f"GOAL: {user_input}")
-        corrected_input = user_input.lower().replace("wahts", "what's")
+        corrected_input = re.sub(r"\s+", " ", user_input.strip().lower())
+        name_patterns = [
+        r"^(what('?s| is) your name\??)$",
+        r"^(who are you\??)$"
+        ]
+        if any(re.match(pattern, corrected_input) for pattern in name_patterns):
+            return "My name is Aether."
+
+
+
+
         lowered = user_input.lower()
         if lowered.startswith("run "):
             try:
                 parts = user_input.split(" ", 2)
                 if len(parts) < 3:
-                    logger.warning("Felaktigt format på 'run'-kommandot.")
-                    return "Använd formatet: run <språk> <kod>"
-                logger.info(f"🚀 Kör kod i språk: {language}")
-                logger.debug(f"Kod som körs:\n{code}")
+                    logger.warning("Invalid format for the 'run' command.")
+                    return "Use the format: run <language> <code>"
+                logger.info(f"Running code in language: {language}")
+                logger.debug(f"Code being executed:\n{code}")
                 language = parts[1]
                 code = parts[2]
                 result = self.handle_code_question(language, code)
-                logger.info(f"✅ Kodkörning lyckades för språk: {language}")
-                return f"Resultat för {language}:\n{result}"
+                logger.info(f"Code execution succeeded for language: {language}")
+                return f"Result for {language}:\n{result}"
             except Exception as e:
-                 logger.exception(f"❌ Fel vid kodkörning i språk: {language}")
-                 return f"Något gick fel vid kodkörning: {e}"
-
-        if "what's your name ?" in corrected_input or "what is your name" in corrected_input:
-            return "My name is Aether."
+                logger.exception(f"Error during code execution in language: {language}")
+                return f"Something went wrong during code execution: {e}"
+        
 
         if user_input.lower().strip() == "train model":
             self.train_model()
@@ -566,13 +731,13 @@ if __name__ == "__main__":
     logger.info(f"Files in current directory: {os.listdir()}")
     try:
         agent.load_model(filename=config["model_path"])
-        logger.info("✅ Modell laddad.")
+        logger.info("Model loaded.")
     except:
-        logger.warning("⚠️ Kunde inte ladda modell – tränar ny modell...")
+        logger.warning(" Kunde inte ladda modell – tränar ny modell...")
         agent.train_model(config_path="ai_Model/config.json")
         agent.save_model(filename=config["model_path"])
 
-    logger.info("🤖 Aether är redo. Fråga något!")
+    logger.info("Aether is ready. Ask me anything!")
 
     while True:
         try:
@@ -580,7 +745,7 @@ if __name__ == "__main__":
             if user_input.lower() in ["exit", "quit"]:
                 break
             output = agent.run(user_input)
-            logger.info(f"Svar: {output}")
+            logger.info(f"Response: {output}")
         except KeyboardInterrupt:
-            logger.info("👋 Avslutar...")
+            logger.info(" Exiting...")
             break

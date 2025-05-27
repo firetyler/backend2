@@ -1,0 +1,471 @@
+2025-05-27 13:47:57,667 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 14:15:08,261 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 14:16:02,059 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 14:17:03,473 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 14:18:39,668 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 14:20:04,010 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 14:22:45,685 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 14:24:37,176 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 14:24:44,100 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 14:27:39,300 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 14:30:40,105 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 14:32:52,039 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 14:38:50,277 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 14:40:12,827 | INFO | aether2 | Epoch 1: Loss = 0.9148
+2025-05-27 14:40:13,068 | INFO | aether2 | Checkpoint sparad: checkpoint_latest.pth
+2025-05-27 14:41:42,825 | INFO | aether2 | Epoch 2: Loss = 0.5335
+2025-05-27 14:41:43,082 | INFO | aether2 | Checkpoint sparad: checkpoint_latest.pth
+2025-05-27 14:43:05,571 | INFO | aether2 | Epoch 3: Loss = 0.4889
+2025-05-27 14:43:05,813 | INFO | aether2 | Checkpoint sparad: checkpoint_latest.pth
+2025-05-27 14:44:25,058 | INFO | aether2 | Epoch 4: Loss = 0.4695
+2025-05-27 14:44:25,304 | INFO | aether2 | Checkpoint sparad: checkpoint_latest.pth
+2025-05-27 14:45:57,629 | INFO | aether2 | Epoch 5: Loss = 0.4582
+2025-05-27 14:45:57,886 | INFO | aether2 | Checkpoint sparad: checkpoint_latest.pth
+2025-05-27 14:47:22,868 | INFO | aether2 | Epoch 6: Loss = 0.4478
+2025-05-27 14:47:23,124 | INFO | aether2 | Checkpoint sparad: checkpoint_latest.pth
+2025-05-27 14:48:52,295 | INFO | aether2 | Epoch 7: Loss = 0.4546
+2025-05-27 14:48:52,564 | INFO | aether2 | Checkpoint sparad: checkpoint_latest.pth
+2025-05-27 14:50:16,099 | INFO | aether2 | Epoch 8: Loss = 0.4461
+2025-05-27 14:50:16,360 | INFO | aether2 | Checkpoint sparad: checkpoint_latest.pth
+2025-05-27 14:51:37,198 | INFO | aether2 | Epoch 9: Loss = 0.4467
+2025-05-27 14:51:37,451 | INFO | aether2 | Checkpoint sparad: checkpoint_latest.pth
+2025-05-27 14:52:55,727 | INFO | aether2 | Epoch 10: Loss = 0.4355
+2025-05-27 14:52:55,960 | INFO | aether2 | Checkpoint sparad: checkpoint_latest.pth
+2025-05-27 14:53:02,135 | INFO | aether2 | GOAL: wahts your name
+2025-05-27 14:53:03,313 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 14:53:03,315 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 14:53:03,363 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 14:53:03,365 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 14:53:03,407 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 14:53:03,410 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 14:53:14,095 | INFO | aether2 | GOAL: whats your name ?
+2025-05-27 14:53:15,324 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 14:53:15,326 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 14:53:15,372 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 14:53:15,376 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 14:53:15,416 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 14:53:15,422 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 14:55:49,966 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 14:55:53,565 | INFO | aether2 | Checkpoint laddad från checkpoint_latest.pth, startar från epoch 11
+2025-05-27 14:56:05,248 | INFO | aether2 | GOAL: wahts your name
+2025-05-27 14:56:06,263 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 14:56:06,266 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 14:56:06,315 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 14:56:06,318 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 14:56:06,360 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 14:56:06,366 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 14:56:58,382 | INFO | aether2 | GOAL: what's your name ?
+2025-05-27 14:56:58,440 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 14:56:58,442 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 14:57:08,325 | INFO | aether2 | GOAL: what is your name
+2025-05-27 14:57:08,375 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 14:57:08,378 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 14:57:19,455 | INFO | aether2 | GOAL: wikipedia England
+2025-05-27 14:57:20,661 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 14:57:20,663 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 14:57:50,317 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 14:57:53,919 | INFO | aether2 | Checkpoint laddad från checkpoint_latest.pth, startar från epoch 11
+2025-05-27 15:09:03,074 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 15:09:06,717 | INFO | aether2 | Checkpoint loaded from checkpoint_latest.pth, starting from epoch 11
+2025-05-27 15:09:14,116 | INFO | aether2 | GOAL: wahts your name
+2025-05-27 15:09:15,049 | INFO | aether2 | Memory added: 'wahts your name...'
+2025-05-27 15:09:15,101 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 15:09:15,103 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 15:09:15,157 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 15:09:15,160 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 15:09:15,209 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 15:09:15,211 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 15:09:18,453 | INFO | aether2 | GOAL: whats your name ?
+2025-05-27 15:09:19,456 | INFO | aether2 | Memory added: 'whats your name ?...'
+2025-05-27 15:09:19,505 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 15:09:19,505 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 15:09:19,562 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 15:09:19,563 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 15:09:19,609 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 15:09:19,609 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 15:09:36,216 | INFO | aether2 | GOAL: what is your name
+2025-05-27 15:09:36,256 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 15:09:36,256 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 15:09:49,095 | INFO | aether2 | GOAL: what´s is the capital of sweden ?
+2025-05-27 15:09:50,084 | INFO | aether2 | Memory added: 'what´s is the capital of sweden ?...'
+2025-05-27 15:09:50,136 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 15:09:50,138 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 15:09:50,189 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 15:09:50,191 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 15:09:50,239 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 15:09:50,241 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 15:15:04,834 | INFO | aether2 | GOAL: whats is the capital of sweden ?
+2025-05-27 15:15:06,017 | INFO | aether2 | Memory added: 'whats is the capital of sweden ?...'
+2025-05-27 15:15:06,077 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 15:15:06,086 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 15:15:06,139 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 15:15:06,143 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 15:15:06,196 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 15:15:06,199 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 15:17:11,268 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 15:21:45,767 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 15:21:49,350 | INFO | aether2 | Tokenizer loaded from checkpoint with vocab size 4
+2025-05-27 15:23:38,223 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 15:24:12,203 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 15:24:15,813 | INFO | aether2 | Tokenizer loaded from checkpoint with vocab size 4
+2025-05-27 15:27:04,850 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 15:27:08,558 | INFO | aether2 | Tokenizer loaded from checkpoint with vocab size 4
+2025-05-27 15:28:03,139 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 15:28:06,739 | INFO | aether2 | Tokenizer loaded from checkpoint with vocab size 4
+2025-05-27 15:40:29,800 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 15:40:33,346 | INFO | aether2 | Tokenizer loaded from checkpoint with vocab size 4
+2025-05-27 15:57:19,568 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 15:57:23,138 | INFO | aether2 | Tokenizer loaded from checkpoint with vocab size 4
+2025-05-27 15:57:23,252 | INFO | aether2 | Checkpoint loaded from checkpoint_latest.pth, starting from epoch 11
+2025-05-27 16:44:11,026 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 16:44:14,736 | INFO | aether2 | Tokenizer loaded from checkpoint with vocab size 4
+2025-05-27 16:44:14,893 | INFO | aether2 | Checkpoint loaded from checkpoint_latest.pth, starting from epoch 11
+2025-05-27 16:44:35,177 | INFO | aether2 | GOAL: what´s is the capital of sweden ?
+2025-05-27 16:44:36,307 | INFO | aether2 | Memory added: 'what´s is the capital of sweden ?...'
+2025-05-27 16:44:36,370 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 16:44:36,383 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 16:44:36,437 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 16:44:36,440 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 16:44:36,487 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 16:44:36,489 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 16:49:43,748 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 16:49:47,453 | INFO | aether2 | Tokenizer loaded from checkpoint with vocab size 4
+2025-05-27 16:49:47,569 | INFO | aether2 | Checkpoint loaded from checkpoint_latest.pth, starting from epoch 11
+2025-05-27 16:51:05,370 | INFO | aether2 | Epoch 12: Loss = 1.3473
+2025-05-27 16:51:05,616 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-27 16:52:22,310 | INFO | aether2 | Epoch 13: Loss = 1.3480
+2025-05-27 16:52:22,588 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-27 16:53:35,157 | INFO | aether2 | Epoch 14: Loss = 1.3479
+2025-05-27 16:53:35,418 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-27 16:54:45,133 | INFO | aether2 | Epoch 15: Loss = 1.3470
+2025-05-27 16:54:45,369 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-27 16:55:54,908 | INFO | aether2 | Epoch 16: Loss = 1.3467
+2025-05-27 16:55:55,188 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-27 16:57:09,453 | INFO | aether2 | Epoch 17: Loss = 1.3465
+2025-05-27 16:57:09,715 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-27 16:58:24,462 | INFO | aether2 | Epoch 18: Loss = 1.3485
+2025-05-27 16:58:24,759 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-27 16:59:35,708 | INFO | aether2 | Epoch 19: Loss = 1.3471
+2025-05-27 16:59:35,973 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-27 17:00:49,068 | INFO | aether2 | Epoch 20: Loss = 1.3461
+2025-05-27 17:00:49,316 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-27 17:01:05,409 | INFO | aether2 | GOAL: how do i loop code in C++
+2025-05-27 17:01:06,485 | INFO | aether2 | Memory added: 'how do i loop code in C++...'
+2025-05-27 17:01:06,636 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 17:01:06,646 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 17:01:06,696 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 17:01:06,696 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 17:01:06,742 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 17:01:06,742 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 17:01:37,247 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 17:01:41,259 | INFO | aether2 | Tokenizer loaded from checkpoint with vocab size 4
+2025-05-27 17:01:41,380 | INFO | aether2 | Checkpoint loaded from checkpoint_latest.pth, starting from epoch 21
+2025-05-27 17:13:30,075 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 17:13:33,672 | INFO | aether2 | Tokenizer loaded from checkpoint with vocab size 4
+2025-05-27 17:13:33,796 | INFO | aether2 | Checkpoint loaded from checkpoint_latest.pth, starting from epoch 21
+2025-05-27 17:14:08,018 | INFO | aether2 | GOAL: how do i loop code in C++
+2025-05-27 17:14:09,111 | INFO | aether2 | Memory added: 'how do i loop code in C++...'
+2025-05-27 17:14:09,163 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 17:14:09,164 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 17:14:09,220 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 17:14:09,224 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 17:14:09,275 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 17:14:09,275 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 17:16:44,216 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 17:16:47,950 | INFO | aether2 | Tokenizer loaded from checkpoint with vocab size 4
+2025-05-27 17:16:48,084 | INFO | aether2 | Checkpoint loaded from checkpoint_latest.pth, starting from epoch 21
+2025-05-27 17:21:10,136 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 17:21:13,908 | INFO | aether2 | Tokenizer loaded from checkpoint with vocab size 4
+2025-05-27 17:21:14,065 | INFO | aether2 | Checkpoint loaded from checkpoint_latest.pth, starting from epoch 21
+2025-05-27 17:23:03,022 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 17:23:07,227 | INFO | aether2 | Tokenizer loaded from checkpoint with vocab size 4
+2025-05-27 17:23:07,340 | INFO | aether2 | Checkpoint loaded from checkpoint_latest.pth, starting from epoch 21
+2025-05-27 17:25:46,627 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 17:25:50,324 | INFO | aether2 | Tokenizer loaded from checkpoint with vocab size 4
+2025-05-27 17:28:00,060 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 17:28:03,934 | INFO | aether2 | Tokenizer loaded from checkpoint with vocab size 4
+2025-05-27 17:28:04,051 | INFO | aether2 | Checkpoint loaded from checkpoint_latest.pth, starting from epoch 21
+2025-05-27 17:28:25,271 | INFO | aether2 | GOAL: whats your name ?
+2025-05-27 17:28:26,329 | INFO | aether2 | Memory added: 'whats your name ?...'
+2025-05-27 17:28:26,491 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 17:28:26,491 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 17:28:26,637 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 17:28:26,637 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 17:28:26,685 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 17:28:26,687 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 17:29:29,403 | INFO | aether2 | GOAL: what's your name ?
+2025-05-27 17:29:29,442 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 17:29:29,442 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 17:30:08,558 | INFO | aether2 | GOAL: how do you feel ?
+2025-05-27 17:30:09,529 | INFO | aether2 | Memory added: 'how do you feel ?...'
+2025-05-27 17:30:09,585 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 17:30:09,594 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 17:30:09,650 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 17:30:09,653 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 17:30:09,707 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 17:30:09,710 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 17:31:09,624 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 17:31:13,448 | INFO | aether2 | Tokenizer loaded from checkpoint with vocab size 4
+2025-05-27 17:31:13,568 | INFO | aether2 | Checkpoint loaded from checkpoint_latest.pth, starting from epoch 21
+2025-05-27 17:36:08,759 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 17:36:08,790 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 17:36:09,231 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 17:36:13,336 | INFO | aether2 | Tokenizer vocab loaded from file with size 93
+2025-05-27 17:36:13,336 | INFO | aether2 |  Keeping latest tokenizer vocabulary.
+2025-05-27 17:36:13,487 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 17:36:38,056 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 17:36:38,093 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 17:36:38,521 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 17:36:41,871 | INFO | aether2 | Tokenizer vocab loaded from file with size 93
+2025-05-27 17:36:41,871 | INFO | aether2 |  Keeping latest tokenizer vocabulary.
+2025-05-27 17:36:42,019 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 17:41:50,377 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 17:41:50,407 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 17:41:50,891 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 17:41:54,481 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 17:42:20,518 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 17:42:20,557 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 17:42:21,007 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 17:42:24,755 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 17:42:48,718 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 17:42:48,761 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 17:42:49,275 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 17:42:52,769 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 17:43:59,530 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 17:43:59,588 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 17:44:00,426 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 17:44:07,034 | INFO | aether2 | Keeping latest tokenizer vocabulary.
+2025-05-27 17:44:07,036 | INFO | aether2 | Setting vocab_size to 93 before loading checkpoint.
+2025-05-27 17:44:07,410 | INFO | aether2 | Checkpoint loaded from checkpoint_latest.pth, starting from epoch 21
+2025-05-27 17:44:07,416 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 17:45:00,063 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 17:45:00,087 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 17:45:00,541 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 17:45:03,777 | INFO | aether2 | Tokenizer vocab loaded from file with size 93
+2025-05-27 17:45:03,777 | INFO | aether2 | Keeping latest tokenizer vocabulary.
+2025-05-27 17:45:03,777 | INFO | aether2 | Setting vocab_size to 93 before loading checkpoint.
+2025-05-27 17:45:03,899 | INFO | aether2 | Checkpoint loaded from checkpoint_latest.pth, starting from epoch 21
+2025-05-27 17:45:03,903 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 17:48:24,277 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 17:48:24,312 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 17:48:24,760 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 17:48:28,031 | INFO | aether2 | Found checkpoint: Loading from checkpoint_latest.pth...
+2025-05-27 17:48:28,455 | INFO | aether2 | Tokenizer vocab loaded from file with size 93
+2025-05-27 17:48:28,456 | INFO | aether2 | Keeping latest tokenizer vocabulary.
+2025-05-27 17:48:28,456 | INFO | aether2 | Setting vocab_size to 93 before loading checkpoint.
+2025-05-27 17:48:28,600 | INFO | aether2 | Checkpoint loaded from checkpoint_latest.pth, starting from epoch 21
+2025-05-27 17:48:28,603 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 17:49:21,636 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 17:49:21,668 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 17:49:22,098 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 17:49:25,147 | INFO | aether2 | Found checkpoint: Loading from checkpoint_latest.pth...
+2025-05-27 17:49:25,477 | INFO | aether2 | Tokenizer vocab loaded from file with size 93
+2025-05-27 17:49:25,477 | INFO | aether2 | Keeping latest tokenizer vocabulary.
+2025-05-27 17:49:25,477 | INFO | aether2 | Setting vocab_size to 93 before loading checkpoint.
+2025-05-27 17:49:25,599 | INFO | aether2 | Checkpoint loaded from checkpoint_latest.pth, starting from epoch 21
+2025-05-27 17:49:25,604 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 17:50:06,700 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 17:50:06,725 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 17:50:07,167 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 17:50:10,584 | INFO | aether2 | Found checkpoint: Loading from checkpoint_latest.pth...
+2025-05-27 17:50:10,914 | INFO | aether2 | Tokenizer vocab loaded from file with size 93
+2025-05-27 17:50:10,914 | INFO | aether2 | Keeping latest tokenizer vocabulary.
+2025-05-27 17:50:10,914 | INFO | aether2 | Setting vocab_size to 93 before loading checkpoint.
+2025-05-27 17:50:11,037 | INFO | aether2 | Checkpoint loaded from checkpoint_latest.pth, starting from epoch 21
+2025-05-27 17:50:11,039 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 17:51:55,311 | INFO | aether2 | GOAL: what´s is the capital of sweden ?
+2025-05-27 17:53:19,898 | INFO | aether2 | GOAL: how do you feel ?
+2025-05-27 17:53:21,039 | INFO | aether2 | Memory added: 'how do you feel ?...'
+2025-05-27 17:53:21,197 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 17:53:21,209 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 17:53:21,261 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 17:53:21,261 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 17:53:21,311 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 17:53:21,311 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 17:53:40,367 | INFO | aether2 | GOAL: hur mår du ?
+2025-05-27 17:55:42,153 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 17:55:42,182 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 17:55:42,624 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 17:55:45,544 | INFO | aether2 | Found checkpoint: Loading from checkpoint_latest.pth...
+2025-05-27 17:55:45,849 | INFO | aether2 | Tokenizer vocab loaded from file with size 93
+2025-05-27 17:55:45,849 | INFO | aether2 | Keeping latest tokenizer vocabulary.
+2025-05-27 17:55:45,849 | INFO | aether2 | Setting vocab_size to 93 before loading checkpoint.
+2025-05-27 17:55:45,974 | INFO | aether2 | Checkpoint loaded from checkpoint_latest.pth, starting from epoch 21
+2025-05-27 17:55:45,979 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 17:55:59,348 | INFO | aether2 | GOAL: corect my spelling 
+2025-05-27 17:58:06,387 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 17:58:06,420 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 17:58:06,885 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 17:58:10,065 | INFO | aether2 | Found checkpoint: Loading from checkpoint_latest.pth...
+2025-05-27 17:58:10,387 | INFO | aether2 | Tokenizer vocab loaded from file with size 93
+2025-05-27 17:58:10,387 | INFO | aether2 | Keeping latest tokenizer vocabulary.
+2025-05-27 17:58:10,387 | INFO | aether2 | Setting vocab_size to 93 before loading checkpoint.
+2025-05-27 17:58:10,512 | INFO | aether2 | Checkpoint loaded from checkpoint_latest.pth, starting from epoch 21
+2025-05-27 17:58:10,519 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 17:58:19,432 | INFO | aether2 | GOAL: what´s is the capital of sweden ?
+2025-05-27 18:01:49,165 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 18:01:49,193 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 18:01:49,582 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 18:01:52,671 | INFO | aether2 | Found checkpoint: Loading from checkpoint_latest.pth...
+2025-05-27 18:01:52,983 | INFO | aether2 | Tokenizer vocab loaded from file with size 93
+2025-05-27 18:01:52,983 | INFO | aether2 | Keeping latest tokenizer vocabulary.
+2025-05-27 18:01:52,983 | INFO | aether2 | Setting vocab_size to 93 before loading checkpoint.
+2025-05-27 18:01:53,093 | INFO | aether2 | Checkpoint loaded from checkpoint_latest.pth, starting from epoch 21
+2025-05-27 18:01:53,098 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 18:01:54,420 | INFO | aether2 | GOAL: what is your name
+2025-05-27 18:01:54,474 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 18:01:54,478 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 18:01:59,397 | INFO | aether2 | GOAL: what´s is the capital of sweden ?
+2025-05-27 18:06:05,766 | INFO | aether2 | GOAL: what´s is the capital of sweden ?
+2025-05-27 18:06:21,350 | INFO | aether2 | GOAL: whats your name 
+2025-05-27 18:08:34,964 | INFO | aether2 | GOAL: whats your name ?
+2025-05-27 18:11:09,494 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 18:11:09,524 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 18:11:29,975 | INFO | aether2 | GOAL: what´s is the capital of sweden ?
+2025-05-27 18:13:53,022 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 18:13:53,514 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 18:13:56,690 | INFO | aether2 | Found checkpoint: Loading from checkpoint_latest.pth...
+2025-05-27 18:13:57,037 | INFO | aether2 | Tokenizer vocab loaded from file with size 87
+2025-05-27 18:13:57,037 | INFO | aether2 | Keeping latest tokenizer vocabulary.
+2025-05-27 18:13:57,037 | INFO | aether2 | Setting vocab_size to 87 before loading checkpoint.
+2025-05-27 18:13:57,167 | INFO | aether2 | Checkpoint loaded from checkpoint_latest.pth, starting from epoch 21
+2025-05-27 18:13:57,167 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 18:14:46,677 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 18:14:46,931 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 18:15:54,464 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 18:15:54,729 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 18:16:16,626 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 18:16:16,859 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 18:16:24,697 | INFO | aether2 | GOAL: what´s is the capital of sweden ?
+2025-05-27 18:29:25,603 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 18:29:25,844 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 18:29:33,731 | INFO | aether2 | GOAL: corect my spelling 
+2025-05-27 18:33:04,820 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 18:33:05,080 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 18:33:55,461 | INFO | aether2 | GOAL: what's your name ?
+2025-05-27 18:33:55,505 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 18:33:55,508 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 18:34:15,349 | INFO | aether2 | GOAL: whats your name ?
+2025-05-27 18:34:15,351 | WARNING | aether2 | Unrecognized word: 'whats', replacing with <UNK>
+2025-05-27 18:34:15,351 | WARNING | aether2 | Unrecognized word: 'your', replacing with <UNK>
+2025-05-27 18:34:15,351 | WARNING | aether2 | Unrecognized word: 'name', replacing with <UNK>
+2025-05-27 18:34:16,394 | WARNING | aether2 | Unrecognized word: 'whats', replacing with <UNK>
+2025-05-27 18:34:16,394 | WARNING | aether2 | Unrecognized word: 'your', replacing with <UNK>
+2025-05-27 18:34:16,394 | WARNING | aether2 | Unrecognized word: 'name', replacing with <UNK>
+2025-05-27 18:34:16,402 | INFO | aether2 | Memory added: 'whats your name ?...'
+2025-05-27 18:34:16,451 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 18:34:16,456 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 18:34:16,508 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 18:34:16,510 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 18:34:16,557 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 18:34:16,559 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 18:43:55,894 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 18:43:56,165 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 18:44:12,521 | INFO | aether2 | GOAL: whats your name ?
+2025-05-27 18:44:12,525 | WARNING | aether2 | Unrecognized word: 'whats', replacing with <UNK>
+2025-05-27 18:44:12,525 | WARNING | aether2 | Unrecognized word: 'your', replacing with <UNK>
+2025-05-27 18:44:12,526 | WARNING | aether2 | Unrecognized word: 'name', replacing with <UNK>
+2025-05-27 18:44:13,473 | WARNING | aether2 | Unrecognized word: 'whats', replacing with <UNK>
+2025-05-27 18:44:13,474 | WARNING | aether2 | Unrecognized word: 'your', replacing with <UNK>
+2025-05-27 18:44:13,474 | WARNING | aether2 | Unrecognized word: 'name', replacing with <UNK>
+2025-05-27 18:44:13,475 | INFO | aether2 | Memory added: 'whats your name ?...'
+2025-05-27 18:44:13,532 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 18:44:13,535 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 18:44:13,693 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 18:44:13,694 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 18:44:13,734 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 18:44:13,739 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 18:47:28,808 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 18:47:29,048 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 18:47:46,513 | INFO | aether2 | GOAL: whats your name ?
+2025-05-27 18:47:46,517 | WARNING | aether2 | Unrecognized word: 'whats', replacing with <UNK>
+2025-05-27 18:47:46,517 | WARNING | aether2 | Unrecognized word: 'your', replacing with <UNK>
+2025-05-27 18:47:46,517 | WARNING | aether2 | Unrecognized word: 'name', replacing with <UNK>
+2025-05-27 18:47:47,503 | WARNING | aether2 | Unrecognized word: 'whats', replacing with <UNK>
+2025-05-27 18:47:47,503 | WARNING | aether2 | Unrecognized word: 'your', replacing with <UNK>
+2025-05-27 18:47:47,503 | WARNING | aether2 | Unrecognized word: 'name', replacing with <UNK>
+2025-05-27 18:47:47,510 | INFO | aether2 | Memory added: 'whats your name ?...'
+2025-05-27 18:47:47,565 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 18:47:47,565 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 18:47:47,617 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 18:47:47,619 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 18:47:47,668 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 18:47:47,670 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 18:48:29,549 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 18:48:29,771 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 18:48:42,010 | INFO | aether2 | GOAL: whats your name ?
+2025-05-27 18:48:42,015 | WARNING | aether2 | Unrecognized word: 'whats', replacing with <UNK>
+2025-05-27 18:48:42,015 | WARNING | aether2 | Unrecognized word: 'your', replacing with <UNK>
+2025-05-27 18:48:42,015 | WARNING | aether2 | Unrecognized word: 'name', replacing with <UNK>
+2025-05-27 18:48:42,975 | WARNING | aether2 | Unrecognized word: 'whats', replacing with <UNK>
+2025-05-27 18:48:42,975 | WARNING | aether2 | Unrecognized word: 'your', replacing with <UNK>
+2025-05-27 18:48:42,975 | WARNING | aether2 | Unrecognized word: 'name', replacing with <UNK>
+2025-05-27 18:48:42,979 | INFO | aether2 | Memory added: 'whats your name ?...'
+2025-05-27 18:48:43,035 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 18:48:43,038 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 18:48:43,181 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 18:48:43,185 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 18:48:43,327 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 18:48:43,329 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 18:53:38,956 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 18:53:39,208 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 18:53:39,636 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 18:53:42,873 | INFO | aether2 | Found checkpoint: Loading from checkpoint_latest.pth...
+2025-05-27 18:53:43,216 | INFO | aether2 | Tokenizer vocab loaded from file with size 90
+2025-05-27 18:53:43,216 | INFO | aether2 | Keeping latest tokenizer vocabulary.
+2025-05-27 18:53:43,216 | INFO | aether2 | Setting vocab_size to 90 before loading checkpoint.
+2025-05-27 18:53:43,349 | INFO | aether2 | Checkpoint loaded from checkpoint_latest.pth, starting from epoch 21
+2025-05-27 18:53:43,354 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 18:54:08,206 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 18:54:08,456 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 18:54:08,936 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 18:54:12,156 | INFO | aether2 | Found checkpoint: Loading from checkpoint_latest.pth...
+2025-05-27 18:54:12,486 | INFO | aether2 | Tokenizer vocab loaded from file with size 87
+2025-05-27 18:54:12,486 | INFO | aether2 | Keeping latest tokenizer vocabulary.
+2025-05-27 18:54:12,486 | INFO | aether2 | Setting vocab_size to 87 before loading checkpoint.
+2025-05-27 18:54:12,615 | INFO | aether2 | Checkpoint loaded from checkpoint_latest.pth, starting from epoch 21
+2025-05-27 18:54:12,619 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 18:55:35,568 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 18:55:35,828 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 18:55:50,334 | INFO | aether2 | GOAL: whats your name ?
+2025-05-27 18:55:50,341 | WARNING | aether2 | Unrecognized word: 'whats', replacing with <UNK>
+2025-05-27 18:55:50,341 | WARNING | aether2 | Unrecognized word: 'your', replacing with <UNK>
+2025-05-27 18:55:50,341 | WARNING | aether2 | Unrecognized word: 'name', replacing with <UNK>
+2025-05-27 18:55:51,437 | WARNING | aether2 | Unrecognized word: 'whats', replacing with <UNK>
+2025-05-27 18:55:51,438 | WARNING | aether2 | Unrecognized word: 'your', replacing with <UNK>
+2025-05-27 18:55:51,438 | WARNING | aether2 | Unrecognized word: 'name', replacing with <UNK>
+2025-05-27 18:55:51,443 | INFO | aether2 | Memory added: 'whats your name ?...'
+2025-05-27 18:55:51,502 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 18:55:51,509 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 18:55:51,565 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 18:55:51,568 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 18:55:51,621 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 18:55:51,624 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 19:12:55,851 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 19:12:56,104 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 19:13:17,653 | INFO | aether2 | GOAL: whats your name ?
+2025-05-27 19:13:17,656 | WARNING | aether2 | Unrecognized word: 'whats', replacing with <UNK>
+2025-05-27 19:13:17,657 | WARNING | aether2 | Unrecognized word: 'your', replacing with <UNK>
+2025-05-27 19:13:17,657 | WARNING | aether2 | Unrecognized word: 'name', replacing with <UNK>
+2025-05-27 19:13:18,698 | WARNING | aether2 | Unrecognized word: 'whats', replacing with <UNK>
+2025-05-27 19:13:18,698 | WARNING | aether2 | Unrecognized word: 'your', replacing with <UNK>
+2025-05-27 19:13:18,699 | WARNING | aether2 | Unrecognized word: 'name', replacing with <UNK>
+2025-05-27 19:13:18,703 | INFO | aether2 | Memory added: 'whats your name ?...'
+2025-05-27 19:13:18,760 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 19:13:18,770 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 19:13:18,825 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 19:13:18,828 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 19:13:18,877 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 19:13:18,880 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 19:15:10,961 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 19:15:11,196 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 19:15:21,416 | INFO | aether2 | GOAL: hello 
+2025-05-27 19:15:21,419 | WARNING | aether2 | Unrecognized word: 'hello', replacing with <UNK>
+2025-05-27 19:15:22,457 | WARNING | aether2 | Unrecognized word: 'hello', replacing with <UNK>
+2025-05-27 19:15:22,463 | INFO | aether2 | Memory added: 'hello ...'
+2025-05-27 19:15:22,518 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 19:15:22,523 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 19:15:22,576 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 19:15:22,578 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 19:15:22,629 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 19:15:22,633 | INFO | DatabaseConnector | Conversation saved successfully.
