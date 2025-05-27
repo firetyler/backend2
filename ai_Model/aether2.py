@@ -1,3 +1,4 @@
+from collections import Counter
 import os
 import torch
 import torch.nn as nn
@@ -16,25 +17,50 @@ from ai_Model.logger_setup import get_logger
 logger = get_logger("aether2")
 # --- Enkel Tokenizer ---
 class SimpleTokenizer:
-    def __init__(self):
+    def __init__(self,min_freq=1):
         self.word2idx = {"<PAD>": 0, "<SOS>": 1, "<EOS>": 2, "<UNK>": 3}
         self.idx2word = {0: "<PAD>", 1: "<SOS>", 2: "<EOS>", 3: "<UNK>"}
         self.vocab_size = 4
+        self.min_freq = min_freq
 
+    def _clean_text(self, text):
+        # Ta bort punktuation och gör lowercase
+        text = text.lower()
+        text = re.sub(r"[^a-z0-9\s]", "", text)
+        return text
+    
     def build_vocab(self, texts):
+        counter = Counter()
         for text in texts:
-            for word in text.lower().split():
-                if word not in self.word2idx:
-                    self.word2idx[word] = self.vocab_size
-                    self.idx2word[self.vocab_size] = word
-                    self.vocab_size += 1
+            cleaned = self._clean_text(text)
+            counter.update(cleaned.split())
+        for word, freq in counter.items():
+            if freq >= self.min_freq and word not in self.word2idx:
+                self.word2idx[word] = self.vocab_size
+                self.idx2word[self.vocab_size] = word
+                self.vocab_size += 1
 
     def encode(self, text):
-        return [1] + [self.word2idx.get(w, 3) for w in text.lower().split()] + [2]
+        cleaned = self._clean_text(text)
+        tokens = [self.word2idx.get(w, 3) for w in cleaned.split()]
+        return [1] + tokens + [2]  # <SOS> och <EOS>
 
     def decode(self, token_ids):
         return " ".join([self.idx2word.get(i, "<UNK>") for i in token_ids if i > 2])
-
+    
+    def encode_batch(self, texts, max_len=None):
+        batch_encoded = [self.encode(text) for text in texts]
+        if max_len is None:
+            max_len = max(len(seq) for seq in batch_encoded)
+        padded_batch = []
+        for seq in batch_encoded:
+            if len(seq) < max_len:
+                seq += [0] * (max_len - len(seq))  # Padding med <PAD>
+            else:
+                seq = seq[:max_len]
+            padded_batch.append(seq)
+        return padded_batch
+#TODO fix if brocken
 # --- Mask för self-attention ---
 def generate_square_subsequent_mask(sz):
     mask = torch.triu(torch.ones(sz, sz), diagonal=1).bool()
@@ -53,6 +79,79 @@ class PositionalEncoding(nn.Module):
 
     def forward(self, x):
         return x + self.pe[:, :x.size(1)].to(x.device)
+
+class TransformerEncoderLayer(nn.Module):
+    def __init__(self, embed_size, heads, ff_hidden_mult=4, dropout=0.1):
+        super().__init__()
+        self.self_attn = nn.MultiheadAttention(embed_dim=embed_size, num_heads=heads, dropout=dropout, batch_first=True)
+        self.feed_forward = nn.Sequential(
+            nn.Linear(embed_size, ff_hidden_mult * embed_size),
+            nn.ReLU(),
+            nn.Linear(ff_hidden_mult * embed_size, embed_size),
+        )
+        self.norm1 = nn.LayerNorm(embed_size)
+        self.norm2 = nn.LayerNorm(embed_size)
+        self.dropout = nn.Dropout(dropout)
+
+    def forward(self, x, mask=None):
+        # Self-attention
+        attn_output, _ = self.self_attn(x, x, x, attn_mask=mask)
+        x = self.norm1(x + self.dropout(attn_output))
+        # Feedforward
+        ff_output = self.feed_forward(x)
+        x = self.norm2(x + self.dropout(ff_output))
+        return x
+    
+
+
+class AdvancedSentenceTransformer(nn.Module):
+    def __init__(self, vocab_size, embed_size=256, num_layers=4, heads=8, max_len=512, dropout=0.1, pooling='mean'):
+        super().__init__()
+        self.embed_size = embed_size
+        self.token_embedding = nn.Embedding(vocab_size, embed_size, padding_idx=0)
+        self.position_encoding = PositionalEncoding(embed_size, max_len=max_len)
+        self.layers = nn.ModuleList([
+            TransformerEncoderLayer(embed_size, heads, dropout=dropout)
+            for _ in range(num_layers)
+        ])
+        self.pooling = pooling  # 'mean', 'max', 'cls'
+        self.cls_token = nn.Parameter(torch.randn(1, 1, embed_size)) if pooling == 'cls' else None
+        self.dropout = nn.Dropout(dropout)
+
+        # Optional projection head
+        self.projection = nn.Linear(embed_size, embed_size)
+
+    def forward(self, input_ids, attention_mask=None):
+        B, S = input_ids.shape
+
+        x = self.token_embedding(input_ids)
+        x = self.position_encoding(x)
+
+        if self.cls_token is not None:
+            cls = self.cls_token.expand(B, -1, -1)  # shape: (B, 1, E)
+            x = torch.cat([cls, x], dim=1)  # prepend cls token
+            if attention_mask is not None:
+                cls_mask = torch.ones(B, 1).to(attention_mask.device)
+                attention_mask = torch.cat([cls_mask, attention_mask], dim=1)
+
+        for layer in self.layers:
+            x = layer(x, mask=None)  # You can add key_padding_mask for better masking
+
+        # --- Pooling ---
+        if self.pooling == 'mean':
+            if attention_mask is not None:
+                mask = attention_mask.unsqueeze(-1).expand_as(x)
+                x = torch.sum(x * mask, dim=1) / torch.clamp(mask.sum(dim=1), min=1e-9)
+            else:
+                x = x.mean(dim=1)
+        elif self.pooling == 'max':
+            x = x.masked_fill((attention_mask == 0).unsqueeze(-1), -1e9)
+            x = x.max(dim=1).values
+        elif self.pooling == 'cls':
+            x = x[:, 0]  # first token (cls)
+
+        # Optional projection head
+        return self.projection(self.dropout(x))
 
 # --- Self-Attention ---
 class SelfAttention(nn.Module):
@@ -129,38 +228,71 @@ class StackedTransformer(nn.Module):
 
 # --- Minnesmodul ---
 class AetherMemory:
-    def __init__(self):
+    def __init__(self, embed_model, tokenizer, device):
+        self.embed_model = embed_model
         self.memories = []
-        self.vector_dim = 256
+        self.vector_dim = embed_model.embed_size
+        
         self.index = faiss.IndexFlatL2(self.vector_dim)
+        self.tokenizer = tokenizer
+        self.device = device
 
     def add(self, text):
         vector = self.text_to_vector(text)
         self.memories.append(text)
         self.index.add(np.array([vector]))
+        logger.info(f"✅ Memory added: '{text[:50]}...'")
 
     def fetch_all_memories(self):
-        return self.memories
+        return self.memories.copy()
 
     def text_to_vector(self, text):
-        np.random.seed(hash(text) % (2 ** 32))
-        return np.random.rand(self.vector_dim).astype('float32')
-
+        self.embed_model.eval()
+        with torch.no_grad():
+            token_ids = self.tokenizer.encode(text)
+            input_ids = torch.tensor([token_ids], dtype=torch.long, device=self.device)
+            attention_mask = (input_ids != 0).long()
+            embedding = self.embed_model(input_ids, attention_mask=attention_mask) 
+            return embedding[0].detach().cpu().numpy().astype('float32')
+        
+    def semantic_search(self, query, top_k=3):
+        query_vector = self.text_to_vector(query)
+        if len(self.memories) == 0:
+            return []
+        distances, indices = self.index.search(np.array([query_vector]), top_k)
+        results = []
+        for i, idx in enumerate(indices[0]):
+            if idx < len(self.memories):
+                results.append((self.memories[idx], float(distances[0][i])))
+        return results
+    
     def calculator_tool(self, expression):
         try:
+            logger.info(f"🧮 Evaluating expression: {expression}")
             safe_expr = re.sub(r"[^0-9+\-*/(). ]", "", expression)
+            result = eval(safe_expr, {"__builtins__": {}})
+            logger.info(f"✅ Calculation result: {result}")
             return f"Result: {eval(safe_expr)}"
         except Exception as e:
+            logger.error(f"❌ Error evaluating expression '{expression}': {e}")
             return f"Error in calculation: {e}"
 
     def wikipedia_tool(self, query):
         try:
+            summary = wikipedia.summary(query, sentences=2)
+            logger.info(f"📚 Wikipedia result for '{query}': {summary[:100]}...")
             return wikipedia.summary(query, sentences=2)
+        
+        except wikipedia.exceptions.DisambiguationError as e:
+            logger.warning(f"⚠️ Multiple results for '{query}': {e.options[:3]}")
+            return f"Disambiguation error: Try one of: {', '.join(e.options[:3])}"
+        except wikipedia.exceptions.PageError:
+            logger.error(f"❌ No page found for '{query}'")
+            return f"No Wikipedia page found for: {query}"
         except Exception as e:
+            logger.error(f"❌ Wikipedia lookup failed for '{query}': {e}")
             return f"Wikipedia lookup failed: {e}"
-
-# --- Dummy-databas ---
-
+        
 # --- AetherAgent ---
 class AetherAgent:
     def __init__(self, db_connector):
@@ -269,13 +401,18 @@ class AetherAgent:
         epochs = config.get("epochs", 10)
         lr = config.get("learning_rate", 0.001)
         batch_size = config.get("batch_size", 32)
-
-        try:
-            with open(filename, 'r', encoding="utf-8") as f:
-                raw_data = json.load(f)
-        except Exception as e:
-            logger.error(f"Failed to load training data: {e}")
-            return
+        filenames = config.get("train_data_paths", ["ai_Model/chat_training_data.json"])
+    
+        training_data  = []
+        for filename in filenames:
+            try:
+                with open(filename, 'r', encoding="utf-8") as f:
+                    raw_data = json.load(f)
+                    valid_data = [(d['input'], d['output']) for d in raw_data if 'input' in d and 'output' in d]
+                    training_data.extend(valid_data)
+            except Exception as e:
+                logger.error(f"Failed to load training data: {e}")
+                return
 
          
         training_data = [(d['input'], d['output']) for d in raw_data if 'input' in d and 'output' in d]
@@ -321,7 +458,7 @@ class AetherAgent:
             self.save_checkpoint(epoch + 1, optimizer, checkpoint_path)
 
     def collate_fn(self, batch):
-        # Exempel på collate_fn som paddar sekvenser till samma längd
+        # collate_fn som paddar sekvenser till samma längd
         inputs, targets = zip(*batch)
         inputs_padded = torch.nn.utils.rnn.pad_sequence(inputs, batch_first=True, padding_value=0)
         targets_padded = torch.nn.utils.rnn.pad_sequence(targets, batch_first=True, padding_value=0)
@@ -362,12 +499,17 @@ class AetherAgent:
             try:
                 parts = user_input.split(" ", 2)
                 if len(parts) < 3:
+                    logger.warning("Felaktigt format på 'run'-kommandot.")
                     return "Använd formatet: run <språk> <kod>"
+                logger.info(f"🚀 Kör kod i språk: {language}")
+                logger.debug(f"Kod som körs:\n{code}")
                 language = parts[1]
                 code = parts[2]
                 result = self.handle_code_question(language, code)
+                logger.info(f"✅ Kodkörning lyckades för språk: {language}")
                 return f"Resultat för {language}:\n{result}"
             except Exception as e:
+                 logger.exception(f"❌ Fel vid kodkörning i språk: {language}")
                  return f"Något gick fel vid kodkörning: {e}"
 
         if "what's your name ?" in corrected_input or "what is your name" in corrected_input:
@@ -385,6 +527,16 @@ class AetherAgent:
         if "wikipedia" in user_input.lower():
             query = user_input.lower().replace("wikipedia", "").strip()
             return self.memory.wikipedia_tool(query)
+        
+        if lowered in ["try again", "that's wrong", "incorrect", "answer again", "that doesn't sound right"]:
+            if self.memory.memories:
+                last_prompt = self.memory.memories[-1]
+                logger.info(f"🔁 User requested retry for: {last_prompt}")
+                regenerated = self.generate_text(last_prompt)
+                self.db_connector.insert_conversation(name="Aether", input="", output=regenerated)
+                return regenerated
+            else:
+                return "I don't have a previous message to retry."
 
         generated = self.generate_text(user_input)
         self.memory.add(user_input)
