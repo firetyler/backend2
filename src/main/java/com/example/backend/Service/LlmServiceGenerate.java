@@ -36,5 +36,18 @@ public class LlmServiceGenerate {
             return "Error: Could not connect to Flask.";
         }
     }
+
+    public Object getAll() {
+        String flaskUrl = "http://localhost:5000/history";  // Exempel-URL till din Flask GET endpoint
+
+        try {
+            ResponseEntity<Object> response = restTemplate.getForEntity(flaskUrl, Object.class);
+            return response.getBody();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "Error: Could not fetch data from Flask.";
+        }
+    
+    }
 }
 

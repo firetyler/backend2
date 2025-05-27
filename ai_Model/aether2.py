@@ -272,8 +272,8 @@ class AetherAgent:
 
         token_data = self.preprocess_data(training_data, config)
 
-        if not token_data:
-            print("❌ Preprocesseringen gav inga token-data. Kontrollera preprocess_data-funktionen och träningsdataformatet.")
+        if not training_data:
+            print("❌ Inga träningsdata hittades i filen. Kontrollera att filen innehåller korrekt träningsdata.")
             return
         #dataloder
         dataset = self.ChatDataset(training_data, self.tokenizer)
@@ -281,10 +281,13 @@ class AetherAgent:
         #loop
         optimizer = torch.optim.Adam(self.model.parameters(), lr=lr)
         criterion = nn.CrossEntropyLoss()
-
+        self.model.train()
         for epoch in range(epochs):
             total_loss = 0.0
-            for x, y in token_data:
+            for x, y in dataloader:
+                x = x.to(self.device)
+                y = y.to(self.device)
+
                 optimizer.zero_grad()
                 mask = generate_square_subsequent_mask(x.size(1)).to(self.device)
                 out = self.model(x, mask)
@@ -293,9 +296,15 @@ class AetherAgent:
                 optimizer.step()
                 total_loss += loss.item()
         
-            avg_loss = total_loss / len(token_data)
+            avg_loss = total_loss / len(dataloader)
             print(f"Epoch {epoch + 1}: Loss = {avg_loss:.4f}")
 
+    def collate_fn(self, batch):
+        # Exempel på collate_fn som paddar sekvenser till samma längd
+        inputs, targets = zip(*batch)
+        inputs_padded = torch.nn.utils.rnn.pad_sequence(inputs, batch_first=True, padding_value=0)
+        targets_padded = torch.nn.utils.rnn.pad_sequence(targets, batch_first=True, padding_value=0)
+        return inputs_padded, targets_padded
 
     def save_model(self, filename="aether_model.pth"):
         torch.save(self.model.state_dict(), filename)
