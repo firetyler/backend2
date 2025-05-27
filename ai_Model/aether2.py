@@ -8,6 +8,12 @@ import faiss
 import json
 import wikipedia
 from torch.utils.data import Dataset,DataLoader
+
+from ai_Model import DatabaseConnector
+from ai_Model.code_executor import CodeExecutor
+from ai_Model.logger_setup import get_logger
+
+logger = get_logger("aether2")
 # --- Enkel Tokenizer ---
 class SimpleTokenizer:
     def __init__(self):
@@ -154,24 +160,7 @@ class AetherMemory:
             return f"Wikipedia lookup failed: {e}"
 
 # --- Dummy-databas ---
-class DatabaseConnector:
-    def insert_conversation(self, user, input_text, output_text):
-        pass
-    def fetch_user_preferences(self):
-        return {}
-class ChatDataset(Dataset):
-    def __init__(self, data, tokenizer):
-        self.data = data
-        self.tokenizer = tokenizer
 
-    def __len__(self):
-        return len(self.data)
-
-    def __getitem__(self, idx):
-        input_text, target_text = self.data[idx]
-        input_ids = self.tokenizer.encode(input_text)
-        target_ids = self.tokenizer.encode(target_text)
-        return input_ids, target_ids
 # --- AetherAgent ---
 class AetherAgent:
     def __init__(self, db_connector):
@@ -182,15 +171,40 @@ class AetherAgent:
         self.tokenizer = SimpleTokenizer()
         self.model = None
         self.embedding_dim = 256
-
+        self.code_executor = CodeExecutor()
+        
+    def handle_code_question(self, language, code):
+        return self.code_executor.run_code(code, language)
     def load_config(self, path):
         try:
             with open(path, "r") as f:
                 return json.load(f)
         except Exception as e:
-            print(f"❌ Kunde inte läsa configfilen: {e}")
+            logger.error(f"❌ Kunde inte läsa configfilen: {e}")
             return {}
+    def save_checkpoint(self, epoch, optimizer, filename):
+        checkpoint = {
+            'epoch': epoch,
+            'model_state_dict': self.model.state_dict(),
+            'optimizer_state_dict': optimizer.state_dict(),
+            'tokenizer': self.tokenizer.word2idx
+        }
+        torch.save(checkpoint, filename)
+        logger.info(f"Checkpoint sparad: {filename}")
 
+    def load_checkpoint(self, filename, optimizer):
+        if os.path.isfile(filename):
+            checkpoint = torch.load(filename, map_location=self.device)
+            self.model.load_state_dict(checkpoint['model_state_dict'])
+            optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
+            self.tokenizer.word2idx = checkpoint.get('tokenizer', self.tokenizer.word2idx)
+            self.tokenizer.idx2word = {v: k for k, v in self.tokenizer.word2idx.items()}
+            logger.info(f"Checkpoint laddad från {filename}, startar från epoch {checkpoint['epoch']}")
+            return checkpoint['epoch']
+        else:
+            logger.warning(f"Ingen checkpoint-fil hittades: {filename}")
+            return 0 
+           
     def preprocess_data(self, training_data, config):
         all_texts = [q for q, _ in training_data] + [a for _, a in training_data]
         self.tokenizer.build_vocab(all_texts)
@@ -260,20 +274,20 @@ class AetherAgent:
             with open(filename, 'r', encoding="utf-8") as f:
                 raw_data = json.load(f)
         except Exception as e:
-            print(f"Failed to load training data: {e}")
+            logger.error(f"Failed to load training data: {e}")
             return
 
          
         training_data = [(d['input'], d['output']) for d in raw_data if 'input' in d and 'output' in d]
 
         if not training_data:
-            print("❌ Inga träningsdata hittades i filen. Kontrollera att filen innehåller korrekt träningsdata.")
+            logger.error("❌ Inga träningsdata hittades i filen. Kontrollera att filen innehåller korrekt träningsdata.")
             return
 
         token_data = self.preprocess_data(training_data, config)
 
         if not training_data:
-            print("❌ Inga träningsdata hittades i filen. Kontrollera att filen innehåller korrekt träningsdata.")
+            logger.error("❌ Inga träningsdata hittades i filen. Kontrollera att filen innehåller korrekt träningsdata.")
             return
         #dataloder
         dataset = self.ChatDataset(training_data, self.tokenizer)
@@ -282,7 +296,12 @@ class AetherAgent:
         optimizer = torch.optim.Adam(self.model.parameters(), lr=lr)
         criterion = nn.CrossEntropyLoss()
         self.model.train()
-        for epoch in range(epochs):
+        checkpoint_path = "checkpoint_latest.pth"   # Namn på checkpoint-fil
+        start_epoch = 0
+        if os.path.exists(checkpoint_path):
+            start_epoch = self.load_checkpoint(checkpoint_path, optimizer)
+
+        for epoch in range(start_epoch ,epochs):
             total_loss = 0.0
             for x, y in dataloader:
                 x = x.to(self.device)
@@ -297,7 +316,9 @@ class AetherAgent:
                 total_loss += loss.item()
         
             avg_loss = total_loss / len(dataloader)
-            print(f"Epoch {epoch + 1}: Loss = {avg_loss:.4f}")
+            logger.info(f"Epoch {epoch + 1}: Loss = {avg_loss:.4f}")
+
+            self.save_checkpoint(epoch + 1, optimizer, checkpoint_path)
 
     def collate_fn(self, batch):
         # Exempel på collate_fn som paddar sekvenser till samma längd
@@ -317,7 +338,7 @@ class AetherAgent:
 
     def generate_text(self, prompt, max_length=50):
         if self.model is None:
-            print("Model not initialized. Call `train_model()` or `load_model()` before generating text.")
+            logger.warning("Model not initialized. Call `train_model()` or `load_model()` before generating text.")
             return ""
         self.model.eval()
         input_ids = torch.tensor([self.tokenizer.encode(prompt)], dtype=torch.long).to(self.device)
@@ -334,8 +355,20 @@ class AetherAgent:
         return self.tokenizer.decode(input_ids[0].tolist())
 
     def run(self, user_input):
-        print(f"GOAL: {user_input}")
+        logger.info(f"GOAL: {user_input}")
         corrected_input = user_input.lower().replace("wahts", "what's")
+        lowered = user_input.lower()
+        if lowered.startswith("run "):
+            try:
+                parts = user_input.split(" ", 2)
+                if len(parts) < 3:
+                    return "Använd formatet: run <språk> <kod>"
+                language = parts[1]
+                code = parts[2]
+                result = self.handle_code_question(language, code)
+                return f"Resultat för {language}:\n{result}"
+            except Exception as e:
+                 return f"Något gick fel vid kodkörning: {e}"
 
         if "what's your name ?" in corrected_input or "what is your name" in corrected_input:
             return "My name is Aether."
@@ -363,7 +396,7 @@ class AetherAgent:
 if __name__ == "__main__":
     db = DatabaseConnector()
     agent = AetherAgent(db)
-
+    
     config = agent.load_config("ai_Model/config.json")
     
     try:
@@ -373,21 +406,21 @@ if __name__ == "__main__":
         all_texts = [q for q, _ in training_data] + [a for _, a in training_data]
         agent.tokenizer.build_vocab(all_texts)
     except Exception as e:
-        print("Failed to build vocab:", e)
+        logger.error(f"Failed to build vocab: {e}")
 
     # Initiera och ladda modell
     agent.initialize_model(config)
-    print("Current working directory:", os.getcwd())
-    print("Files in current directory:", os.listdir())
+    logger.info(f"Current working directory: {os.getcwd()}")
+    logger.info(f"Files in current directory: {os.listdir()}")
     try:
         agent.load_model(filename=config["model_path"])
-        print("✅ Modell laddad.")
+        logger.info("✅ Modell laddad.")
     except:
-        print("⚠️ Kunde inte ladda modell – tränar ny modell...")
+        logger.warning("⚠️ Kunde inte ladda modell – tränar ny modell...")
         agent.train_model(config_path="ai_Model/config.json")
         agent.save_model(filename=config["model_path"])
 
-    print("🤖 Aether är redo. Fråga något!")
+    logger.info("🤖 Aether är redo. Fråga något!")
 
     while True:
         try:
@@ -395,7 +428,7 @@ if __name__ == "__main__":
             if user_input.lower() in ["exit", "quit"]:
                 break
             output = agent.run(user_input)
-            print("Svar:", output)
+            logger.info(f"Svar: {output}")
         except KeyboardInterrupt:
-            print("\n👋 Avslutar...")
+            logger.info("👋 Avslutar...")
             break
