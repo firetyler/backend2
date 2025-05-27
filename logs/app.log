@@ -469,3 +469,19 @@
 2025-05-27 19:15:22,578 | INFO | DatabaseConnector | Conversation saved successfully.
 2025-05-27 19:15:22,629 | INFO | DatabaseConnector | Database connection established.
 2025-05-27 19:15:22,633 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 19:20:52,120 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 19:20:52,393 | INFO | aether2 |  Vocab saved to tokenizer_vocab.json
+2025-05-27 19:20:59,643 | INFO | aether2 | GOAL: whats your name ?
+2025-05-27 19:20:59,646 | WARNING | aether2 | Unrecognized word: 'whats', replacing with <UNK>
+2025-05-27 19:20:59,647 | WARNING | aether2 | Unrecognized word: 'your', replacing with <UNK>
+2025-05-27 19:20:59,647 | WARNING | aether2 | Unrecognized word: 'name', replacing with <UNK>
+2025-05-27 19:21:00,695 | WARNING | aether2 | Unrecognized word: 'whats', replacing with <UNK>
+2025-05-27 19:21:00,696 | WARNING | aether2 | Unrecognized word: 'your', replacing with <UNK>
+2025-05-27 19:21:00,696 | WARNING | aether2 | Unrecognized word: 'name', replacing with <UNK>
+2025-05-27 19:21:00,700 | INFO | aether2 | Memory added: 'whats your name ?...'
+2025-05-27 19:21:00,759 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 19:21:00,765 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 19:21:00,817 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 19:21:00,819 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 19:21:00,872 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 19:21:00,875 | INFO | DatabaseConnector | Conversation saved successfully.
