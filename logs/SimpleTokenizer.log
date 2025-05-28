@@ -1,0 +1,6 @@
+2025-05-28 18:07:55,029 | INFO | SimpleTokenizer |  Vocab saved to tokenizer_vocab.json
+2025-05-28 18:07:55,411 | INFO | SimpleTokenizer |  Vocab saved to tokenizer_vocab.json
+2025-05-28 18:09:37,816 | WARNING | SimpleTokenizer | Unrecognized word: 'whats', replacing with <UNK>
+2025-05-28 18:09:37,816 | WARNING | SimpleTokenizer | Unrecognized word: 'name', replacing with <UNK>
+2025-05-28 18:09:38,666 | WARNING | SimpleTokenizer | Unrecognized word: 'whats', replacing with <UNK>
+2025-05-28 18:09:38,666 | WARNING | SimpleTokenizer | Unrecognized word: 'name', replacing with <UNK>

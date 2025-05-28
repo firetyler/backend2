@@ -2,12 +2,13 @@ import math
 import sys
 import torch
 import torch.nn as nn
-from logger_setup import get_logger
+
 
 import json
 import re
 import unicodedata
 from collections import Counter
+from logToken import get_logger
 sys.stdout.reconfigure(encoding='utf-8')  # Forces UTF-8 output
 logger = get_logger("SimpleTokenizer")
 class SimpleTokenizer:

@@ -15,47 +15,16 @@ from logger_setup import get_logger
 from code_executor import CodeExecutor
 
 logger = get_logger("aether2")
-class ChatDataset(Dataset):
-    def __init__(self, data, tokenizer, max_len=128):
-        self.data = data  # list of (input_text, output_text) tuples
-        self.tokenizer = tokenizer
-        self.max_len = max_len
-
-    def __len__(self):
-        return len(self.data)
-
-    def __getitem__(self, idx):
-        input_text, output_text = self.data[idx]
-        
-        # Tokenisera input och output och konvertera till tensorer
-        input_tokens = torch.tensor(self.tokenizer.encode(input_text), dtype=torch.long)
-        output_tokens = torch.tensor(self.tokenizer.encode(output_text), dtype=torch.long)
-        
-        return input_tokens, output_tokens
-
-class AetherAgent:
-    def __init__(self, db_connector):
-        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        self.db_connector = db_connector
-        self.name = "Aether"
-        self.tokenizer = SimpleTokenizer()
-        self.model = None
-        self.code_executor = CodeExecutor()
-        self.embed_model = None
-        self.embed_size = 256  # Mock for embed_model.embed_size
-        self.embed_model = AdvancedSentenceTransformer(vocab_size=self.tokenizer.vocab_size).to(self.device)
-        self.memory = AetherMemory(self.embed_model, self.tokenizer, self.device)
-        self.ChatDataset = ChatDataset
-    def handle_code_question(self, language, code):
+def handle_code_question(self, language, code):
         return self.code_executor.run_code(code, language)
-    def load_config(self, path):
+def load_config(self, path):
         try:
             with open(path, "r") as f:
                 return json.load(f)
         except Exception as e:
             logger.error(f" Could not read the config file.: {e}")
             return {}
-    def save_checkpoint(self, epoch, optimizer, filename):
+def save_checkpoint(self, epoch, optimizer, filename):
         checkpoint = {
             'epoch': epoch,
             'model_state_dict': self.model.state_dict(),
@@ -68,7 +37,7 @@ class AetherAgent:
         except Exception as e:
                 logger.error(f"Failed to save checkpoint: {e}")
 
-    def load_checkpoint(self, filename, optimizer, config):
+def load_checkpoint(self, filename, optimizer, config):
         if os.path.isfile(filename):
             checkpoint = torch.load(filename, map_location=self.device)
 
@@ -126,7 +95,7 @@ class AetherAgent:
             logger.warning(f" No checkpoint file found: {filename}")
             return 0
           
-    def preprocess_data(self, training_data, config):
+def preprocess_data(self, training_data, config):
         all_texts = [q for q, _ in training_data] + [a for _, a in training_data]
         self.tokenizer.build_vocab(all_texts)
 
@@ -169,7 +138,7 @@ class AetherAgent:
         data = [(seq_x.unsqueeze(0).to(self.device), seq_y.unsqueeze(0).to(self.device)) for seq_x, seq_y in zip(inputs_padded, targets_padded)]
 
         return data
-    def initialize_model(self, config):
+def initialize_model(self, config):
         num_layers = config.get("num_layers", 4)
         heads = config.get("heads", 8)
         forward_expansion = config.get("forward_expansion", 4)
@@ -185,7 +154,7 @@ class AetherAgent:
             dropout=dropout
         ).to(self.device)
 
-    def train_model(self, config_path="ai_Model/config.json"):
+def train_model(self, config_path="ai_Model/config.json"):
         """Träna AI-modellen med data från flera JSON-filer."""
 
         # ✅ Ladda konfiguration
@@ -287,7 +256,7 @@ class AetherAgent:
 
         logger.info("Training complete! Model saved successfully.")
 
-    def collate_fn(self, batch):
+def collate_fn(self, batch):
         inputs, targets = zip(*batch)
     
     # Hitta maxlängden bland både inputs och targets
@@ -312,179 +281,29 @@ class AetherAgent:
     
         return inputs_padded, targets_padded
     
-    def save_model(self, filename="aether_model.pth"):
+def save_model(self, filename="aether_model.pth"):
         torch.save(self.model.state_dict(), filename)
 
-    def load_model(self, filename="aether_model.pth"):
+def load_model(self, filename="aether_model.pth"):
         if self.model is None:
             raise RuntimeError("Model not initialized. You must train or preprocess first.")
         self.model.load_state_dict(torch.load(filename, map_location=self.device))
         self.model.eval()
 
-    def generate_text(self, prompt, max_length=50):
-        if self.model is None:
-            logger.warning("Model not initialized. Call `train_model()` or `load_model()` before generating text.")
-            return json.dumps({"error": "Model not initialized."})  #  JSON-format
+class ChatDataset(Dataset):
+    def __init__(self, data, tokenizer, max_len=128):
+        self.data = data  # list of (input_text, output_text) tuples
+        self.tokenizer = tokenizer
+        self.max_len = max_len
 
-        self.model.eval()
-        tokens = self.tokenizer.encode(prompt)
-        # ✅ Se till att tokenizern returnerar data
-        if len(tokens) == 0:
-            logger.error("Tokenizer returned an empty sequence!")
-            return json.dumps({"error": "Invalid input, couldn't process text."})  #  JSON-format
+    def __len__(self):
+        return len(self.data)
 
-        input_ids = torch.tensor([tokens], dtype=torch.long).to(self.device)
-
-        for _ in range(max_length):
-            mask = generate_square_subsequent_mask(input_ids.size(1)).to(self.device)
-            
-            with torch.no_grad():
-                out = self.model(input_ids, mask)
-
-            next_token_logits = out[:, -1, :]
-            next_token_id = torch.argmax(next_token_logits, dim=-1).unsqueeze(0)
-
-            if next_token_id.item() not in self.tokenizer.word2idx.values():
-                logger.error("Next token ID is out of range!")
-                return json.dumps({"error": "Generated an invalid token."})  #  JSON-format
-
-            input_ids = torch.cat((input_ids, next_token_id), dim=1)
-            if next_token_id.item() == self.tokenizer.word2idx["<EOS>"]:
-                break
-
-        generated_text = self.tokenizer.decode(input_ids[0].tolist())
-
-        return json.dumps({"response": generated_text})  #  Returnera JSON-struktur
-
-    def run(self, user_input):
-        logger.info(f"GOAL: {user_input}")
-        corrected_input = re.sub(r"\s+", " ", user_input.strip().lower())
-        name_patterns = [
-        r"^(what('?s| is) your name\??)$",
-        r"^(who are you\??)$"
-        ]
-        if any(re.match(pattern, corrected_input) for pattern in name_patterns):
-            return "My name is Aether."
-
-        lowered = user_input.lower()
-        if lowered.startswith("run "):
-            try:
-                parts = user_input.split(" ", 2)
-                if len(parts) < 3:
-                    logger.warning("Invalid format for the 'run' command.")
-                    return "Use the format: run <language> <code>"
-                logger.info(f"Running code in language: {language}")
-                logger.debug(f"Code being executed:\n{code}")
-                language = parts[1]
-                code = parts[2]
-                result = self.handle_code_question(language, code)
-                logger.info(f"Code execution succeeded for language: {language}")
-                return f"Result for {language}:\n{result}"
-            except Exception as e:
-                logger.exception(f"Error during code execution in language: {language}")
-                return f"Something went wrong during code execution: {e}"
+    def __getitem__(self, idx):
+        input_text, output_text = self.data[idx]
         
-
-        if user_input.lower().strip() == "train model":
-            self.train_model()
-            self.save_model()
-            print("Training finished")
-            return "Model trained and saved."
-
-        if "calculate" in user_input.lower():
-            expression = user_input.lower().replace("calculate", "").strip()
-            return self.memory.calculator_tool(expression)
-
-        if "wikipedia" in user_input.lower():
-            query = user_input.lower().replace("wikipedia", "").strip()
-            return self.memory.wikipedia_tool(query)
+        # Tokenisera input och output och konvertera till tensorer
+        input_tokens = torch.tensor(self.tokenizer.encode(input_text), dtype=torch.long)
+        output_tokens = torch.tensor(self.tokenizer.encode(output_text), dtype=torch.long)
         
-        if lowered in ["try again", "that's wrong", "incorrect", "answer again", "that doesn't sound right"]:
-            if self.memory.memories:
-                last_prompt = self.memory.memories[-1]
-                logger.info(f" User requested retry for: {last_prompt}")
-                regenerated = self.generate_text(last_prompt)
-                self.db_connector.insert_conversation(name="Aether", input="", output=regenerated)
-                return regenerated
-            else:
-                return "I don't have a previous message to retry."
-
-        generated = self.generate_text(user_input)
-        self.memory.add(user_input)
-        self.db_connector.insert_conversation(name="User", input=user_input, output="")
-        self.db_connector.insert_conversation(name="Aether", input="", output=generated)
-        return generated
-
-# --- Kör agenten ---
-if __name__ == "__main__":
-    logger.info("Starting Aether...")
-
-    # ✅ Initialize database connector
-    db = DatabaseConnector()
-
-    # ✅ Create AI agent
-    agent = AetherAgent(db)
-
-    # ✅ Load configuration safely
-    config = agent.load_config("ai_Model/config.json")
-
-    # ✅ Build tokenizer vocabulary with multiple files
-    try:
-        filenames = config.get("train_data_paths", ["ai_Model/chat_training_data.json"])  # Ensure list format
-        training_data = []
-
-        for filename in filenames:
-            if not isinstance(filename, str):
-                logger.error(f"Invalid filename format: {filename}. Expected a string.")
-                continue
-
-            try:
-                with open(filename, "r", encoding="utf-8") as f:
-                    raw_data = json.load(f)
-                    valid_data = [(d["input"], d["output"]) for d in raw_data if "input" in d and "output" in d]
-                    training_data.extend(valid_data)
-            except Exception as e:
-                logger.error(f"Failed to load training data from {filename}: {e}")
-
-        if training_data:
-            all_texts = [q for q, _ in training_data] + [a for _, a in training_data]
-            agent.tokenizer.build_vocab(all_texts)
-            logger.info(f"Tokenizer vocabulary updated with {len(all_texts)} examples.")
-        else:
-            logger.warning("No valid training data loaded for vocabulary.")
-
-    except Exception as e:
-        logger.error(f"Failed to build tokenizer vocabulary: {e}")
-
-    # ✅ Initialize and load the model safely
-    agent.initialize_model(config)
-
-    # ✅ Debugging info for file paths
-    logger.info(f"Current working directory: {os.getcwd()}")
-    logger.info(f"Files in current directory: {os.listdir()}")
-
-    try:
-        agent.load_model(filename=config["model_path"])
-        logger.info("Model loaded successfully.")
-    except Exception as e:
-        logger.warning(f"Model not found – training new model... ({e})")
-        agent.train_model(config_path="ai_Model/config.json")
-        agent.save_model(filename=config["model_path"])
-
-    logger.info("Aether is ready. Ask me anything!")
-
-    # ✅ Main interaction loop
-    while True:
-        try:
-            user_input = input("\n> ")
-            if user_input.lower() in ["exit", "quit"]:
-                logger.info("Exiting Aether.")
-                break
-            
-            output = agent.run(user_input)
-            logger.info(f"Response: {output}")
-
-        except KeyboardInterrupt:
-            logger.info("Interrupted by user. Exiting...")
-            break
-
+        return input_tokens, output_tokens

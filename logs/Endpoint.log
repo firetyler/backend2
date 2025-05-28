@@ -1,0 +1,8 @@
+2025-05-28 17:56:32,149 | INFO | EndPoints | Tokenizer vocabulary updated with 40000 examples.
+2025-05-28 17:56:32,364 | WARNING | EndPoints |  Model not found – training new model... (Error(s) in loading state_dict for StackedTransformer:
+	size mismatch for embedding.weight: copying a param with shape torch.Size([87, 256]) from checkpoint, the shape in current model is torch.Size([153, 256]).
+	size mismatch for fc_out.weight: copying a param with shape torch.Size([87, 256]) from checkpoint, the shape in current model is torch.Size([153, 256]).
+	size mismatch for fc_out.bias: copying a param with shape torch.Size([87]) from checkpoint, the shape in current model is torch.Size([153]).)
+2025-05-28 17:56:32,777 | INFO | EndPoints | New model trained and saved.
+2025-05-28 17:56:32,788 | INFO | EndPoints | Starting Flask server...
+2025-05-28 17:57:16,783 | ERROR | EndPoints | Error occurred: index out of range in self

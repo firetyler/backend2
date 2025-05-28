@@ -1,0 +1,1 @@
+2025-05-28 17:56:28,915 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
