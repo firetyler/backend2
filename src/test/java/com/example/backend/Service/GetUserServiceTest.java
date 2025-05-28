@@ -5,7 +5,7 @@ import static org.mockito.Mockito.*;
 
 import com.example.backend.Domain.User;
 import com.example.backend.Repository.UserRepository;
-import com.example.backend.Service.GetUserService;
+
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

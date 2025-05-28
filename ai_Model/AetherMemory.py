@@ -7,7 +7,7 @@ import numpy as np
 import torch
 import wikipedia
 
-from logger_setup import get_logger
+from AetherMemoryLog import get_logger
 import re
 
 logger = get_logger("AetherMemory")

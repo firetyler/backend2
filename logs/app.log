@@ -966,3 +966,905 @@
 2025-05-27 22:58:11,861 | INFO | DatabaseConnector | Conversation saved successfully.
 2025-05-27 22:59:53,629 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
 2025-05-27 22:59:53,836 | INFO | SimpleTokenizer |  Vocab saved to tokenizer_vocab.json
+2025-05-27 23:02:44,649 | INFO | aether2 | GOAL: what's your name ?
+2025-05-27 23:02:44,653 | WARNING | SimpleTokenizer | Unrecognized word: 'whats', replacing with <UNK>
+2025-05-27 23:02:44,653 | WARNING | SimpleTokenizer | Unrecognized word: 'your', replacing with <UNK>
+2025-05-27 23:02:44,653 | WARNING | SimpleTokenizer | Unrecognized word: 'name', replacing with <UNK>
+2025-05-27 23:02:45,564 | WARNING | SimpleTokenizer | Unrecognized word: 'whats', replacing with <UNK>
+2025-05-27 23:02:45,565 | WARNING | SimpleTokenizer | Unrecognized word: 'your', replacing with <UNK>
+2025-05-27 23:02:45,565 | WARNING | SimpleTokenizer | Unrecognized word: 'name', replacing with <UNK>
+2025-05-27 23:02:45,570 | INFO | AetherMemory | Memory added: 'what's your name ?...'
+2025-05-27 23:02:45,620 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 23:02:45,622 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 23:02:45,668 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 23:02:45,670 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 23:02:45,717 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 23:02:45,719 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 23:17:07,268 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 23:17:10,026 | INFO | aether2 |  Found checkpoint: Loading from checkpoint_latest.pth...
+2025-05-27 23:17:10,322 | INFO | aether2 | Tokenizer vocab loaded from file with size 87
+2025-05-27 23:17:10,322 | INFO | aether2 | Keeping latest tokenizer vocabulary.
+2025-05-27 23:17:10,322 | INFO | aether2 | Setting vocab_size to 87 before loading checkpoint.
+2025-05-27 23:17:10,427 | INFO | aether2 | Checkpoint loaded from checkpoint_latest.pth, starting from epoch 101
+2025-05-27 23:17:10,431 | INFO | SimpleTokenizer |  Vocab saved to tokenizer_vocab.json
+2025-05-27 23:17:10,431 | INFO | aether2 | Starting model training for 100 epochs...
+2025-05-27 23:17:10,431 | INFO | aether2 | Training complete! Model saved successfully.
+2025-05-27 23:17:36,810 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 23:17:39,087 | INFO | aether2 |  Found checkpoint: Loading from checkpoint_latest.pth...
+2025-05-27 23:17:39,384 | INFO | aether2 | Tokenizer vocab loaded from file with size 87
+2025-05-27 23:17:39,384 | INFO | aether2 | Keeping latest tokenizer vocabulary.
+2025-05-27 23:17:39,384 | INFO | aether2 | Setting vocab_size to 87 before loading checkpoint.
+2025-05-27 23:17:39,490 | INFO | aether2 | Checkpoint loaded from checkpoint_latest.pth, starting from epoch 101
+2025-05-27 23:17:39,493 | INFO | SimpleTokenizer |  Vocab saved to tokenizer_vocab.json
+2025-05-27 23:17:39,494 | INFO | aether2 | Starting model training for 100 epochs...
+2025-05-27 23:17:39,494 | INFO | aether2 | Training complete! Model saved successfully.
+2025-05-27 23:18:54,079 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 23:18:56,417 | INFO | aether2 |  Found checkpoint: Loading from checkpoint_latest.pth...
+2025-05-27 23:18:56,721 | INFO | aether2 | Tokenizer vocab loaded from file with size 87
+2025-05-27 23:18:56,721 | INFO | aether2 | Keeping latest tokenizer vocabulary.
+2025-05-27 23:18:56,721 | INFO | aether2 | Setting vocab_size to 87 before loading checkpoint.
+2025-05-27 23:18:56,841 | INFO | aether2 | Checkpoint loaded from checkpoint_latest.pth, starting from epoch 101
+2025-05-27 23:18:56,845 | INFO | SimpleTokenizer |  Vocab saved to tokenizer_vocab.json
+2025-05-27 23:18:56,846 | INFO | aether2 | Starting model training for 100 epochs...
+2025-05-27 23:18:56,846 | INFO | aether2 | Training complete! Model saved successfully.
+2025-05-27 23:19:15,614 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 23:19:17,995 | INFO | aether2 |  Found checkpoint: Loading from checkpoint_latest.pth...
+2025-05-27 23:19:18,291 | INFO | aether2 | Tokenizer vocab loaded from file with size 87
+2025-05-27 23:19:18,291 | INFO | aether2 | Keeping latest tokenizer vocabulary.
+2025-05-27 23:19:18,291 | INFO | aether2 | Setting vocab_size to 87 before loading checkpoint.
+2025-05-27 23:19:18,394 | INFO | aether2 | Checkpoint loaded from checkpoint_latest.pth, starting from epoch 101
+2025-05-27 23:19:18,398 | INFO | SimpleTokenizer |  Vocab saved to tokenizer_vocab.json
+2025-05-27 23:19:18,398 | INFO | aether2 | Starting model training for 100 epochs...
+2025-05-27 23:19:18,399 | INFO | aether2 | Training complete! Model saved successfully.
+2025-05-27 23:21:32,259 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 23:21:32,498 | ERROR | aether2 | No valid training data loaded. Aborting training...
+2025-05-27 23:23:21,581 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 23:23:40,162 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 23:23:47,588 | INFO | aether2 | GOAL: whats your name ?
+2025-05-27 23:23:47,591 | WARNING | SimpleTokenizer | Unrecognized word: 'whats', replacing with <UNK>
+2025-05-27 23:23:47,591 | WARNING | SimpleTokenizer | Unrecognized word: 'your', replacing with <UNK>
+2025-05-27 23:23:47,592 | WARNING | SimpleTokenizer | Unrecognized word: 'name', replacing with <UNK>
+2025-05-27 23:23:48,447 | WARNING | SimpleTokenizer | Unrecognized word: 'whats', replacing with <UNK>
+2025-05-27 23:23:48,447 | WARNING | SimpleTokenizer | Unrecognized word: 'your', replacing with <UNK>
+2025-05-27 23:23:48,447 | WARNING | SimpleTokenizer | Unrecognized word: 'name', replacing with <UNK>
+2025-05-27 23:23:48,451 | INFO | AetherMemory | Memory added: 'whats your name ?...'
+2025-05-27 23:23:48,601 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 23:23:48,606 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 23:23:48,652 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 23:23:48,655 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 23:23:48,695 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 23:23:48,697 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 23:24:24,847 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 23:29:03,840 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 23:32:48,185 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 23:34:59,955 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 23:35:17,045 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 23:37:52,089 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 23:38:45,147 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 23:39:30,352 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 23:40:48,744 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 23:43:01,012 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 23:45:57,374 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 23:47:23,721 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 23:50:16,224 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 23:50:16,431 | INFO | SimpleTokenizer |  Vocab saved to tokenizer_vocab.json
+2025-05-27 23:50:16,641 | WARNING | EndPoints |  Model not found – training new model... (Error(s) in loading state_dict for StackedTransformer:
+	size mismatch for embedding.weight: copying a param with shape torch.Size([4, 256]) from checkpoint, the shape in current model is torch.Size([87, 256]).
+	size mismatch for fc_out.weight: copying a param with shape torch.Size([4, 256]) from checkpoint, the shape in current model is torch.Size([87, 256]).
+	size mismatch for fc_out.bias: copying a param with shape torch.Size([4]) from checkpoint, the shape in current model is torch.Size([87]).)
+2025-05-27 23:50:16,642 | ERROR | aether2 | No valid training data loaded. Aborting training...
+2025-05-27 23:50:16,719 | INFO | EndPoints | Starting Flask server...
+2025-05-27 23:50:58,057 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 23:50:58,252 | INFO | SimpleTokenizer |  Vocab saved to tokenizer_vocab.json
+2025-05-27 23:50:58,501 | INFO | EndPoints | Starting Flask server...
+2025-05-27 23:51:31,950 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 23:51:32,157 | INFO | SimpleTokenizer |  Vocab saved to tokenizer_vocab.json
+2025-05-27 23:51:32,373 | INFO | EndPoints | Model loaded.
+2025-05-27 23:51:32,376 | INFO | EndPoints | Starting Flask server...
+2025-05-27 23:52:04,433 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 23:52:04,631 | INFO | SimpleTokenizer |  Vocab saved to tokenizer_vocab.json
+2025-05-27 23:52:04,631 | INFO | EndPoints | Tokenizer vocabulary updated with 20000 examples.
+2025-05-27 23:52:04,839 | INFO | EndPoints | Model loaded.
+2025-05-27 23:52:04,850 | INFO | EndPoints | Starting Flask server...
+2025-05-27 23:52:16,246 | INFO | EndPoints | Received input: whats your name ?
+2025-05-27 23:52:16,246 | INFO | aether2 | GOAL: whats your name ?
+2025-05-27 23:52:16,249 | WARNING | SimpleTokenizer | Unrecognized word: 'whats', replacing with <UNK>
+2025-05-27 23:52:16,249 | WARNING | SimpleTokenizer | Unrecognized word: 'your', replacing with <UNK>
+2025-05-27 23:52:16,249 | WARNING | SimpleTokenizer | Unrecognized word: 'name', replacing with <UNK>
+2025-05-27 23:52:17,108 | WARNING | SimpleTokenizer | Unrecognized word: 'whats', replacing with <UNK>
+2025-05-27 23:52:17,109 | WARNING | SimpleTokenizer | Unrecognized word: 'your', replacing with <UNK>
+2025-05-27 23:52:17,109 | WARNING | SimpleTokenizer | Unrecognized word: 'name', replacing with <UNK>
+2025-05-27 23:52:17,113 | INFO | AetherMemory | Memory added: 'whats your name ?...'
+2025-05-27 23:52:17,159 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 23:52:17,165 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 23:52:17,210 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 23:52:17,214 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 23:52:17,264 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 23:52:17,266 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 23:57:12,573 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 23:57:12,782 | INFO | SimpleTokenizer |  Vocab saved to tokenizer_vocab.json
+2025-05-27 23:57:12,783 | INFO | EndPoints | Tokenizer vocabulary updated with 20000 examples.
+2025-05-27 23:57:13,036 | INFO | EndPoints | Model loaded.
+2025-05-27 23:57:13,038 | INFO | EndPoints | Starting Flask server...
+2025-05-27 23:57:22,936 | INFO | aether2 | GOAL: whats your name ?
+2025-05-27 23:57:22,940 | WARNING | SimpleTokenizer | Unrecognized word: 'whats', replacing with <UNK>
+2025-05-27 23:57:22,940 | WARNING | SimpleTokenizer | Unrecognized word: 'your', replacing with <UNK>
+2025-05-27 23:57:22,940 | WARNING | SimpleTokenizer | Unrecognized word: 'name', replacing with <UNK>
+2025-05-27 23:57:23,861 | WARNING | SimpleTokenizer | Unrecognized word: 'whats', replacing with <UNK>
+2025-05-27 23:57:23,862 | WARNING | SimpleTokenizer | Unrecognized word: 'your', replacing with <UNK>
+2025-05-27 23:57:23,862 | WARNING | SimpleTokenizer | Unrecognized word: 'name', replacing with <UNK>
+2025-05-27 23:57:23,867 | INFO | AetherMemory | Memory added: 'whats your name ?...'
+2025-05-27 23:57:23,914 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 23:57:23,917 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 23:57:24,056 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 23:57:24,059 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 23:57:58,946 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-27 23:57:59,148 | INFO | SimpleTokenizer |  Vocab saved to tokenizer_vocab.json
+2025-05-27 23:57:59,149 | INFO | EndPoints | Tokenizer vocabulary updated with 20000 examples.
+2025-05-27 23:57:59,345 | INFO | EndPoints | Model loaded.
+2025-05-27 23:57:59,347 | INFO | EndPoints | Starting Flask server...
+2025-05-27 23:58:05,554 | INFO | aether2 | GOAL: whats your name ?
+2025-05-27 23:58:05,559 | WARNING | SimpleTokenizer | Unrecognized word: 'whats', replacing with <UNK>
+2025-05-27 23:58:05,559 | WARNING | SimpleTokenizer | Unrecognized word: 'your', replacing with <UNK>
+2025-05-27 23:58:05,559 | WARNING | SimpleTokenizer | Unrecognized word: 'name', replacing with <UNK>
+2025-05-27 23:58:06,421 | WARNING | SimpleTokenizer | Unrecognized word: 'whats', replacing with <UNK>
+2025-05-27 23:58:06,421 | WARNING | SimpleTokenizer | Unrecognized word: 'your', replacing with <UNK>
+2025-05-27 23:58:06,421 | WARNING | SimpleTokenizer | Unrecognized word: 'name', replacing with <UNK>
+2025-05-27 23:58:06,426 | INFO | AetherMemory | Memory added: 'whats your name ?...'
+2025-05-27 23:58:06,496 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 23:58:06,498 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 23:58:06,539 | INFO | DatabaseConnector | Database connection established.
+2025-05-27 23:58:06,541 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-27 23:58:06,542 | ERROR | EndPoints | Error occurred: local variable 'cleaned_response' referenced before assignment
+2025-05-28 00:00:19,013 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-28 00:00:19,202 | INFO | SimpleTokenizer |  Vocab saved to tokenizer_vocab.json
+2025-05-28 00:00:19,202 | INFO | EndPoints | Tokenizer vocabulary updated with 20000 examples.
+2025-05-28 00:00:19,400 | INFO | EndPoints | Model loaded.
+2025-05-28 00:00:19,402 | INFO | EndPoints | Starting Flask server...
+2025-05-28 00:00:27,751 | INFO | aether2 | GOAL: whats your name ?
+2025-05-28 00:00:27,754 | WARNING | SimpleTokenizer | Unrecognized word: 'whats', replacing with <UNK>
+2025-05-28 00:00:27,755 | WARNING | SimpleTokenizer | Unrecognized word: 'your', replacing with <UNK>
+2025-05-28 00:00:27,755 | WARNING | SimpleTokenizer | Unrecognized word: 'name', replacing with <UNK>
+2025-05-28 00:00:28,587 | WARNING | SimpleTokenizer | Unrecognized word: 'whats', replacing with <UNK>
+2025-05-28 00:00:28,588 | WARNING | SimpleTokenizer | Unrecognized word: 'your', replacing with <UNK>
+2025-05-28 00:00:28,588 | WARNING | SimpleTokenizer | Unrecognized word: 'name', replacing with <UNK>
+2025-05-28 00:00:28,592 | INFO | AetherMemory | Memory added: 'whats your name ?...'
+2025-05-28 00:00:28,746 | INFO | DatabaseConnector | Database connection established.
+2025-05-28 00:00:28,749 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-28 00:00:28,900 | INFO | DatabaseConnector | Database connection established.
+2025-05-28 00:00:28,902 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-28 00:00:28,940 | INFO | DatabaseConnector | Database connection established.
+2025-05-28 00:00:28,942 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-28 00:02:09,775 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-28 00:02:09,963 | INFO | SimpleTokenizer |  Vocab saved to tokenizer_vocab.json
+2025-05-28 00:02:09,964 | INFO | EndPoints | Tokenizer vocabulary updated with 20000 examples.
+2025-05-28 00:02:10,165 | INFO | EndPoints | Model loaded.
+2025-05-28 00:02:10,166 | INFO | EndPoints | Starting Flask server...
+2025-05-28 00:02:16,320 | INFO | aether2 | GOAL: train model
+2025-05-28 00:02:16,323 | ERROR | aether2 | No valid training data loaded. Aborting training...
+2025-05-28 00:02:16,395 | ERROR | EndPoints | Error occurred: module 'flask.json' has no attribute 'JSONDecodeError'
+2025-05-28 00:05:16,040 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-28 00:05:16,249 | INFO | SimpleTokenizer |  Vocab saved to tokenizer_vocab.json
+2025-05-28 00:05:16,249 | INFO | EndPoints | Tokenizer vocabulary updated with 20000 examples.
+2025-05-28 00:05:16,464 | INFO | EndPoints | Model loaded.
+2025-05-28 00:05:16,466 | INFO | EndPoints | Starting Flask server...
+2025-05-28 00:05:25,316 | INFO | aether2 | GOAL: train model
+2025-05-28 00:05:25,317 | ERROR | aether2 | No valid training data loaded. Aborting training...
+2025-05-28 00:05:25,435 | INFO | DatabaseConnector | Database connection established.
+2025-05-28 00:05:25,437 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-28 00:08:58,964 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-28 00:08:59,161 | INFO | SimpleTokenizer |  Vocab saved to tokenizer_vocab.json
+2025-05-28 00:08:59,161 | INFO | EndPoints | Tokenizer vocabulary updated with 20000 examples.
+2025-05-28 00:08:59,392 | INFO | EndPoints | Model loaded.
+2025-05-28 00:08:59,394 | INFO | EndPoints | Starting Flask server...
+2025-05-28 00:09:07,769 | INFO | aether2 | GOAL: train model
+2025-05-28 00:09:07,770 | ERROR | aether2 | No valid training data loaded. Aborting training...
+2025-05-28 00:09:07,890 | INFO | DatabaseConnector | Database connection established.
+2025-05-28 00:09:07,892 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-28 00:11:36,788 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-28 00:11:36,996 | INFO | SimpleTokenizer |  Vocab saved to tokenizer_vocab.json
+2025-05-28 00:11:36,997 | INFO | EndPoints | Tokenizer vocabulary updated with 20000 examples.
+2025-05-28 00:11:37,236 | INFO | EndPoints | Model loaded.
+2025-05-28 00:11:37,238 | INFO | EndPoints | Starting Flask server...
+2025-05-28 00:11:42,691 | INFO | aether2 | GOAL: train model
+2025-05-28 00:11:42,692 | ERROR | aether2 | No valid training data loaded. Aborting training...
+2025-05-28 00:11:42,813 | INFO | DatabaseConnector | Database connection established.
+2025-05-28 00:11:42,815 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-28 00:17:10,200 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-28 00:17:10,407 | INFO | SimpleTokenizer |  Vocab saved to tokenizer_vocab.json
+2025-05-28 00:17:10,407 | INFO | EndPoints | Tokenizer vocabulary updated with 20000 examples.
+2025-05-28 00:17:10,622 | INFO | EndPoints | Model loaded.
+2025-05-28 00:17:10,625 | INFO | EndPoints | Starting Flask server...
+2025-05-28 00:17:21,642 | INFO | aether2 | GOAL: train model
+2025-05-28 00:17:21,645 | ERROR | aether2 | No valid training data loaded. Aborting training...
+2025-05-28 00:17:21,765 | INFO | DatabaseConnector | Database connection established.
+2025-05-28 00:17:21,768 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-28 00:19:22,793 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-28 00:19:23,177 | INFO | SimpleTokenizer |  Vocab saved to tokenizer_vocab.json
+2025-05-28 00:19:23,177 | INFO | EndPoints | Tokenizer vocabulary updated with 40000 examples.
+2025-05-28 00:19:23,426 | WARNING | EndPoints |  Model not found – training new model... (Error(s) in loading state_dict for StackedTransformer:
+	size mismatch for embedding.weight: copying a param with shape torch.Size([87, 256]) from checkpoint, the shape in current model is torch.Size([153, 256]).
+	size mismatch for fc_out.weight: copying a param with shape torch.Size([87, 256]) from checkpoint, the shape in current model is torch.Size([153, 256]).
+	size mismatch for fc_out.bias: copying a param with shape torch.Size([87]) from checkpoint, the shape in current model is torch.Size([153]).)
+2025-05-28 00:19:26,112 | INFO | aether2 | Found checkpoint: Loading from checkpoint_latest.pth...
+2025-05-28 00:19:26,455 | INFO | aether2 | Tokenizer vocab loaded from file with size 153
+2025-05-28 00:19:26,455 | INFO | aether2 | Keeping latest tokenizer vocabulary.
+2025-05-28 00:19:26,455 | INFO | aether2 | Setting vocab_size to 153 before loading checkpoint.
+2025-05-28 00:19:26,577 | INFO | aether2 | Checkpoint loaded from checkpoint_latest.pth, starting from epoch 101
+2025-05-28 00:19:26,583 | INFO | SimpleTokenizer |  Vocab saved to tokenizer_vocab.json
+2025-05-28 00:21:53,154 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-28 00:21:53,490 | INFO | SimpleTokenizer |  Vocab saved to tokenizer_vocab.json
+2025-05-28 00:21:53,491 | INFO | EndPoints | Tokenizer vocabulary updated with 40000 examples.
+2025-05-28 00:21:53,705 | WARNING | EndPoints |  Model not found – training new model... (Error(s) in loading state_dict for StackedTransformer:
+	size mismatch for embedding.weight: copying a param with shape torch.Size([87, 256]) from checkpoint, the shape in current model is torch.Size([153, 256]).
+	size mismatch for fc_out.weight: copying a param with shape torch.Size([87, 256]) from checkpoint, the shape in current model is torch.Size([153, 256]).
+	size mismatch for fc_out.bias: copying a param with shape torch.Size([87]) from checkpoint, the shape in current model is torch.Size([153]).)
+2025-05-28 00:21:56,008 | INFO | aether2 | Found checkpoint: Loading from checkpoint_latest.pth...
+2025-05-28 00:21:56,339 | INFO | aether2 | Tokenizer vocab loaded from file with size 153
+2025-05-28 00:21:56,339 | INFO | aether2 | Keeping latest tokenizer vocabulary.
+2025-05-28 00:21:56,340 | INFO | aether2 | Setting vocab_size to 153 before loading checkpoint.
+2025-05-28 00:21:56,452 | INFO | aether2 | Checkpoint loaded from checkpoint_latest.pth, starting from epoch 101
+2025-05-28 00:21:56,456 | INFO | SimpleTokenizer |  Vocab saved to tokenizer_vocab.json
+2025-05-28 00:26:13,699 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-28 00:26:14,051 | INFO | SimpleTokenizer |  Vocab saved to tokenizer_vocab.json
+2025-05-28 00:26:14,052 | INFO | EndPoints | Tokenizer vocabulary updated with 40000 examples.
+2025-05-28 00:26:14,251 | WARNING | EndPoints |  Model not found – training new model... (Error(s) in loading state_dict for StackedTransformer:
+	size mismatch for embedding.weight: copying a param with shape torch.Size([87, 256]) from checkpoint, the shape in current model is torch.Size([153, 256]).
+	size mismatch for fc_out.weight: copying a param with shape torch.Size([87, 256]) from checkpoint, the shape in current model is torch.Size([153, 256]).
+	size mismatch for fc_out.bias: copying a param with shape torch.Size([87]) from checkpoint, the shape in current model is torch.Size([153]).)
+2025-05-28 00:26:16,450 | INFO | aether2 | Found checkpoint: Loading from checkpoint_latest.pth...
+2025-05-28 00:26:16,764 | INFO | aether2 | Tokenizer vocab loaded from file with size 153
+2025-05-28 00:26:16,764 | INFO | aether2 | Keeping latest tokenizer vocabulary.
+2025-05-28 00:26:16,764 | INFO | aether2 | Setting vocab_size to 153 before loading checkpoint.
+2025-05-28 00:26:16,874 | INFO | aether2 | Checkpoint loaded from checkpoint_latest.pth, starting from epoch 101
+2025-05-28 00:26:16,880 | INFO | SimpleTokenizer |  Vocab saved to tokenizer_vocab.json
+2025-05-28 00:30:25,569 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-28 00:30:25,913 | INFO | SimpleTokenizer |  Vocab saved to tokenizer_vocab.json
+2025-05-28 00:30:25,914 | INFO | EndPoints | Tokenizer vocabulary updated with 40000 examples.
+2025-05-28 00:30:26,148 | WARNING | EndPoints |  Model not found – training new model... (Error(s) in loading state_dict for StackedTransformer:
+	size mismatch for embedding.weight: copying a param with shape torch.Size([87, 256]) from checkpoint, the shape in current model is torch.Size([153, 256]).
+	size mismatch for fc_out.weight: copying a param with shape torch.Size([87, 256]) from checkpoint, the shape in current model is torch.Size([153, 256]).
+	size mismatch for fc_out.bias: copying a param with shape torch.Size([87]) from checkpoint, the shape in current model is torch.Size([153]).)
+2025-05-28 00:30:28,916 | INFO | aether2 | Tokenizer vocab loaded from file with size 153
+2025-05-28 00:30:28,916 | INFO | aether2 | Keeping latest tokenizer vocabulary.
+2025-05-28 00:30:28,916 | INFO | aether2 | Setting vocab_size to 153 before loading checkpoint.
+2025-05-28 00:30:29,021 | INFO | aether2 | Checkpoint loaded from checkpoint_latest.pth, starting from epoch 101
+2025-05-28 00:30:29,027 | INFO | SimpleTokenizer |  Vocab saved to tokenizer_vocab.json
+2025-05-28 00:31:19,193 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-28 00:31:19,555 | INFO | SimpleTokenizer |  Vocab saved to tokenizer_vocab.json
+2025-05-28 00:31:19,555 | INFO | EndPoints | Tokenizer vocabulary updated with 40000 examples.
+2025-05-28 00:31:19,761 | WARNING | EndPoints |  Model not found – training new model... (Error(s) in loading state_dict for StackedTransformer:
+	size mismatch for embedding.weight: copying a param with shape torch.Size([87, 256]) from checkpoint, the shape in current model is torch.Size([153, 256]).
+	size mismatch for fc_out.weight: copying a param with shape torch.Size([87, 256]) from checkpoint, the shape in current model is torch.Size([153, 256]).
+	size mismatch for fc_out.bias: copying a param with shape torch.Size([87]) from checkpoint, the shape in current model is torch.Size([153]).)
+2025-05-28 00:31:22,073 | INFO | aether2 | Found checkpoint: Loading from checkpoint_latest.pth...
+2025-05-28 00:31:22,384 | INFO | aether2 | Tokenizer vocab loaded from file with size 153
+2025-05-28 00:31:22,385 | INFO | aether2 | Keeping latest tokenizer vocabulary.
+2025-05-28 00:31:22,385 | INFO | aether2 | Setting vocab_size to 153 before loading checkpoint.
+2025-05-28 00:31:22,492 | INFO | aether2 | Checkpoint loaded from checkpoint_latest.pth, starting from epoch 101
+2025-05-28 00:31:22,496 | INFO | SimpleTokenizer |  Vocab saved to tokenizer_vocab.json
+2025-05-28 00:31:49,379 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-28 00:31:49,742 | INFO | SimpleTokenizer |  Vocab saved to tokenizer_vocab.json
+2025-05-28 00:31:49,742 | INFO | EndPoints | Tokenizer vocabulary updated with 40000 examples.
+2025-05-28 00:31:49,934 | WARNING | EndPoints |  Model not found – training new model... (Error(s) in loading state_dict for StackedTransformer:
+	size mismatch for embedding.weight: copying a param with shape torch.Size([87, 256]) from checkpoint, the shape in current model is torch.Size([153, 256]).
+	size mismatch for fc_out.weight: copying a param with shape torch.Size([87, 256]) from checkpoint, the shape in current model is torch.Size([153, 256]).
+	size mismatch for fc_out.bias: copying a param with shape torch.Size([87]) from checkpoint, the shape in current model is torch.Size([153]).)
+2025-05-28 00:31:52,312 | INFO | aether2 | Found checkpoint: Loading from checkpoint_latest.pth...
+2025-05-28 00:31:52,621 | INFO | aether2 | Tokenizer vocab loaded from file with size 153
+2025-05-28 00:31:52,621 | INFO | aether2 | Keeping latest tokenizer vocabulary.
+2025-05-28 00:31:52,621 | INFO | aether2 | Setting vocab_size to 153 before loading checkpoint.
+2025-05-28 00:31:52,736 | INFO | aether2 | Checkpoint loaded from checkpoint_latest.pth, starting from epoch 101
+2025-05-28 00:31:52,742 | INFO | SimpleTokenizer |  Vocab saved to tokenizer_vocab.json
+2025-05-28 00:31:52,816 | INFO | aether2 | Starting model training for 700 epochs...
+2025-05-28 00:35:18,408 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 00:37:04,080 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-28 00:37:04,427 | INFO | SimpleTokenizer |  Vocab saved to tokenizer_vocab.json
+2025-05-28 00:37:04,428 | INFO | EndPoints | Tokenizer vocabulary updated with 40000 examples.
+2025-05-28 00:37:04,633 | WARNING | EndPoints |  Model not found – training new model... (Error(s) in loading state_dict for StackedTransformer:
+	size mismatch for embedding.weight: copying a param with shape torch.Size([87, 256]) from checkpoint, the shape in current model is torch.Size([153, 256]).
+	size mismatch for fc_out.weight: copying a param with shape torch.Size([87, 256]) from checkpoint, the shape in current model is torch.Size([153, 256]).
+	size mismatch for fc_out.bias: copying a param with shape torch.Size([87]) from checkpoint, the shape in current model is torch.Size([153]).)
+2025-05-28 00:37:06,900 | INFO | aether2 | Found checkpoint: Loading from checkpoint_latest.pth...
+2025-05-28 00:37:07,224 | INFO | aether2 | Tokenizer vocab loaded from file with size 153
+2025-05-28 00:37:07,224 | INFO | aether2 | Keeping latest tokenizer vocabulary.
+2025-05-28 00:37:07,224 | INFO | aether2 | Setting vocab_size to 153 before loading checkpoint.
+2025-05-28 00:37:07,332 | INFO | aether2 | Checkpoint loaded from checkpoint_latest.pth, starting from epoch 103
+2025-05-28 00:37:07,338 | INFO | SimpleTokenizer |  Vocab saved to tokenizer_vocab.json
+2025-05-28 00:37:07,411 | INFO | aether2 | Starting model training for 700 epochs...
+2025-05-28 00:38:59,495 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-28 00:38:59,877 | INFO | SimpleTokenizer |  Vocab saved to tokenizer_vocab.json
+2025-05-28 00:38:59,877 | INFO | EndPoints | Tokenizer vocabulary updated with 40000 examples.
+2025-05-28 00:39:00,127 | WARNING | EndPoints |  Model not found – training new model... (Error(s) in loading state_dict for StackedTransformer:
+	size mismatch for embedding.weight: copying a param with shape torch.Size([87, 256]) from checkpoint, the shape in current model is torch.Size([153, 256]).
+	size mismatch for fc_out.weight: copying a param with shape torch.Size([87, 256]) from checkpoint, the shape in current model is torch.Size([153, 256]).
+	size mismatch for fc_out.bias: copying a param with shape torch.Size([87]) from checkpoint, the shape in current model is torch.Size([153]).)
+2025-05-28 00:39:02,649 | WARNING | aether2 | No checkpoint found – starting training from scratch...
+2025-05-28 00:39:02,727 | INFO | aether2 | Starting model training for 700 epochs...
+2025-05-28 00:42:33,552 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 00:43:21,646 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-28 00:43:45,256 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-28 00:46:58,058 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-28 00:47:00,453 | INFO | aether2 | Found checkpoint: Loading from checkpoint_latest.pth...
+2025-05-28 00:47:00,564 | INFO | aether2 | Tokenizer vocab loaded from file with size 153
+2025-05-28 00:47:00,564 | INFO | aether2 | Keeping latest tokenizer vocabulary.
+2025-05-28 00:47:00,565 | INFO | aether2 | Setting vocab_size to 153 before loading checkpoint.
+2025-05-28 00:47:00,669 | INFO | aether2 | Checkpoint loaded from checkpoint_latest.pth, starting from epoch 2
+2025-05-28 00:47:00,675 | INFO | SimpleTokenizer |  Vocab saved to tokenizer_vocab.json
+2025-05-28 00:47:00,675 | INFO | aether2 |  Starting model training for 700 epochs...
+2025-05-28 00:50:15,450 | INFO | aether2 | Epoch 3: Loss = 5.3561
+2025-05-28 00:50:15,517 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 00:53:29,449 | INFO | aether2 | Epoch 4: Loss = 5.3575
+2025-05-28 00:53:29,522 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 00:56:53,077 | INFO | aether2 | Epoch 5: Loss = 5.3542
+2025-05-28 00:56:53,157 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 01:00:12,879 | INFO | aether2 | Epoch 6: Loss = 5.3559
+2025-05-28 01:00:12,955 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 01:03:29,949 | INFO | aether2 | Epoch 7: Loss = 5.3554
+2025-05-28 01:03:30,051 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 01:06:46,800 | INFO | aether2 | Epoch 8: Loss = 5.3572
+2025-05-28 01:06:46,876 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 01:10:03,048 | INFO | aether2 | Epoch 9: Loss = 5.3570
+2025-05-28 01:10:03,121 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 01:13:19,781 | INFO | aether2 | Epoch 10: Loss = 5.3576
+2025-05-28 01:13:19,862 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 01:16:35,643 | INFO | aether2 | Epoch 11: Loss = 5.3544
+2025-05-28 01:16:35,722 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 01:19:53,701 | INFO | aether2 | Epoch 12: Loss = 5.3586
+2025-05-28 01:19:53,776 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 01:23:10,889 | INFO | aether2 | Epoch 13: Loss = 5.3560
+2025-05-28 01:23:10,961 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 01:26:28,512 | INFO | aether2 | Epoch 14: Loss = 5.3564
+2025-05-28 01:26:28,581 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 01:29:46,437 | INFO | aether2 | Epoch 15: Loss = 5.3565
+2025-05-28 01:29:46,518 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 01:33:02,368 | INFO | aether2 | Epoch 16: Loss = 5.3552
+2025-05-28 01:33:02,436 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 01:36:19,924 | INFO | aether2 | Epoch 17: Loss = 5.3560
+2025-05-28 01:36:20,007 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 01:39:45,835 | INFO | aether2 | Epoch 18: Loss = 5.3566
+2025-05-28 01:39:45,914 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 01:43:09,558 | INFO | aether2 | Epoch 19: Loss = 5.3573
+2025-05-28 01:43:09,661 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 01:46:28,329 | INFO | aether2 | Epoch 20: Loss = 5.3536
+2025-05-28 01:46:28,410 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 01:49:48,413 | INFO | aether2 | Epoch 21: Loss = 5.3564
+2025-05-28 01:49:48,486 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 01:53:07,930 | INFO | aether2 | Epoch 22: Loss = 5.3563
+2025-05-28 01:53:08,012 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 01:56:26,032 | INFO | aether2 | Epoch 23: Loss = 5.3544
+2025-05-28 01:56:26,110 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 01:59:46,235 | INFO | aether2 | Epoch 24: Loss = 5.3565
+2025-05-28 01:59:46,316 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 02:03:04,808 | INFO | aether2 | Epoch 25: Loss = 5.3557
+2025-05-28 02:03:04,887 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 02:06:23,720 | INFO | aether2 | Epoch 26: Loss = 5.3566
+2025-05-28 02:06:23,816 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 02:09:43,454 | INFO | aether2 | Epoch 27: Loss = 5.3557
+2025-05-28 02:09:43,534 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 02:13:02,618 | INFO | aether2 | Epoch 28: Loss = 5.3559
+2025-05-28 02:13:02,695 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 02:16:19,998 | INFO | aether2 | Epoch 29: Loss = 5.3550
+2025-05-28 02:16:20,072 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 02:19:39,519 | INFO | aether2 | Epoch 30: Loss = 5.3560
+2025-05-28 02:19:39,620 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 02:22:58,412 | INFO | aether2 | Epoch 31: Loss = 5.3558
+2025-05-28 02:22:58,509 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 02:26:15,998 | INFO | aether2 | Epoch 32: Loss = 5.3572
+2025-05-28 02:26:16,072 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 02:29:35,564 | INFO | aether2 | Epoch 33: Loss = 5.3576
+2025-05-28 02:29:35,642 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 02:32:53,283 | INFO | aether2 | Epoch 34: Loss = 5.3552
+2025-05-28 02:32:53,361 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 02:36:11,810 | INFO | aether2 | Epoch 35: Loss = 5.3555
+2025-05-28 02:36:11,902 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 02:39:31,040 | INFO | aether2 | Epoch 36: Loss = 5.3575
+2025-05-28 02:39:31,114 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 02:42:50,078 | INFO | aether2 | Epoch 37: Loss = 5.3564
+2025-05-28 02:42:50,157 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 02:46:06,510 | INFO | aether2 | Epoch 38: Loss = 5.3573
+2025-05-28 02:46:06,583 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 02:49:20,916 | INFO | aether2 | Epoch 39: Loss = 5.3566
+2025-05-28 02:49:20,991 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 02:52:36,253 | INFO | aether2 | Epoch 40: Loss = 5.3574
+2025-05-28 02:52:36,331 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 02:55:50,811 | INFO | aether2 | Epoch 41: Loss = 5.3569
+2025-05-28 02:55:50,893 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 02:59:04,587 | INFO | aether2 | Epoch 42: Loss = 5.3571
+2025-05-28 02:59:04,675 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 03:02:17,929 | INFO | aether2 | Epoch 43: Loss = 5.3551
+2025-05-28 03:02:18,007 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 03:05:32,562 | INFO | aether2 | Epoch 44: Loss = 5.3563
+2025-05-28 03:05:32,632 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 03:08:49,545 | INFO | aether2 | Epoch 45: Loss = 5.3566
+2025-05-28 03:08:49,621 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 03:12:17,516 | INFO | aether2 | Epoch 46: Loss = 5.3538
+2025-05-28 03:12:17,604 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 03:15:41,502 | INFO | aether2 | Epoch 47: Loss = 5.3579
+2025-05-28 03:15:41,583 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 03:18:57,036 | INFO | aether2 | Epoch 48: Loss = 5.3549
+2025-05-28 03:18:57,116 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 03:22:12,595 | INFO | aether2 | Epoch 49: Loss = 5.3569
+2025-05-28 03:22:12,665 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 03:25:28,135 | INFO | aether2 | Epoch 50: Loss = 5.3567
+2025-05-28 03:25:28,214 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 03:28:43,687 | INFO | aether2 | Epoch 51: Loss = 5.3562
+2025-05-28 03:28:43,788 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 03:31:58,823 | INFO | aether2 | Epoch 52: Loss = 5.3593
+2025-05-28 03:31:58,905 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 03:35:13,880 | INFO | aether2 | Epoch 53: Loss = 5.3558
+2025-05-28 03:35:13,951 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 03:38:28,789 | INFO | aether2 | Epoch 54: Loss = 5.3560
+2025-05-28 03:38:28,895 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 03:41:44,789 | INFO | aether2 | Epoch 55: Loss = 5.3570
+2025-05-28 03:41:44,866 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 03:44:59,181 | INFO | aether2 | Epoch 56: Loss = 5.3567
+2025-05-28 03:44:59,253 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 03:48:14,079 | INFO | aether2 | Epoch 57: Loss = 5.3568
+2025-05-28 03:48:14,162 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 03:51:29,729 | INFO | aether2 | Epoch 58: Loss = 5.3576
+2025-05-28 03:51:29,804 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 03:54:44,652 | INFO | aether2 | Epoch 59: Loss = 5.3555
+2025-05-28 03:54:44,733 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 03:58:00,058 | INFO | aether2 | Epoch 60: Loss = 5.3581
+2025-05-28 03:58:00,139 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 04:01:15,113 | INFO | aether2 | Epoch 61: Loss = 5.3573
+2025-05-28 04:01:15,186 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 04:04:29,630 | INFO | aether2 | Epoch 62: Loss = 5.3569
+2025-05-28 04:04:29,706 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 04:07:45,242 | INFO | aether2 | Epoch 63: Loss = 5.3587
+2025-05-28 04:07:45,319 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 04:11:00,156 | INFO | aether2 | Epoch 64: Loss = 5.3552
+2025-05-28 04:11:00,229 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 04:14:15,003 | INFO | aether2 | Epoch 65: Loss = 5.3570
+2025-05-28 04:14:15,112 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 04:17:31,708 | INFO | aether2 | Epoch 66: Loss = 5.3573
+2025-05-28 04:17:31,801 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 04:20:46,760 | INFO | aether2 | Epoch 67: Loss = 5.3583
+2025-05-28 04:20:46,832 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 04:24:01,669 | INFO | aether2 | Epoch 68: Loss = 5.3556
+2025-05-28 04:24:01,750 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 04:27:17,458 | INFO | aether2 | Epoch 69: Loss = 5.3573
+2025-05-28 04:27:17,540 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 04:30:32,379 | INFO | aether2 | Epoch 70: Loss = 5.3565
+2025-05-28 04:30:32,460 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 04:33:47,196 | INFO | aether2 | Epoch 71: Loss = 5.3555
+2025-05-28 04:33:47,291 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 04:37:01,188 | INFO | aether2 | Epoch 72: Loss = 5.3570
+2025-05-28 04:37:01,270 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 04:40:16,693 | INFO | aether2 | Epoch 73: Loss = 5.3575
+2025-05-28 04:40:16,765 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 04:43:31,119 | INFO | aether2 | Epoch 74: Loss = 5.3547
+2025-05-28 04:43:31,201 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 04:46:46,794 | INFO | aether2 | Epoch 75: Loss = 5.3573
+2025-05-28 04:46:46,875 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 04:50:02,012 | INFO | aether2 | Epoch 76: Loss = 5.3578
+2025-05-28 04:50:02,087 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 04:53:17,918 | INFO | aether2 | Epoch 77: Loss = 5.3588
+2025-05-28 04:53:17,995 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 04:56:32,707 | INFO | aether2 | Epoch 78: Loss = 5.3582
+2025-05-28 04:56:32,780 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 04:59:46,927 | INFO | aether2 | Epoch 79: Loss = 5.3565
+2025-05-28 04:59:47,025 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 05:03:02,453 | INFO | aether2 | Epoch 80: Loss = 5.3559
+2025-05-28 05:03:02,559 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 05:06:16,853 | INFO | aether2 | Epoch 81: Loss = 5.3562
+2025-05-28 05:06:16,928 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 05:09:30,961 | INFO | aether2 | Epoch 82: Loss = 5.3557
+2025-05-28 05:09:31,035 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 05:12:45,543 | INFO | aether2 | Epoch 83: Loss = 5.3547
+2025-05-28 05:12:45,624 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 05:16:01,176 | INFO | aether2 | Epoch 84: Loss = 5.3562
+2025-05-28 05:16:01,253 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 05:19:15,916 | INFO | aether2 | Epoch 85: Loss = 5.3556
+2025-05-28 05:19:15,996 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 05:22:31,730 | INFO | aether2 | Epoch 86: Loss = 5.3570
+2025-05-28 05:22:31,826 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 05:25:47,001 | INFO | aether2 | Epoch 87: Loss = 5.3560
+2025-05-28 05:25:47,098 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 05:29:01,372 | INFO | aether2 | Epoch 88: Loss = 5.3554
+2025-05-28 05:29:01,441 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 05:32:17,322 | INFO | aether2 | Epoch 89: Loss = 5.3574
+2025-05-28 05:32:17,416 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 05:35:32,647 | INFO | aether2 | Epoch 90: Loss = 5.3565
+2025-05-28 05:35:32,724 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 05:38:48,070 | INFO | aether2 | Epoch 91: Loss = 5.3589
+2025-05-28 05:38:48,173 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 05:42:03,270 | INFO | aether2 | Epoch 92: Loss = 5.3549
+2025-05-28 05:42:03,350 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 05:45:18,162 | INFO | aether2 | Epoch 93: Loss = 5.3568
+2025-05-28 05:45:18,256 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 05:48:33,896 | INFO | aether2 | Epoch 94: Loss = 5.3569
+2025-05-28 05:48:33,970 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 05:51:49,867 | INFO | aether2 | Epoch 95: Loss = 5.3570
+2025-05-28 05:51:49,961 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 05:55:05,804 | INFO | aether2 | Epoch 96: Loss = 5.3561
+2025-05-28 05:55:05,885 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 05:58:20,134 | INFO | aether2 | Epoch 97: Loss = 5.3548
+2025-05-28 05:58:20,225 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 06:01:36,223 | INFO | aether2 | Epoch 98: Loss = 5.3562
+2025-05-28 06:01:36,305 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 06:04:51,408 | INFO | aether2 | Epoch 99: Loss = 5.3569
+2025-05-28 06:04:51,483 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 06:08:05,897 | INFO | aether2 | Epoch 100: Loss = 5.3566
+2025-05-28 06:08:05,974 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 06:11:20,460 | INFO | aether2 | Epoch 101: Loss = 5.3569
+2025-05-28 06:11:20,540 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 06:14:34,496 | INFO | aether2 | Epoch 102: Loss = 5.3558
+2025-05-28 06:14:34,603 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 06:17:49,044 | INFO | aether2 | Epoch 103: Loss = 5.3555
+2025-05-28 06:17:49,145 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 06:21:04,368 | INFO | aether2 | Epoch 104: Loss = 5.3580
+2025-05-28 06:21:04,439 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 06:24:19,263 | INFO | aether2 | Epoch 105: Loss = 5.3545
+2025-05-28 06:24:19,335 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 06:27:33,282 | INFO | aether2 | Epoch 106: Loss = 5.3558
+2025-05-28 06:27:33,355 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 06:30:47,613 | INFO | aether2 | Epoch 107: Loss = 5.3547
+2025-05-28 06:30:47,687 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 06:34:02,599 | INFO | aether2 | Epoch 108: Loss = 5.3560
+2025-05-28 06:34:02,680 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 06:37:18,570 | INFO | aether2 | Epoch 109: Loss = 5.3554
+2025-05-28 06:37:18,646 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 06:40:34,662 | INFO | aether2 | Epoch 110: Loss = 5.3553
+2025-05-28 06:40:34,733 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 06:43:50,309 | INFO | aether2 | Epoch 111: Loss = 5.3579
+2025-05-28 06:43:50,408 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 06:47:04,451 | INFO | aether2 | Epoch 112: Loss = 5.3548
+2025-05-28 06:47:04,532 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 06:50:18,783 | INFO | aether2 | Epoch 113: Loss = 5.3563
+2025-05-28 06:50:18,858 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 06:53:33,864 | INFO | aether2 | Epoch 114: Loss = 5.3573
+2025-05-28 06:53:33,944 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 06:56:48,903 | INFO | aether2 | Epoch 115: Loss = 5.3565
+2025-05-28 06:56:49,011 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 07:00:03,135 | INFO | aether2 | Epoch 116: Loss = 5.3582
+2025-05-28 07:00:03,215 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 07:03:18,732 | INFO | aether2 | Epoch 117: Loss = 5.3583
+2025-05-28 07:03:18,810 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 07:06:32,959 | INFO | aether2 | Epoch 118: Loss = 5.3574
+2025-05-28 07:06:33,061 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 07:09:46,635 | INFO | aether2 | Epoch 119: Loss = 5.3537
+2025-05-28 07:09:46,714 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 07:13:02,136 | INFO | aether2 | Epoch 120: Loss = 5.3563
+2025-05-28 07:13:02,208 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 07:16:17,155 | INFO | aether2 | Epoch 121: Loss = 5.3556
+2025-05-28 07:16:17,230 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 07:19:33,267 | INFO | aether2 | Epoch 122: Loss = 5.3589
+2025-05-28 07:19:33,343 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 07:22:48,642 | INFO | aether2 | Epoch 123: Loss = 5.3575
+2025-05-28 07:22:48,718 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 07:26:03,541 | INFO | aether2 | Epoch 124: Loss = 5.3556
+2025-05-28 07:26:03,614 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 07:29:17,422 | INFO | aether2 | Epoch 125: Loss = 5.3547
+2025-05-28 07:29:17,498 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 07:32:32,932 | INFO | aether2 | Epoch 126: Loss = 5.3551
+2025-05-28 07:32:33,007 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 07:35:48,723 | INFO | aether2 | Epoch 127: Loss = 5.3574
+2025-05-28 07:35:48,801 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 07:39:02,939 | INFO | aether2 | Epoch 128: Loss = 5.3557
+2025-05-28 07:39:03,016 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 07:42:18,162 | INFO | aether2 | Epoch 129: Loss = 5.3559
+2025-05-28 07:42:18,241 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 07:45:34,743 | INFO | aether2 | Epoch 130: Loss = 5.3583
+2025-05-28 07:45:34,817 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 07:48:47,675 | INFO | aether2 | Epoch 131: Loss = 5.3548
+2025-05-28 07:48:47,760 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 07:52:01,943 | INFO | aether2 | Epoch 132: Loss = 5.3559
+2025-05-28 07:52:02,025 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 07:55:17,535 | INFO | aether2 | Epoch 133: Loss = 5.3552
+2025-05-28 07:55:17,623 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 07:58:32,765 | INFO | aether2 | Epoch 134: Loss = 5.3582
+2025-05-28 07:58:32,868 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 08:01:47,462 | INFO | aether2 | Epoch 135: Loss = 5.3561
+2025-05-28 08:01:47,537 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 08:05:01,928 | INFO | aether2 | Epoch 136: Loss = 5.3576
+2025-05-28 08:05:01,999 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 08:08:15,669 | INFO | aether2 | Epoch 137: Loss = 5.3565
+2025-05-28 08:08:15,741 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 08:11:30,585 | INFO | aether2 | Epoch 138: Loss = 5.3569
+2025-05-28 08:11:30,660 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 08:14:43,412 | INFO | aether2 | Epoch 139: Loss = 5.3534
+2025-05-28 08:14:43,488 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 08:17:59,034 | INFO | aether2 | Epoch 140: Loss = 5.3567
+2025-05-28 08:17:59,115 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 08:21:14,062 | INFO | aether2 | Epoch 141: Loss = 5.3574
+2025-05-28 08:21:14,157 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 08:24:28,337 | INFO | aether2 | Epoch 142: Loss = 5.3593
+2025-05-28 08:24:28,436 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 08:27:42,676 | INFO | aether2 | Epoch 143: Loss = 5.3549
+2025-05-28 08:27:42,759 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 08:30:57,581 | INFO | aether2 | Epoch 144: Loss = 5.3555
+2025-05-28 08:30:57,681 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 08:34:12,130 | INFO | aether2 | Epoch 145: Loss = 5.3569
+2025-05-28 08:34:12,205 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 08:37:26,507 | INFO | aether2 | Epoch 146: Loss = 5.3554
+2025-05-28 08:37:26,588 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 08:40:42,502 | INFO | aether2 | Epoch 147: Loss = 5.3553
+2025-05-28 08:40:42,578 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 08:43:58,028 | INFO | aether2 | Epoch 148: Loss = 5.3573
+2025-05-28 08:43:58,124 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 08:47:11,965 | INFO | aether2 | Epoch 149: Loss = 5.3552
+2025-05-28 08:47:12,042 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 08:50:27,131 | INFO | aether2 | Epoch 150: Loss = 5.3586
+2025-05-28 08:50:27,212 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 08:53:41,777 | INFO | aether2 | Epoch 151: Loss = 5.3585
+2025-05-28 08:53:41,852 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 08:56:57,411 | INFO | aether2 | Epoch 152: Loss = 5.3574
+2025-05-28 08:56:57,487 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 09:00:11,987 | INFO | aether2 | Epoch 153: Loss = 5.3548
+2025-05-28 09:00:12,067 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 09:03:27,065 | INFO | aether2 | Epoch 154: Loss = 5.3563
+2025-05-28 09:03:27,146 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 09:06:42,741 | INFO | aether2 | Epoch 155: Loss = 5.3576
+2025-05-28 09:06:42,812 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 09:09:57,130 | INFO | aether2 | Epoch 156: Loss = 5.3563
+2025-05-28 09:09:57,207 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 09:13:11,168 | INFO | aether2 | Epoch 157: Loss = 5.3543
+2025-05-28 09:13:11,241 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 09:16:26,807 | INFO | aether2 | Epoch 158: Loss = 5.3578
+2025-05-28 09:16:26,887 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 09:19:41,210 | INFO | aether2 | Epoch 159: Loss = 5.3586
+2025-05-28 09:19:41,315 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 09:22:56,822 | INFO | aether2 | Epoch 160: Loss = 5.3576
+2025-05-28 09:22:56,898 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 09:26:10,865 | INFO | aether2 | Epoch 161: Loss = 5.3547
+2025-05-28 09:26:10,944 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 09:29:26,148 | INFO | aether2 | Epoch 162: Loss = 5.3570
+2025-05-28 09:29:26,239 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 09:32:40,512 | INFO | aether2 | Epoch 163: Loss = 5.3578
+2025-05-28 09:32:40,590 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 09:35:54,820 | INFO | aether2 | Epoch 164: Loss = 5.3570
+2025-05-28 09:35:54,911 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 09:39:09,511 | INFO | aether2 | Epoch 165: Loss = 5.3568
+2025-05-28 09:39:09,588 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 09:42:24,065 | INFO | aether2 | Epoch 166: Loss = 5.3550
+2025-05-28 09:42:24,164 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 09:45:39,011 | INFO | aether2 | Epoch 167: Loss = 5.3559
+2025-05-28 09:45:39,099 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 09:48:53,175 | INFO | aether2 | Epoch 168: Loss = 5.3554
+2025-05-28 09:48:53,252 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 09:52:06,919 | INFO | aether2 | Epoch 169: Loss = 5.3551
+2025-05-28 09:52:06,992 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 09:55:20,248 | INFO | aether2 | Epoch 170: Loss = 5.3552
+2025-05-28 09:55:20,321 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 09:58:37,156 | INFO | aether2 | Epoch 171: Loss = 5.3568
+2025-05-28 09:58:37,243 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 10:01:55,928 | INFO | aether2 | Epoch 172: Loss = 5.3567
+2025-05-28 10:01:56,003 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 10:05:14,888 | INFO | aether2 | Epoch 173: Loss = 5.3579
+2025-05-28 10:05:14,962 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 10:08:34,053 | INFO | aether2 | Epoch 174: Loss = 5.3569
+2025-05-28 10:08:34,129 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 10:11:52,865 | INFO | aether2 | Epoch 175: Loss = 5.3558
+2025-05-28 10:11:52,937 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 10:15:10,104 | INFO | aether2 | Epoch 176: Loss = 5.3548
+2025-05-28 10:15:10,176 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 10:18:27,152 | INFO | aether2 | Epoch 177: Loss = 5.3570
+2025-05-28 10:18:27,233 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 10:21:46,497 | INFO | aether2 | Epoch 178: Loss = 5.3570
+2025-05-28 10:21:46,581 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 10:25:06,178 | INFO | aether2 | Epoch 179: Loss = 5.3580
+2025-05-28 10:25:06,254 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 10:28:24,596 | INFO | aether2 | Epoch 180: Loss = 5.3561
+2025-05-28 10:28:24,693 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 10:31:42,002 | INFO | aether2 | Epoch 181: Loss = 5.3562
+2025-05-28 10:31:42,083 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 10:34:59,683 | INFO | aether2 | Epoch 182: Loss = 5.3564
+2025-05-28 10:34:59,764 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 10:38:18,069 | INFO | aether2 | Epoch 183: Loss = 5.3537
+2025-05-28 10:38:18,143 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 10:41:36,653 | INFO | aether2 | Epoch 184: Loss = 5.3571
+2025-05-28 10:41:36,726 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 10:44:55,371 | INFO | aether2 | Epoch 185: Loss = 5.3562
+2025-05-28 10:44:55,458 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 10:48:14,999 | INFO | aether2 | Epoch 186: Loss = 5.3568
+2025-05-28 10:48:15,095 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 10:51:33,506 | INFO | aether2 | Epoch 187: Loss = 5.3570
+2025-05-28 10:51:33,606 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 10:54:52,196 | INFO | aether2 | Epoch 188: Loss = 5.3562
+2025-05-28 10:54:52,271 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 10:58:10,423 | INFO | aether2 | Epoch 189: Loss = 5.3567
+2025-05-28 10:58:10,523 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 11:01:28,374 | INFO | aether2 | Epoch 190: Loss = 5.3561
+2025-05-28 11:01:28,449 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 11:04:46,346 | INFO | aether2 | Epoch 191: Loss = 5.3555
+2025-05-28 11:04:46,419 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 11:08:05,697 | INFO | aether2 | Epoch 192: Loss = 5.3586
+2025-05-28 11:08:05,779 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 11:11:22,368 | INFO | aether2 | Epoch 193: Loss = 5.3557
+2025-05-28 11:11:22,446 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 11:14:37,738 | INFO | aether2 | Epoch 194: Loss = 5.3580
+2025-05-28 11:14:37,817 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 11:17:51,519 | INFO | aether2 | Epoch 195: Loss = 5.3540
+2025-05-28 11:17:51,591 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 11:21:06,464 | INFO | aether2 | Epoch 196: Loss = 5.3576
+2025-05-28 11:21:06,542 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 11:24:21,747 | INFO | aether2 | Epoch 197: Loss = 5.3598
+2025-05-28 11:24:21,819 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 11:27:37,117 | INFO | aether2 | Epoch 198: Loss = 5.3552
+2025-05-28 11:27:37,208 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 11:30:52,144 | INFO | aether2 | Epoch 199: Loss = 5.3565
+2025-05-28 11:30:52,218 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 11:34:06,894 | INFO | aether2 | Epoch 200: Loss = 5.3548
+2025-05-28 11:34:06,969 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 11:37:22,547 | INFO | aether2 | Epoch 201: Loss = 5.3591
+2025-05-28 11:37:22,643 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 11:40:37,637 | INFO | aether2 | Epoch 202: Loss = 5.3568
+2025-05-28 11:40:37,711 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 11:43:52,481 | INFO | aether2 | Epoch 203: Loss = 5.3546
+2025-05-28 11:43:52,559 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 11:47:07,741 | INFO | aether2 | Epoch 204: Loss = 5.3556
+2025-05-28 11:47:07,823 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 11:50:21,531 | INFO | aether2 | Epoch 205: Loss = 5.3553
+2025-05-28 11:50:21,608 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 11:53:35,808 | INFO | aether2 | Epoch 206: Loss = 5.3551
+2025-05-28 11:53:35,881 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 11:56:51,575 | INFO | aether2 | Epoch 207: Loss = 5.3581
+2025-05-28 11:56:51,655 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 12:00:05,936 | INFO | aether2 | Epoch 208: Loss = 5.3556
+2025-05-28 12:00:06,011 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 12:03:22,032 | INFO | aether2 | Epoch 209: Loss = 5.3586
+2025-05-28 12:03:22,106 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 12:06:37,135 | INFO | aether2 | Epoch 210: Loss = 5.3562
+2025-05-28 12:06:37,207 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 12:09:50,407 | INFO | aether2 | Epoch 211: Loss = 5.3566
+2025-05-28 12:09:50,485 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 12:13:05,192 | INFO | aether2 | Epoch 212: Loss = 5.3557
+2025-05-28 12:13:05,266 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 12:16:20,541 | INFO | aether2 | Epoch 213: Loss = 5.3530
+2025-05-28 12:16:20,615 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 12:19:35,437 | INFO | aether2 | Epoch 214: Loss = 5.3545
+2025-05-28 12:19:35,515 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 12:22:51,012 | INFO | aether2 | Epoch 215: Loss = 5.3559
+2025-05-28 12:22:51,082 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 12:26:04,979 | INFO | aether2 | Epoch 216: Loss = 5.3551
+2025-05-28 12:26:05,054 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 12:29:20,320 | INFO | aether2 | Epoch 217: Loss = 5.3582
+2025-05-28 12:29:20,392 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 12:32:35,650 | INFO | aether2 | Epoch 218: Loss = 5.3572
+2025-05-28 12:32:35,726 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 12:35:49,726 | INFO | aether2 | Epoch 219: Loss = 5.3559
+2025-05-28 12:35:49,804 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 12:39:03,134 | INFO | aether2 | Epoch 220: Loss = 5.3547
+2025-05-28 12:39:03,204 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 12:42:17,414 | INFO | aether2 | Epoch 221: Loss = 5.3552
+2025-05-28 12:42:17,494 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 12:45:33,457 | INFO | aether2 | Epoch 222: Loss = 5.3562
+2025-05-28 12:45:33,535 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 12:48:48,635 | INFO | aether2 | Epoch 223: Loss = 5.3559
+2025-05-28 12:48:48,706 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 12:52:03,219 | INFO | aether2 | Epoch 224: Loss = 5.3571
+2025-05-28 12:52:03,296 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 12:55:17,372 | INFO | aether2 | Epoch 225: Loss = 5.3563
+2025-05-28 12:55:17,443 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 12:58:31,111 | INFO | aether2 | Epoch 226: Loss = 5.3561
+2025-05-28 12:58:31,184 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 13:01:47,579 | INFO | aether2 | Epoch 227: Loss = 5.3577
+2025-05-28 13:01:47,657 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 13:05:02,821 | INFO | aether2 | Epoch 228: Loss = 5.3564
+2025-05-28 13:05:02,895 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 13:08:18,299 | INFO | aether2 | Epoch 229: Loss = 5.3545
+2025-05-28 13:08:18,379 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 13:11:32,143 | INFO | aether2 | Epoch 230: Loss = 5.3547
+2025-05-28 13:11:32,220 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 13:14:47,550 | INFO | aether2 | Epoch 231: Loss = 5.3573
+2025-05-28 13:14:47,623 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 13:18:03,952 | INFO | aether2 | Epoch 232: Loss = 5.3567
+2025-05-28 13:18:04,039 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 13:21:18,980 | INFO | aether2 | Epoch 233: Loss = 5.3592
+2025-05-28 13:21:19,055 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 13:24:34,212 | INFO | aether2 | Epoch 234: Loss = 5.3567
+2025-05-28 13:24:34,310 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 13:27:47,797 | INFO | aether2 | Epoch 235: Loss = 5.3533
+2025-05-28 13:27:47,874 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 13:31:02,980 | INFO | aether2 | Epoch 236: Loss = 5.3548
+2025-05-28 13:31:03,060 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 13:34:17,748 | INFO | aether2 | Epoch 237: Loss = 5.3543
+2025-05-28 13:34:17,826 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 13:37:32,790 | INFO | aether2 | Epoch 238: Loss = 5.3576
+2025-05-28 13:37:32,865 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 13:40:46,233 | INFO | aether2 | Epoch 239: Loss = 5.3561
+2025-05-28 13:40:46,302 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 13:44:01,174 | INFO | aether2 | Epoch 240: Loss = 5.3553
+2025-05-28 13:44:01,253 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 13:47:15,815 | INFO | aether2 | Epoch 241: Loss = 5.3541
+2025-05-28 13:47:15,887 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 13:50:29,554 | INFO | aether2 | Epoch 242: Loss = 5.3545
+2025-05-28 13:50:29,633 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 13:53:43,307 | INFO | aether2 | Epoch 243: Loss = 5.3550
+2025-05-28 13:53:43,385 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 13:56:57,604 | INFO | aether2 | Epoch 244: Loss = 5.3555
+2025-05-28 13:56:57,693 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 14:00:12,674 | INFO | aether2 | Epoch 245: Loss = 5.3565
+2025-05-28 14:00:12,767 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 14:03:29,469 | INFO | aether2 | Epoch 246: Loss = 5.3575
+2025-05-28 14:03:29,560 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 14:06:43,606 | INFO | aether2 | Epoch 247: Loss = 5.3560
+2025-05-28 14:06:43,701 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 14:09:58,749 | INFO | aether2 | Epoch 248: Loss = 5.3559
+2025-05-28 14:09:58,825 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 14:13:13,328 | INFO | aether2 | Epoch 249: Loss = 5.3548
+2025-05-28 14:13:13,410 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 14:16:28,596 | INFO | aether2 | Epoch 250: Loss = 5.3563
+2025-05-28 14:16:28,686 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 14:19:43,919 | INFO | aether2 | Epoch 251: Loss = 5.3572
+2025-05-28 14:19:43,995 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 14:22:58,224 | INFO | aether2 | Epoch 252: Loss = 5.3557
+2025-05-28 14:22:58,299 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 14:26:12,155 | INFO | aether2 | Epoch 253: Loss = 5.3536
+2025-05-28 14:26:12,227 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 14:29:27,366 | INFO | aether2 | Epoch 254: Loss = 5.3576
+2025-05-28 14:29:27,436 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 14:32:42,917 | INFO | aether2 | Epoch 255: Loss = 5.3580
+2025-05-28 14:32:42,997 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 14:35:58,448 | INFO | aether2 | Epoch 256: Loss = 5.3575
+2025-05-28 14:35:58,520 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 14:39:12,940 | INFO | aether2 | Epoch 257: Loss = 5.3541
+2025-05-28 14:39:13,016 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 14:42:26,627 | INFO | aether2 | Epoch 258: Loss = 5.3551
+2025-05-28 14:42:26,704 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 14:45:41,678 | INFO | aether2 | Epoch 259: Loss = 5.3548
+2025-05-28 14:45:41,756 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 14:48:57,098 | INFO | aether2 | Epoch 260: Loss = 5.3556
+2025-05-28 14:48:57,197 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 14:52:12,368 | INFO | aether2 | Epoch 261: Loss = 5.3570
+2025-05-28 14:52:12,442 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 14:55:27,391 | INFO | aether2 | Epoch 262: Loss = 5.3559
+2025-05-28 14:55:27,468 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 14:58:41,812 | INFO | aether2 | Epoch 263: Loss = 5.3582
+2025-05-28 14:58:41,887 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 15:01:56,627 | INFO | aether2 | Epoch 264: Loss = 5.3564
+2025-05-28 15:01:56,723 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 15:05:11,286 | INFO | aether2 | Epoch 265: Loss = 5.3565
+2025-05-28 15:05:11,367 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 15:08:25,552 | INFO | aether2 | Epoch 266: Loss = 5.3569
+2025-05-28 15:08:25,622 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 15:11:37,444 | INFO | aether2 | Epoch 267: Loss = 5.3565
+2025-05-28 15:11:37,518 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 15:14:30,084 | INFO | aether2 | Epoch 268: Loss = 5.3560
+2025-05-28 15:14:30,160 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 15:17:24,462 | INFO | aether2 | Epoch 269: Loss = 5.3564
+2025-05-28 15:17:24,544 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 15:20:17,143 | INFO | aether2 | Epoch 270: Loss = 5.3579
+2025-05-28 15:20:17,229 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 15:23:09,517 | INFO | aether2 | Epoch 271: Loss = 5.3559
+2025-05-28 15:23:09,585 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 15:26:01,780 | INFO | aether2 | Epoch 272: Loss = 5.3573
+2025-05-28 15:26:01,852 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 15:28:52,947 | INFO | aether2 | Epoch 273: Loss = 5.3538
+2025-05-28 15:28:53,019 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 15:31:45,445 | INFO | aether2 | Epoch 274: Loss = 5.3549
+2025-05-28 15:31:45,519 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 15:34:38,459 | INFO | aether2 | Epoch 275: Loss = 5.3579
+2025-05-28 15:34:38,555 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 15:37:29,626 | INFO | aether2 | Epoch 276: Loss = 5.3553
+2025-05-28 15:37:29,702 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 15:40:22,307 | INFO | aether2 | Epoch 277: Loss = 5.3587
+2025-05-28 15:40:22,382 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 15:43:16,357 | INFO | aether2 | Epoch 278: Loss = 5.3578
+2025-05-28 15:43:16,433 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 15:46:09,654 | INFO | aether2 | Epoch 279: Loss = 5.3559
+2025-05-28 15:46:09,725 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 15:49:01,748 | INFO | aether2 | Epoch 280: Loss = 5.3569
+2025-05-28 15:49:01,817 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 15:51:53,817 | INFO | aether2 | Epoch 281: Loss = 5.3551
+2025-05-28 15:51:53,904 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 15:54:46,797 | INFO | aether2 | Epoch 282: Loss = 5.3570
+2025-05-28 15:54:46,867 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 15:57:39,001 | INFO | aether2 | Epoch 283: Loss = 5.3576
+2025-05-28 15:57:39,093 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 16:00:32,097 | INFO | aether2 | Epoch 284: Loss = 5.3567
+2025-05-28 16:00:32,165 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 16:03:24,787 | INFO | aether2 | Epoch 285: Loss = 5.3540
+2025-05-28 16:03:24,855 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 16:06:17,256 | INFO | aether2 | Epoch 286: Loss = 5.3547
+2025-05-28 16:06:17,323 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 16:09:10,346 | INFO | aether2 | Epoch 287: Loss = 5.3565
+2025-05-28 16:09:10,433 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 16:12:06,400 | INFO | aether2 | Epoch 288: Loss = 5.3558
+2025-05-28 16:12:06,469 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 16:15:00,035 | INFO | aether2 | Epoch 289: Loss = 5.3575
+2025-05-28 16:15:00,101 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth
+2025-05-28 16:17:59,592 | INFO | aether2 | Epoch 290: Loss = 5.3569
+2025-05-28 16:17:59,664 | INFO | aether2 | Checkpoint saved: checkpoint_latest.pth

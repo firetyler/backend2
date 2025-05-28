@@ -62,8 +62,15 @@ class AetherAgent:
             'optimizer_state_dict': optimizer.state_dict(),
             'tokenizer': self.tokenizer.word2idx
         }
-        torch.save(checkpoint, filename)
-        logger.info(f"Checkpoint saved: {filename}")
+        try:
+            torch.save(checkpoint, filename)
+            logger.info(f"Checkpoint saved: {filename}")
+        except Exception as e:
+                logger.error(f"Failed to save checkpoint: {e}")
+
+        
+        
+
     def load_checkpoint(self, filename, optimizer, config):
         if os.path.isfile(filename):
             checkpoint = torch.load(filename, map_location=self.device)
@@ -89,6 +96,8 @@ class AetherAgent:
             # Initialisera modellen med värden från config-filen
             vocab_size = self.tokenizer.vocab_size
             logger.info(f"Setting vocab_size to {vocab_size} before loading checkpoint.")
+            vocab_size = len(self.tokenizer.word2idx)
+            print(f"📌 Using vocab_size = {vocab_size} for model initialization.")  
 
             self.model = StackedTransformer(
                 embed_size=config.get("embedding_dim", 256),
@@ -179,58 +188,91 @@ class AetherAgent:
             dropout=dropout
         ).to(self.device)
 
-    def train_model(self, filename="ai_Model/chat_training_data.json", config_path="ai_Model/config.json"):
-        """Train the AI model using data from JSON files."""
-        
-        #  Load configuration
+
+
+ 
+
+
+
+    def train_model(self, config_path="ai_Model/config.json"):
+        """Träna AI-modellen med data från flera JSON-filer."""
+
+        # ✅ Ladda konfiguration
         config = self.load_config(config_path)
         epochs = config.get("epochs", 10)
         lr = config.get("learning_rate", 0.001)
         batch_size = config.get("batch_size", 32)
-        filenames = config.get("train_data_paths", ["ai_Model/chat_training_data.json"])
+        filenames = config.get("train_data_paths", [])
 
-        #  Load training data properly
+        # ✅ Debugging: Kontrollera filerna
+        print(f"🔎 Training files listed in config: {filenames}")
+        print(f"📂 Current working directory: {os.getcwd()}")
+
         training_data = []
         for filename in filenames:
+            if not isinstance(filename, str):  
+                logger.error(f"Invalid filename format: {filename}. Expected a string.")
+                continue  
+
+            # ✅ Kontrollera att träningsfilen existerar
+            if not os.path.exists(filename):
+                logger.error(f"Training data file not found: {filename}")
+                continue  
+
             try:
-                with open(filename, 'r', encoding="utf-8") as f:
+                with open(filename, "r", encoding="utf-8") as f:
                     raw_data = json.load(f)
-                    
-                    if not raw_data:
-                        logger.warning(f" No training data found in {filename}. Skipping...")
-                        continue
-                    
-                    valid_data = [(d['input'], d['output']) for d in raw_data if 'input' in d and 'output' in d]
+
+                    # ✅ Se till att JSON är korrekt strukturerad
+                    if isinstance(raw_data, dict):  
+                        raw_data = raw_data.get("data", [])  
+
+                    valid_data = [(d["input"], d["output"]) for d in raw_data if "input" in d and "output" in d]
                     training_data.extend(valid_data)
+                    print(f"✅ Loaded {len(valid_data)} examples from {filename}")
+
             except Exception as e:
                 logger.error(f"Failed to load training data from {filename}: {e}")
-                return
-            
+
+        # ✅ Kontrollera om träningsdata har laddats korrekt
         if not training_data:
             logger.error("No valid training data loaded. Aborting training...")
             return
 
-        #  Prepare dataset & DataLoader
+        # ✅ Förbered dataset & DataLoader
         dataset = self.ChatDataset(training_data, self.tokenizer)
         dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True, num_workers=0, collate_fn=self.collate_fn)
 
-        #  Initialize optimizer and loss function
+        # ✅ Fix: Se till att `self.model` är korrekt initialiserad innan träning
+        vocab_size = len(self.tokenizer.word2idx)
+        print(f"📌 Using vocab_size = {vocab_size} for model initialization.")
+
+        self.model = StackedTransformer(
+            embed_size=config.get("embedding_dim", 256),
+            vocab_size=vocab_size,
+            num_layers=config.get("num_layers", 6),
+            heads=config.get("heads", 8),
+            forward_expansion=config.get("forward_expansion", 4),
+            dropout=config.get("dropout", 0.1)
+        )
+
+        # ✅ Initialisera optimizer och loss-funktion
         optimizer = torch.optim.Adam(self.model.parameters(), lr=lr)
         criterion = nn.CrossEntropyLoss()
         self.model.train()
 
-        #  Handle checkpoints correctly
+        # ✅ Hantera checkpoints
         checkpoint_path = "checkpoint_latest.pth"
         start_epoch = 0
         if os.path.exists(checkpoint_path):
-            logger.info(f" Found checkpoint: Loading from {checkpoint_path}...")
+            logger.info(f"Found checkpoint: Loading from {checkpoint_path}...")
             start_epoch = self.load_checkpoint(checkpoint_path, optimizer, config)
         else:
-            logger.warning(f"No checkpoint found – starting training from scratch...")
-            start_epoch = 0  # Ensure training starts at the correct epoch
-        
-        #  Run training loop
-        logger.info(f"Starting model training for {epochs} epochs...")
+            logger.warning("No checkpoint found – starting training from scratch...")
+            start_epoch = 0
+
+        # ✅ Starta träningsloop
+        logger.info(f" Starting model training for {epochs} epochs...")
         for epoch in range(start_epoch, epochs):
             total_loss = 0.0
             for x, y in dataloader:
@@ -249,10 +291,14 @@ class AetherAgent:
             avg_loss = total_loss / len(dataloader)
             logger.info(f"Epoch {epoch + 1}: Loss = {avg_loss:.4f}")
 
-            # Save checkpoint after each epoch
+            # ✅ Spara checkpoint efter varje epoch
             self.save_checkpoint(epoch + 1, optimizer, checkpoint_path)
 
         logger.info("Training complete! Model saved successfully.")
+
+
+
+
 
     def collate_fn(self, batch):
         inputs, targets = zip(*batch)
@@ -355,7 +401,7 @@ class AetherAgent:
         if user_input.lower().strip() == "train model":
             self.train_model()
             self.save_model()
-            print("✅ Training finished")
+            print("Training finished")
             return "Model trained and saved."
 
         if "calculate" in user_input.lower():
@@ -384,41 +430,74 @@ class AetherAgent:
 
 # --- Kör agenten ---
 if __name__ == "__main__":
-    db = DatabaseConnector()
-    agent = AetherAgent(db)
-    
-    config = agent.load_config("ai_Model/config.json")
-    
-    try:
-        with open(config.get("train_data_path", "ai_Model/chat_training_data.json"), "r", encoding="utf-8") as f:
-            raw_data = json.load(f)
-        training_data = [(d['input'], d['output']) for d in raw_data if 'input' in d and 'output' in d]
-        all_texts = [q for q, _ in training_data] + [a for _, a in training_data]
-        agent.tokenizer.build_vocab(all_texts)
-    except Exception as e:
-        logger.error(f"Failed to build vocab: {e}")
+    logger.info("Starting Aether...")
 
-    # Initiera och ladda modell
+    # ✅ Initialize database connector
+    db = DatabaseConnector()
+
+    # ✅ Create AI agent
+    agent = AetherAgent(db)
+
+    # ✅ Load configuration safely
+    config = agent.load_config("ai_Model/config.json")
+
+    # ✅ Build tokenizer vocabulary with multiple files
+    try:
+        filenames = config.get("train_data_paths", ["ai_Model/chat_training_data.json"])  # Ensure list format
+        training_data = []
+
+        for filename in filenames:
+            if not isinstance(filename, str):
+                logger.error(f"Invalid filename format: {filename}. Expected a string.")
+                continue
+
+            try:
+                with open(filename, "r", encoding="utf-8") as f:
+                    raw_data = json.load(f)
+                    valid_data = [(d["input"], d["output"]) for d in raw_data if "input" in d and "output" in d]
+                    training_data.extend(valid_data)
+            except Exception as e:
+                logger.error(f"Failed to load training data from {filename}: {e}")
+
+        if training_data:
+            all_texts = [q for q, _ in training_data] + [a for _, a in training_data]
+            agent.tokenizer.build_vocab(all_texts)
+            logger.info(f"Tokenizer vocabulary updated with {len(all_texts)} examples.")
+        else:
+            logger.warning("No valid training data loaded for vocabulary.")
+
+    except Exception as e:
+        logger.error(f"Failed to build tokenizer vocabulary: {e}")
+
+    # ✅ Initialize and load the model safely
     agent.initialize_model(config)
+
+    # ✅ Debugging info for file paths
     logger.info(f"Current working directory: {os.getcwd()}")
     logger.info(f"Files in current directory: {os.listdir()}")
+
     try:
         agent.load_model(filename=config["model_path"])
-        logger.info("Model loaded.")
-    except:
-        logger.warning(" Kunde inte ladda modell – tränar ny modell...")
+        logger.info("Model loaded successfully.")
+    except Exception as e:
+        logger.warning(f"Model not found – training new model... ({e})")
         agent.train_model(config_path="ai_Model/config.json")
         agent.save_model(filename=config["model_path"])
 
     logger.info("Aether is ready. Ask me anything!")
 
+    # ✅ Main interaction loop
     while True:
         try:
             user_input = input("\n> ")
             if user_input.lower() in ["exit", "quit"]:
+                logger.info("Exiting Aether.")
                 break
+            
             output = agent.run(user_input)
             logger.info(f"Response: {output}")
+
         except KeyboardInterrupt:
-            logger.info(" Exiting...")
+            logger.info("Interrupted by user. Exiting...")
             break
+

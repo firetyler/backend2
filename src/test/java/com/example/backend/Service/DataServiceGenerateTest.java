@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-import com.example.backend.Service.DataServiceGenerate;
+
 import com.example.backend.Repository.DataRepository;
 import com.example.backend.Domain.Data;
 
@@ -16,7 +16,7 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
+
 
 public class DataServiceGenerateTest {
 
