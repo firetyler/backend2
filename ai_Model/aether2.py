@@ -33,6 +33,7 @@ class ChatDataset(Dataset):
         
         return input_tokens, output_tokens
 
+
 class AetherAgent:
     def __init__(self, db_connector):
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -43,9 +44,34 @@ class AetherAgent:
         self.code_executor = CodeExecutor()
         self.embed_model = None
         self.embed_size = 256  # Mock for embed_model.embed_size
+
+        # ✅ Ladda vokabulären innan något annat
+        self.tokenizer.load_vocab("tokenizer_vocab.json")
+        logger.info(f"Vocab loaded with size: {self.tokenizer.vocab_size}")
+
+        # ✅ Se till att vokabulären är tillräckligt stor
+        if self.tokenizer.vocab_size < 10:
+            logger.warning(f"Vocabulary size ({self.tokenizer.vocab_size}) is too small! Check tokenizer_vocab.json.")
+
+        # ✅ Instansiera `token_embedding`
+        self.token_embedding = torch.nn.Embedding(self.tokenizer.vocab_size, self.embed_size, padding_idx=0)
+        logger.info(f"Token embedding initialized with vocab size: {self.tokenizer.vocab_size}")
+
+        # ✅ Skapa `embed_model` med korrekt vokabulärstorlek
         self.embed_model = AdvancedSentenceTransformer(vocab_size=self.tokenizer.vocab_size).to(self.device)
+
+        # ✅ Skapa minnessystemet
         self.memory = AetherMemory(self.embed_model, self.tokenizer, self.device)
+
+        # ✅ Referera till träningsdataset
         self.ChatDataset = ChatDataset
+    def generate_square_subsequent_mask(sz):
+        if sz < 1:
+            raise ValueError(f"Mask size {sz} is too small.")
+        mask = torch.triu(torch.ones(sz, sz), diagonal=1).bool()
+        return mask.float()
+
+
     def handle_code_question(self, language, code):
         return self.code_executor.run_code(code, language)
     def load_config(self, path):
@@ -57,75 +83,62 @@ class AetherAgent:
             return {}
     def save_checkpoint(self, epoch, optimizer, filename):
         checkpoint = {
-            'epoch': epoch,
-            'model_state_dict': self.model.state_dict(),
-            'optimizer_state_dict': optimizer.state_dict(),
-            'tokenizer': self.tokenizer.word2idx
+            "epoch": epoch,
+            "model_state_dict": self.model.state_dict(),
+            "optimizer_state_dict": optimizer.state_dict(),
+            "tokenizer": self.tokenizer.word2idx
         }
         try:
             torch.save(checkpoint, filename)
             logger.info(f"Checkpoint saved: {filename}")
         except Exception as e:
-                logger.error(f"Failed to save checkpoint: {e}")
+            logger.error(f"Failed to save checkpoint: {e}")
+
+        
+        
 
     def load_checkpoint(self, filename, optimizer, config):
-        if os.path.isfile(filename):
-            checkpoint = torch.load(filename, map_location=self.device)
-
-            # Ladda tokenizern från sparad vokabulär först
-            self.tokenizer.load_vocab(config.get("tokenizer_vocab_path", "tokenizer_vocab.json"))
-            logger.info(f"Tokenizer vocab loaded from file with size {self.tokenizer.vocab_size}")
-
-            # 🔄 Om checkpoint innehåller en äldre vokabulär, behåll den senaste istället
-            if 'tokenizer' in checkpoint:
-                if len(checkpoint['tokenizer']) > len(self.tokenizer.word2idx):
-                    logger.warning(" Checkpoint tokenizer has more entries, updating...")
-                    self.tokenizer.word2idx = checkpoint['tokenizer']
-                    self.tokenizer.idx2word = {idx: word for word, idx in self.tokenizer.word2idx.items()}
-                    self.tokenizer.vocab_size = len(self.tokenizer.word2idx)
-                    logger.info(f" Tokenizer updated from checkpoint with vocab size {self.tokenizer.vocab_size}")
-                else:
-                    logger.info("Keeping latest tokenizer vocabulary.")
-            else:
-                logger.error(" Tokenizer vocab not found in checkpoint.")
-                return 0
-
-            # Initialisera modellen med värden från config-filen
-            vocab_size = self.tokenizer.vocab_size
-            logger.info(f"Setting vocab_size to {vocab_size} before loading checkpoint.")
-            vocab_size = len(self.tokenizer.word2idx)
-            print(f"📌 Using vocab_size = {vocab_size} for model initialization.")  
-
-            self.model = StackedTransformer(
-                embed_size=config.get("embedding_dim", 256),
-                vocab_size=vocab_size,  # Anpassa vocab_size dynamiskt
-                num_layers=config.get("num_layers", 4),
-                heads=config.get("heads", 8),
-                forward_expansion=config.get("forward_expansion", 4),
-                dropout=config.get("dropout", 0.1)
-            ).to(self.device)
-
-            #  Ladda modellens state_dict men filtrera inkompatibla delar
-            model_dict = self.model.state_dict()
-            pretrained_dict = {
-                k: v for k, v in checkpoint['model_state_dict'].items()
-                if k in model_dict and model_dict[k].shape == v.shape
-            }
-            model_dict.update(pretrained_dict)
-            self.model.load_state_dict(model_dict)
-
-            optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
-            start_epoch = checkpoint.get('epoch', 0) + 1
-            logger.info(f"Checkpoint loaded from {filename}, starting from epoch {start_epoch}")
-
-            # Spara tokenizer-vokabulären så att den är tillgänglig nästa gång
-            self.tokenizer.save_vocab(config.get("tokenizer_vocab_path", "tokenizer_vocab.json"))
-
-            return start_epoch
-        else:
-            logger.warning(f" No checkpoint file found: {filename}")
+        if not os.path.isfile(filename):
+            logger.warning(f"No checkpoint file found: {filename}")
             return 0
-          
+
+        checkpoint = torch.load(filename, map_location=self.device)
+
+        self.tokenizer.load_vocab(config.get("tokenizer_vocab_path", "tokenizer_vocab.json"))
+        logger.info(f"Tokenizer vocab loaded from file with size {self.tokenizer.vocab_size}")
+
+        vocab_size = self.tokenizer.vocab_size
+        self.token_embedding = nn.Embedding(vocab_size, self.embed_size, padding_idx=0)
+        logger.info(f"Token embedding updated with vocab size {vocab_size}")
+
+        self.model = StackedTransformer(
+            embed_size=self.embed_size,
+            vocab_size=vocab_size,
+            num_layers=config.get("num_layers", 4),
+            heads=config.get("heads", 8),
+            forward_expansion=config.get("forward_expansion", 4),
+            dropout=config.get("dropout", 0.1)
+        ).to(self.device)
+
+        model_dict = self.model.state_dict()
+        pretrained_dict = {k: v for k, v in checkpoint["model_state_dict"].items() if k in model_dict and model_dict[k].shape == v.shape}
+        model_dict.update(pretrained_dict)
+        self.model.load_state_dict(model_dict)
+
+        if "optimizer_state_dict" in checkpoint:
+            optimizer.load_state_dict(checkpoint["optimizer_state_dict"])
+            logger.info("Optimizer state loaded from checkpoint.")
+
+        start_epoch = checkpoint.get("epoch", 0) + 1
+        logger.info(f"Checkpoint loaded from {filename}, starting from epoch {start_epoch}")
+
+        self.tokenizer.save_vocab(config.get("tokenizer_vocab_path", "tokenizer_vocab.json"))
+
+        if not os.path.exists(config.get("tokenizer_vocab_path", "tokenizer_vocab.json")):
+            logger.warning("Vocab file not found after saving! Double-check file permissions.")
+
+        return start_epoch
+       
     def preprocess_data(self, training_data, config):
         all_texts = [q for q, _ in training_data] + [a for _, a in training_data]
         self.tokenizer.build_vocab(all_texts)
@@ -196,36 +209,34 @@ class AetherAgent:
         filenames = config.get("train_data_paths", [])
 
         # ✅ Debugging: Kontrollera filerna
-        print(f"🔎 Training files listed in config: {filenames}")
-        print(f"📂 Current working directory: {os.getcwd()}")
+        logger.info(f"Training files listed in config: {filenames}")
+        logger.info(f"Current working directory: {os.getcwd()}")
 
         training_data = []
         for filename in filenames:
-            if not isinstance(filename, str):  
+            if not isinstance(filename, str):
                 logger.error(f"Invalid filename format: {filename}. Expected a string.")
-                continue  
+                continue
 
-            # ✅ Kontrollera att träningsfilen existerar
             if not os.path.exists(filename):
                 logger.error(f"Training data file not found: {filename}")
-                continue  
+                continue
 
             try:
                 with open(filename, "r", encoding="utf-8") as f:
                     raw_data = json.load(f)
 
                     # ✅ Se till att JSON är korrekt strukturerad
-                    if isinstance(raw_data, dict):  
-                        raw_data = raw_data.get("data", [])  
+                    if isinstance(raw_data, dict):
+                        raw_data = raw_data.get("data", [])
 
                     valid_data = [(d["input"], d["output"]) for d in raw_data if "input" in d and "output" in d]
                     training_data.extend(valid_data)
-                    print(f"✅ Loaded {len(valid_data)} examples from {filename}")
+                    logger.info(f"Loaded {len(valid_data)} examples from {filename}")
 
             except Exception as e:
                 logger.error(f"Failed to load training data from {filename}: {e}")
 
-        # ✅ Kontrollera om träningsdata har laddats korrekt
         if not training_data:
             logger.error("No valid training data loaded. Aborting training...")
             return
@@ -236,7 +247,7 @@ class AetherAgent:
 
         # ✅ Fix: Se till att `self.model` är korrekt initialiserad innan träning
         vocab_size = len(self.tokenizer.word2idx)
-        print(f"📌 Using vocab_size = {vocab_size} for model initialization.")
+        logger.info(f"Using vocab_size = {vocab_size} for model initialization.")
 
         self.model = StackedTransformer(
             embed_size=config.get("embedding_dim", 256),
@@ -245,7 +256,7 @@ class AetherAgent:
             heads=config.get("heads", 8),
             forward_expansion=config.get("forward_expansion", 4),
             dropout=config.get("dropout", 0.1)
-        )
+        ).to(self.device)
 
         # ✅ Initialisera optimizer och loss-funktion
         optimizer = torch.optim.Adam(self.model.parameters(), lr=lr)
@@ -258,12 +269,28 @@ class AetherAgent:
         if os.path.exists(checkpoint_path):
             logger.info(f"Found checkpoint: Loading from {checkpoint_path}...")
             start_epoch = self.load_checkpoint(checkpoint_path, optimizer, config)
+
+            # ✅ Fix: Se till att `start_epoch` är korrekt
+            if start_epoch is None or not isinstance(start_epoch, int):
+                logger.warning(f"Invalid start_epoch: {start_epoch}. Setting default to 0.")
+                start_epoch = 0
         else:
             logger.warning("No checkpoint found – starting training from scratch...")
             start_epoch = 0
 
+        # ✅ Kontrollera att `epochs` är större än `start_epoch`
+        if start_epoch >= epochs:
+            logger.warning(f"start_epoch ({start_epoch}) is greater than total epochs ({epochs}). Skipping training.")
+            return
+
+        # ✅ Justera `epochs` automatiskt om det är för lågt
+        if epochs <= start_epoch:
+            logger.warning(f"Epochs ({epochs}) are too low. Adjusting to {start_epoch + 10}.")
+            epochs = start_epoch + 10  # Lägg till 10 extra epoker automatiskt
+
         # ✅ Starta träningsloop
-        logger.info(f" Starting model training for {epochs} epochs...")
+        logger.info(f"Starting model training for {epochs} epochs...")
+            
         for epoch in range(start_epoch, epochs):
             total_loss = 0.0
             for x, y in dataloader:
@@ -271,10 +298,17 @@ class AetherAgent:
                 y = y.to(self.device)
 
                 optimizer.zero_grad()
-                mask = generate_square_subsequent_mask(x.size(1)).to(self.device)
-                out = self.model(x, mask)
-                loss = criterion(out.view(-1, out.size(-1)), y.view(-1))
 
+                # ✅ Fix: Se till att masken har korrekt storlek
+                sz = x.size(1)
+                if sz < 1:
+                    logger.error(f"Invalid mask size: {sz}. Skipping batch.")
+                    continue
+
+                mask = generate_square_subsequent_mask(sz).to(self.device)
+                out = self.model(x, mask)
+
+                loss = criterion(out.view(-1, out.size(-1)), y.view(-1))
                 loss.backward()
                 optimizer.step()
                 total_loss += loss.item()
@@ -321,98 +355,135 @@ class AetherAgent:
         self.model.load_state_dict(torch.load(filename, map_location=self.device))
         self.model.eval()
 
-    def generate_text(self, prompt, max_length=50):
+    def generate_text(self, prompt):
         if self.model is None:
             logger.warning("Model not initialized. Call `train_model()` or `load_model()` before generating text.")
-            return json.dumps({"error": "Model not initialized."})  #  JSON-format
+            return json.dumps({"error": "Model not initialized."})
 
         self.model.eval()
         tokens = self.tokenizer.encode(prompt)
-        # ✅ Se till att tokenizern returnerar data
-        if len(tokens) == 0:
+        logger.info(f"Tokenized input: {tokens}")
+
+        if len(tokens) <= 2:
             logger.error("Tokenizer returned an empty sequence!")
-            return json.dumps({"error": "Invalid input, couldn't process text."})  #  JSON-format
+            return json.dumps({"error": "Invalid input, couldn't process text."})
 
         input_ids = torch.tensor([tokens], dtype=torch.long).to(self.device)
 
-        for _ in range(max_length):
-            mask = generate_square_subsequent_mask(input_ids.size(1)).to(self.device)
-            
+        if max(input_ids[0]) >= self.token_embedding.num_embeddings:
+            logger.error(f"Token index {max(input_ids[0])} is out of range.")
+            return json.dumps({"error": "Generated token is out of range."})
+
+        while True:
+            sz = input_ids.size(1)
+            mask = generate_square_subsequent_mask(sz).to(self.device)
+
+            if mask.shape != (sz, sz):
+                logger.error(f"Mask shape {mask.shape} does not match input size {sz}.")
+                return json.dumps({"error": "Invalid mask dimensions."})
+
             with torch.no_grad():
                 out = self.model(input_ids, mask)
 
             next_token_logits = out[:, -1, :]
             next_token_id = torch.argmax(next_token_logits, dim=-1).unsqueeze(0)
 
-            if next_token_id.item() not in self.tokenizer.word2idx.values():
-                logger.error("Next token ID is out of range!")
-                return json.dumps({"error": "Generated an invalid token."})  #  JSON-format
+            if next_token_id.numel() == 0 or next_token_id.item() >= self.token_embedding.num_embeddings:
+                logger.error(f"Token index {next_token_id.item()} is out of range.")
+                return json.dumps({"error": "Generated token is out of range."})
 
             input_ids = torch.cat((input_ids, next_token_id), dim=1)
-            if next_token_id.item() == self.tokenizer.word2idx["<EOS>"]:
+
+            if "<EOS>" in self.tokenizer.decode(input_ids[0].tolist()):
+                logger.info("Modellen genererade <EOS>, stoppar.")
+                return json.dumps({"response": self.tokenizer.decode(input_ids[0].tolist())})
+
+            if input_ids.size(1) >= 1000:
+                logger.warning("Sekvensen har nått 1000 tokens, stoppar generering!")
                 break
 
         generated_text = self.tokenizer.decode(input_ids[0].tolist())
+        return json.dumps({"response": generated_text})
 
-        return json.dumps({"response": generated_text})  #  Returnera JSON-struktur
+
 
     def run(self, user_input):
         logger.info(f"GOAL: {user_input}")
+        
+        # 🔹 Rensa och formattera input
         corrected_input = re.sub(r"\s+", " ", user_input.strip().lower())
-        name_patterns = [
-        r"^(what('?s| is) your name\??)$",
-        r"^(who are you\??)$"
-        ]
-        if any(re.match(pattern, corrected_input) for pattern in name_patterns):
+
+        # 🔹 Identifiera namnrelaterade frågor
+        if re.match(r"^(what('?s| is) your name\??)$", user_input.lower()):
             return "My name is Aether."
 
         lowered = user_input.lower()
+
+        # 🔹 Hantera kod-exekvering (fixad variabelordning)
         if lowered.startswith("run "):
             try:
                 parts = user_input.split(" ", 2)
                 if len(parts) < 3:
                     logger.warning("Invalid format for the 'run' command.")
                     return "Use the format: run <language> <code>"
-                logger.info(f"Running code in language: {language}")
-                logger.debug(f"Code being executed:\n{code}")
+                
                 language = parts[1]
                 code = parts[2]
+
+                logger.info(f"Running code in language: {language}")
+                logger.debug(f"Code being executed:\n{code}")
+
                 result = self.handle_code_question(language, code)
                 logger.info(f"Code execution succeeded for language: {language}")
                 return f"Result for {language}:\n{result}"
+            
             except Exception as e:
                 logger.exception(f"Error during code execution in language: {language}")
                 return f"Something went wrong during code execution: {e}"
         
+        # 🔹 Träna modellen
+        if lowered == "train model":
+            try:
+                logger.info("Starting model training process...")
+                self.train_model()
+                self.save_model()
+                logger.info("Training finished.")
+                return "Model trained and saved."
+            except Exception as e:
+                logger.exception(f"Error during training: {e}")
+                return f"Training failed: {e}"
 
-        if user_input.lower().strip() == "train model":
-            self.train_model()
-            self.save_model()
-            print("Training finished")
-            return "Model trained and saved."
-
-        if "calculate" in user_input.lower():
-            expression = user_input.lower().replace("calculate", "").strip()
+        # 🔹 Kalkylator-verktyg (Fixad tom uttryckshantering)
+        if "calculate" in lowered:
+            expression = lowered.replace("calculate", "").strip()
+            if not expression:
+                return "Invalid calculation request. Please provide an expression."
             return self.memory.calculator_tool(expression)
 
-        if "wikipedia" in user_input.lower():
-            query = user_input.lower().replace("wikipedia", "").strip()
+        # 🔹 Wikipedia-sökning
+        if "wikipedia" in lowered:
+            query = lowered.replace("wikipedia", "").strip()
+            if not query:
+                return "Invalid Wikipedia request. Please provide a search term."
             return self.memory.wikipedia_tool(query)
         
+        # 🔹 Hantera om användaren vill försöka igen
         if lowered in ["try again", "that's wrong", "incorrect", "answer again", "that doesn't sound right"]:
-            if self.memory.memories:
+            if self.memory.memories and len(self.memory.memories) > 0:
                 last_prompt = self.memory.memories[-1]
-                logger.info(f" User requested retry for: {last_prompt}")
+                logger.info(f"User requested retry for: {last_prompt}")
                 regenerated = self.generate_text(last_prompt)
                 self.db_connector.insert_conversation(name="Aether", input="", output=regenerated)
                 return regenerated
             else:
                 return "I don't have a previous message to retry."
 
+        # 🔹 Generera nytt svar och lagra i minnet
         generated = self.generate_text(user_input)
         self.memory.add(user_input)
         self.db_connector.insert_conversation(name="User", input=user_input, output="")
         self.db_connector.insert_conversation(name="Aether", input="", output=generated)
+
         return generated
 
 # --- Kör agenten ---
@@ -471,18 +542,38 @@ if __name__ == "__main__":
         agent.train_model(config_path="ai_Model/config.json")
         agent.save_model(filename=config["model_path"])
 
-    logger.info("Aether is ready. Ask me anything!")
+    logger.info("Aether is ready. Type something to chat!")
 
-    # ✅ Main interaction loop
+    # ✅ Terminal interaction loop
     while True:
         try:
-            user_input = input("\n> ")
+            user_input = input("\n> ")  # 🔹 Gör att du kan skriva i terminalen
             if user_input.lower() in ["exit", "quit"]:
                 logger.info("Exiting Aether.")
                 break
-            
-            output = agent.run(user_input)
+
+            elif user_input.lower() == "clear":
+                os.system("cls" if os.name == "nt" else "clear")  # 🔹 Rensar terminalen
+                continue
+
+            elif user_input.lower() == "help":
+                print("\n🛠 Available Commands:")
+                print("- Type any message to chat with Aether.")
+                print("- `exit` or `quit` to leave the chat.")
+                print("- `clear` to clear the terminal screen.")
+                print("- `train model` to retrain Aether.")
+                continue
+
+            elif user_input.lower() == "train model":
+                logger.info("Retraining model...")
+                agent.train_model(config_path="ai_Model/config.json")
+                agent.save_model(filename=config["model_path"])
+                print("✅ Model retrained successfully!")
+                continue
+
+            output = agent.run(user_input)  # 🔹 Genererar svar från AI-agenten
             logger.info(f"Response: {output}")
+            print(f"Aether: {output}")  # 🔹 Skriver ut svaret i terminalen
 
         except KeyboardInterrupt:
             logger.info("Interrupted by user. Exiting...")
