@@ -18,7 +18,7 @@ logger = get_logger("training")
 
 class Trainer:
     def __init__(self, tokenizer=None, device=None, embed_size=256):
-        self.tokenizer = tokenizer or SimpleTokenizer()
+        self.tokenizer = SimpleTokenizer()
         self.device = device or torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.embed_size = embed_size
         self.model = None
