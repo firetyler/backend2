@@ -1,3 +1,10 @@
+from warnings import deprecated
+
+@deprecated("Use another function instead")
+def old_function():
+    pass
+
+
 import numpy as np
 import sys
 import faiss
