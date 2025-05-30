@@ -41,3 +41,4 @@ ai_Model/training_data_10000.json
 ai_Model/*.pth
 
 aether_chat_trained.pth
+*.log
