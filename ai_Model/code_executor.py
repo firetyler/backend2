@@ -3,9 +3,20 @@ import subprocess
 import os
 #TODO fix logger if needed
 class CodeExecutor:
-    def __init__(self, config_path="ai_Model/code_exec_config.json"):
+    def __init__(self, config_path=None):
+        if config_path is None:
+            # Build path relative to this file
+            base_dir = os.path.dirname(os.path.abspath(__file__))
+            config_path = os.path.join(base_dir, "code_exec_config.json")
+        else:
+            # If given path is relative, make absolute relative to this file
+            if not os.path.isabs(config_path):
+                base_dir = os.path.dirname(os.path.abspath(__file__))
+                config_path = os.path.join(base_dir, config_path)
+
         with open(config_path, "r") as f:
             self.config = json.load(f)
+
 
     def run_code(self, code: str, language: str) -> str:
         language = language.lower()

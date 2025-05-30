@@ -538,3 +538,4 @@
 2025-05-30 18:02:26,790 | INFO | EndPoints | Starting Flask server...
 2025-05-30 18:02:43,524 | INFO | EndPoints | Received request: {'prompt': 'She slipped on the wet floor.'}
 2025-05-30 18:05:20,491 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-30 21:56:17,494 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)

@@ -762,3 +762,4 @@
 2025-05-30 18:02:43,933 | INFO | DatabaseConnector | Database connection established.
 2025-05-30 18:02:43,935 | INFO | DatabaseConnector | Conversation saved successfully.
 2025-05-30 18:05:20,449 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-30 21:56:17,459 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser

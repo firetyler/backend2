@@ -1203,3 +1203,16 @@
 2025-05-30 18:05:23,878 | INFO | SimpleTokenizer | Initialized StackedTransformer with vocab_size 280
 2025-05-30 18:05:23,914 | INFO | SimpleTokenizer |  Vocabulary saved successfully: tokenizer_vocab.json
 2025-05-30 18:05:23,924 | INFO | SimpleTokenizer | Vocab file successfully saved. Contains 280 words.
+2025-05-30 21:56:17,461 | INFO | SimpleTokenizer | Vocabulary loaded from tokenizer_vocab.json with 280 words.
+2025-05-30 21:56:17,485 | INFO | SimpleTokenizer |  Initialized AdvancedSentenceTransformer with vocab_size 280
+2025-05-30 21:56:18,181 | INFO | SimpleTokenizer | Vocab built with 280 words! Added 0 new words.
+2025-05-30 21:56:18,187 | INFO | SimpleTokenizer |  Vocabulary saved successfully: tokenizer_vocab.json
+2025-05-30 21:56:18,199 | INFO | SimpleTokenizer | Vocab file successfully saved. Contains 280 words.
+2025-05-30 21:56:18,200 | INFO | SimpleTokenizer | Vocab file successfully saved. Contains 280 words.
+2025-05-30 21:56:18,206 | INFO | SimpleTokenizer |  Vocabulary saved successfully: tokenizer_vocab.json
+2025-05-30 21:56:18,215 | INFO | SimpleTokenizer | Vocab file successfully saved. Contains 280 words.
+2025-05-30 21:56:18,298 | INFO | SimpleTokenizer | Initialized StackedTransformer with vocab_size 280
+2025-05-30 21:56:20,812 | INFO | SimpleTokenizer | Vocabulary loaded from tokenizer_vocab.json with 280 words.
+2025-05-30 21:56:20,902 | INFO | SimpleTokenizer | Initialized StackedTransformer with vocab_size 280
+2025-05-30 21:56:20,941 | INFO | SimpleTokenizer |  Vocabulary saved successfully: tokenizer_vocab.json
+2025-05-30 21:56:20,951 | INFO | SimpleTokenizer | Vocab file successfully saved. Contains 280 words.
