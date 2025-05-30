@@ -13,7 +13,7 @@ sys.stdout.reconfigure(encoding='utf-8')  # Forces UTF-8 output
 from DatabaseConnector import DatabaseConnector
 from logger_setup import get_logger
 from code_executor import CodeExecutor
-
+from train_model import Trainer
 logger = get_logger("aether2")
 class ChatDataset(Dataset):
     def __init__(self, data, tokenizer, max_len=128):
@@ -47,6 +47,7 @@ class AetherAgent:
 
         # ✅ Ladda vokabulären innan något annat
         self.tokenizer.load_vocab("tokenizer_vocab.json")
+        self.token_embedding = torch.nn.Embedding(self.tokenizer.vocab_size, self.embed_size, padding_idx=0)
         logger.info(f"Vocab loaded with size: {self.tokenizer.vocab_size}")
 
         # ✅ Se till att vokabulären är tillräckligt stor
@@ -70,6 +71,20 @@ class AetherAgent:
             raise ValueError(f"Mask size {sz} is too small.")
         mask = torch.triu(torch.ones(sz, sz), diagonal=1).bool()
         return mask.float()
+    def update_model_embedding(self):
+        """Ensure model embedding layer matches tokenizer vocab size dynamically."""
+        if self.tokenizer.vocab_size > self.token_embedding.num_embeddings:
+            logger.warning(f"Updating embedding layer to match new vocab size ({self.tokenizer.vocab_size})")
+            
+            self.token_embedding = torch.nn.Embedding(self.tokenizer.vocab_size, self.embed_size, padding_idx=0)
+            self.model = StackedTransformer(
+                embed_size=self.embed_size,
+                vocab_size=self.tokenizer.vocab_size,
+                num_layers=4, heads=8, forward_expansion=4, dropout=0.1
+            ).to(self.device)
+
+            logger.info("Model successfully updated to match new vocab size.")
+
 
 
     def handle_code_question(self, language, code):
@@ -103,17 +118,17 @@ class AetherAgent:
             return 0
 
         checkpoint = torch.load(filename, map_location=self.device)
-
+         # ✅ Reload tokenizer vocabulary
         self.tokenizer.load_vocab(config.get("tokenizer_vocab_path", "tokenizer_vocab.json"))
         logger.info(f"Tokenizer vocab loaded from file with size {self.tokenizer.vocab_size}")
-
-        vocab_size = self.tokenizer.vocab_size
-        self.token_embedding = nn.Embedding(vocab_size, self.embed_size, padding_idx=0)
-        logger.info(f"Token embedding updated with vocab size {vocab_size}")
-
+        
+        new_vocab_size = self.tokenizer.vocab_size
+        self.token_embedding = nn.Embedding(new_vocab_size, self.embed_size, padding_idx=0)
+        logger.info(f"Token embedding updated with vocab size {new_vocab_size}")
+         # ✅ Rebuild model with updated vocabulary size
         self.model = StackedTransformer(
             embed_size=self.embed_size,
-            vocab_size=vocab_size,
+            vocab_size=new_vocab_size,
             num_layers=config.get("num_layers", 4),
             heads=config.get("heads", 8),
             forward_expansion=config.get("forward_expansion", 4),
@@ -131,11 +146,14 @@ class AetherAgent:
 
         start_epoch = checkpoint.get("epoch", 0) + 1
         logger.info(f"Checkpoint loaded from {filename}, starting from epoch {start_epoch}")
+        vocab_path = config.get("tokenizer_vocab_path", "tokenizer_vocab.json")
+        self.tokenizer.save_vocab(vocab_path)
+        
 
-        self.tokenizer.save_vocab(config.get("tokenizer_vocab_path", "tokenizer_vocab.json"))
-
-        if not os.path.exists(config.get("tokenizer_vocab_path", "tokenizer_vocab.json")):
+        if not os.path.exists(vocab_path):
             logger.warning("Vocab file not found after saving! Double-check file permissions.")
+        else:
+            logger.info(f"Vocabulary successfully saved to {vocab_path}.")
 
         return start_epoch
        
@@ -208,7 +226,6 @@ class AetherAgent:
         batch_size = config.get("batch_size", 32)
         filenames = config.get("train_data_paths", [])
 
-        # ✅ Debugging: Kontrollera filerna
         logger.info(f"Training files listed in config: {filenames}")
         logger.info(f"Current working directory: {os.getcwd()}")
 
@@ -225,8 +242,6 @@ class AetherAgent:
             try:
                 with open(filename, "r", encoding="utf-8") as f:
                     raw_data = json.load(f)
-
-                    # ✅ Se till att JSON är korrekt strukturerad
                     if isinstance(raw_data, dict):
                         raw_data = raw_data.get("data", [])
 
@@ -241,11 +256,15 @@ class AetherAgent:
             logger.error("No valid training data loaded. Aborting training...")
             return
 
-        # ✅ Förbered dataset & DataLoader
+        # ✅ Bygg och spara vokabulär från träningsdata
+        all_texts = [q for q, _ in training_data] + [a for _, a in training_data]
+        self.tokenizer.build_vocab(all_texts)
+        self.tokenizer.save_vocab("tokenizer_vocab.json")
+        logger.info(f"Tokenizer updated and saved with {len(self.tokenizer.word2idx)} tokens.")
+
         dataset = self.ChatDataset(training_data, self.tokenizer)
         dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True, num_workers=0, collate_fn=self.collate_fn)
 
-        # ✅ Fix: Se till att `self.model` är korrekt initialiserad innan träning
         vocab_size = len(self.tokenizer.word2idx)
         logger.info(f"Using vocab_size = {vocab_size} for model initialization.")
 
@@ -258,39 +277,31 @@ class AetherAgent:
             dropout=config.get("dropout", 0.1)
         ).to(self.device)
 
-        # ✅ Initialisera optimizer och loss-funktion
         optimizer = torch.optim.Adam(self.model.parameters(), lr=lr)
         criterion = nn.CrossEntropyLoss()
         self.model.train()
 
-        # ✅ Hantera checkpoints
         checkpoint_path = "checkpoint_latest.pth"
         start_epoch = 0
         if os.path.exists(checkpoint_path):
             logger.info(f"Found checkpoint: Loading from {checkpoint_path}...")
             start_epoch = self.load_checkpoint(checkpoint_path, optimizer, config)
-
-            # ✅ Fix: Se till att `start_epoch` är korrekt
             if start_epoch is None or not isinstance(start_epoch, int):
                 logger.warning(f"Invalid start_epoch: {start_epoch}. Setting default to 0.")
                 start_epoch = 0
         else:
             logger.warning("No checkpoint found – starting training from scratch...")
-            start_epoch = 0
 
-        # ✅ Kontrollera att `epochs` är större än `start_epoch`
         if start_epoch >= epochs:
             logger.warning(f"start_epoch ({start_epoch}) is greater than total epochs ({epochs}). Skipping training.")
             return
 
-        # ✅ Justera `epochs` automatiskt om det är för lågt
         if epochs <= start_epoch:
             logger.warning(f"Epochs ({epochs}) are too low. Adjusting to {start_epoch + 10}.")
-            epochs = start_epoch + 10  # Lägg till 10 extra epoker automatiskt
+            epochs = start_epoch + 10
 
-        # ✅ Starta träningsloop
         logger.info(f"Starting model training for {epochs} epochs...")
-            
+
         for epoch in range(start_epoch, epochs):
             total_loss = 0.0
             for x, y in dataloader:
@@ -299,7 +310,6 @@ class AetherAgent:
 
                 optimizer.zero_grad()
 
-                # ✅ Fix: Se till att masken har korrekt storlek
                 sz = x.size(1)
                 if sz < 1:
                     logger.error(f"Invalid mask size: {sz}. Skipping batch.")
@@ -315,11 +325,24 @@ class AetherAgent:
 
             avg_loss = total_loss / len(dataloader)
             logger.info(f"Epoch {epoch + 1}: Loss = {avg_loss:.4f}")
-
-            # ✅ Spara checkpoint efter varje epoch
             self.save_checkpoint(epoch + 1, optimizer, checkpoint_path)
 
         logger.info("Training complete! Model saved successfully.")
+
+        # === Ladda modellen och tokenizern efter träning ===
+        logger.info("Reloading model and tokenizer after training...")
+
+        # Ladda tokenizer vocab
+        self.tokenizer.load_vocab("tokenizer_vocab.json")
+        logger.info(f"Tokenizer vocab reloaded with {len(self.tokenizer.word2idx)} tokens.")
+
+        # Ladda modell från checkpoint
+        checkpoint = torch.load(checkpoint_path, map_location=self.device)
+        self.model.load_state_dict(checkpoint['model_state_dict'])
+        self.model.to(self.device)
+        self.model.eval()  # sätt modellen i eval-läge för inferens
+
+        logger.info("Model reloaded and ready for inference.")
 
     def collate_fn(self, batch):
         inputs, targets = zip(*batch)
@@ -357,53 +380,49 @@ class AetherAgent:
 
     def generate_text(self, prompt):
         if self.model is None:
-            logger.warning("Model not initialized. Call `train_model()` or `load_model()` before generating text.")
+            logger.warning("Model not initialized.")
             return json.dumps({"error": "Model not initialized."})
 
-        self.model.eval()
+        # 🔹 Ladda config för korrekt instansiering
+        config = self.load_config("ai_Model/config.json")
+
+        # 🔹 Tokenisera först och kolla om några nya ord lagts till
         tokens = self.tokenizer.encode(prompt)
         logger.info(f"Tokenized input: {tokens}")
 
-        if len(tokens) <= 2:
-            logger.error("Tokenizer returned an empty sequence!")
-            return json.dumps({"error": "Invalid input, couldn't process text."})
+        vocab_size = self.tokenizer.vocab_size
+        max_token_index = max(tokens) if tokens else -1
 
-        input_ids = torch.tensor([tokens], dtype=torch.long).to(self.device)
+        # ✅ Uppdatera model och token_embedding FÖRE token används i modellen
+        if vocab_size > self.token_embedding.num_embeddings or max_token_index >= self.token_embedding.num_embeddings:
+            logger.warning(f"Updating model and embeddings to vocab size {vocab_size} (max token index: {max_token_index})")
+            self.token_embedding = torch.nn.Embedding(vocab_size, self.embed_size, padding_idx=0)
+            self.model = StackedTransformer(
+                embed_size=config.get("embedding_dim", 256),
+                vocab_size=vocab_size,
+                num_layers=config.get("num_layers", 6),
+                heads=config.get("heads", 8),
+                forward_expansion=config.get("forward_expansion", 4),
+                dropout=config.get("dropout", 0.1)
+            ).to(self.device)
+            logger.info("Model and embedding updated.")
 
-        if max(input_ids[0]) >= self.token_embedding.num_embeddings:
-            logger.error(f"Token index {max(input_ids[0])} is out of range.")
+        if not tokens or max_token_index >= self.token_embedding.num_embeddings:
+            logger.error(f"Token index {max_token_index} exceeds embedding size ({self.token_embedding.num_embeddings})")
             return json.dumps({"error": "Generated token is out of range."})
 
-        while True:
-            sz = input_ids.size(1)
-            mask = generate_square_subsequent_mask(sz).to(self.device)
+        input_ids = torch.tensor([tokens], dtype=torch.long).to(self.device)
+        mask = generate_square_subsequent_mask(input_ids.size(1)).to(self.device)
 
-            if mask.shape != (sz, sz):
-                logger.error(f"Mask shape {mask.shape} does not match input size {sz}.")
-                return json.dumps({"error": "Invalid mask dimensions."})
+        with torch.no_grad():
+            out = self.model(input_ids, mask)
 
-            with torch.no_grad():
-                out = self.model(input_ids, mask)
-
-            next_token_logits = out[:, -1, :]
-            next_token_id = torch.argmax(next_token_logits, dim=-1).unsqueeze(0)
-
-            if next_token_id.numel() == 0 or next_token_id.item() >= self.token_embedding.num_embeddings:
-                logger.error(f"Token index {next_token_id.item()} is out of range.")
-                return json.dumps({"error": "Generated token is out of range."})
-
-            input_ids = torch.cat((input_ids, next_token_id), dim=1)
-
-            if "<EOS>" in self.tokenizer.decode(input_ids[0].tolist()):
-                logger.info("Modellen genererade <EOS>, stoppar.")
-                return json.dumps({"response": self.tokenizer.decode(input_ids[0].tolist())})
-
-            if input_ids.size(1) >= 1000:
-                logger.warning("Sekvensen har nått 1000 tokens, stoppar generering!")
-                break
-
-        generated_text = self.tokenizer.decode(input_ids[0].tolist())
+        generated_text = self.tokenizer.decode(out.argmax(dim=-1).squeeze().tolist())
         return json.dumps({"response": generated_text})
+
+
+
+
 
 
 

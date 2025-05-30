@@ -1,3 +1,4 @@
+import json
 import psycopg2
 import os
 from jproperties import Properties
@@ -52,10 +53,17 @@ class DatabaseConnector:
             return None
 
     def insert_conversation(self, name, input, output="default"):
+        """Inserts conversation data into the database, ensuring proper JSON handling."""
+        
         conn = self.connect()
         if conn:
             try:
                 cursor = conn.cursor()
+
+                # ✅ Convert dictionary responses to JSON string
+                if isinstance(output, dict):
+                    output = json.dumps(output)
+
                 insert_query = """
                 INSERT INTO data (name, input, output)
                 VALUES (%s, %s, %s);
@@ -63,8 +71,10 @@ class DatabaseConnector:
                 cursor.execute(insert_query, (name, input, output))
                 conn.commit()
                 logger.info("Conversation saved successfully.")
+
             except Exception as e:
                 logger.error(f"Error inserting into database: {e}")
+
             finally:
                 cursor.close()
                 conn.close()

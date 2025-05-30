@@ -6,3 +6,534 @@
 2025-05-28 17:56:32,777 | INFO | EndPoints | New model trained and saved.
 2025-05-28 17:56:32,788 | INFO | EndPoints | Starting Flask server...
 2025-05-28 17:57:16,783 | ERROR | EndPoints | Error occurred: index out of range in self
+2025-05-28 18:07:55,412 | INFO | EndPoints | Tokenizer vocabulary updated with 40000 examples.
+2025-05-28 18:07:55,619 | INFO | EndPoints | Model loaded.
+2025-05-28 18:07:55,620 | INFO | EndPoints | Starting Flask server...
+2025-05-28 18:09:14,565 | ERROR | EndPoints | Error occurred: index out of range in self
+2025-05-28 18:09:38,667 | ERROR | EndPoints | Error occurred: index out of range in self
+2025-05-28 18:09:44,491 | ERROR | EndPoints | Error occurred: index out of range in self
+2025-05-28 18:09:49,850 | ERROR | EndPoints | Error occurred: index out of range in self
+2025-05-28 18:51:19,724 | INFO | EndPoints | Tokenizer vocabulary updated with 40000 examples.
+2025-05-28 18:51:19,945 | INFO | EndPoints | Model loaded.
+2025-05-28 18:51:19,948 | INFO | EndPoints | Starting Flask server...
+2025-05-28 18:52:00,522 | INFO | EndPoints | Tokenizer vocabulary updated with 40000 examples.
+2025-05-28 18:52:00,724 | INFO | EndPoints | Model loaded.
+2025-05-28 18:52:00,726 | INFO | EndPoints | Starting Flask server...
+2025-05-28 18:52:18,542 | ERROR | EndPoints | Error occurred: index out of range in self
+2025-05-28 18:53:09,891 | ERROR | EndPoints | Error occurred: index out of range in self
+2025-05-28 18:56:44,284 | INFO | EndPoints | Tokenizer vocabulary updated with 40000 examples.
+2025-05-28 18:56:44,518 | INFO | EndPoints | Model loaded.
+2025-05-28 18:56:44,521 | INFO | EndPoints | Starting Flask server...
+2025-05-28 18:57:03,373 | ERROR | EndPoints | Error occurred: index out of range in self
+2025-05-28 18:57:28,550 | ERROR | EndPoints | Error occurred: index out of range in self
+2025-05-28 18:58:26,939 | INFO | EndPoints | Tokenizer vocabulary updated with 40000 examples.
+2025-05-28 18:58:27,151 | INFO | EndPoints | Model loaded.
+2025-05-28 18:58:27,154 | INFO | EndPoints | Starting Flask server...
+2025-05-28 19:00:00,038 | INFO | EndPoints | Tokenizer vocabulary updated with 40000 examples.
+2025-05-28 19:00:00,249 | INFO | EndPoints | Model loaded.
+2025-05-28 19:00:00,251 | INFO | EndPoints | Starting Flask server...
+2025-05-28 19:00:18,085 | INFO | EndPoints | Tokenizer vocabulary updated with 40000 examples.
+2025-05-28 19:00:18,286 | INFO | EndPoints | Model loaded.
+2025-05-28 19:00:18,287 | INFO | EndPoints | Starting Flask server...
+2025-05-28 19:00:24,769 | ERROR | EndPoints | Error occurred: index out of range in self
+2025-05-28 19:04:53,004 | INFO | EndPoints | Tokenizer vocabulary updated with 40000 examples.
+2025-05-28 19:04:53,211 | INFO | EndPoints | Model loaded.
+2025-05-28 19:04:53,213 | INFO | EndPoints | Starting Flask server...
+2025-05-28 19:05:03,539 | ERROR | EndPoints | Error occurred: index out of range in self
+2025-05-28 19:07:12,275 | INFO | EndPoints | Tokenizer vocabulary updated with 40000 examples.
+2025-05-28 19:07:12,471 | INFO | EndPoints | Model loaded.
+2025-05-28 19:07:12,474 | INFO | EndPoints | Starting Flask server...
+2025-05-28 19:07:18,440 | ERROR | EndPoints | Error occurred: index out of range in self
+2025-05-28 19:08:53,292 | INFO | EndPoints | Tokenizer vocabulary updated with 40000 examples.
+2025-05-28 19:08:53,497 | INFO | EndPoints | Model loaded.
+2025-05-28 19:08:53,500 | INFO | EndPoints | Starting Flask server...
+2025-05-28 19:08:59,075 | ERROR | EndPoints | Error occurred: index out of range in self
+2025-05-28 19:12:43,864 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 19:12:46,472 | INFO | EndPoints |  New model trained and saved.
+2025-05-28 19:12:46,474 | INFO | EndPoints |  Starting Flask server...
+2025-05-28 19:12:51,851 | ERROR | EndPoints |  Error occurred: index out of range in self
+2025-05-28 19:14:07,883 | ERROR | EndPoints | Error occurred: index out of range in self
+2025-05-28 19:14:17,274 | ERROR | EndPoints | Error occurred: index out of range in self
+2025-05-28 19:14:22,709 | ERROR | EndPoints | Error occurred: index out of range in self
+2025-05-28 19:17:25,858 | INFO | EndPoints | Starting Flask server...
+2025-05-28 19:17:48,993 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 19:17:51,526 | INFO | EndPoints | New model trained and saved.
+2025-05-28 19:17:51,528 | INFO | EndPoints | Starting Flask server...
+2025-05-28 19:18:00,278 | INFO | EndPoints | Received request: {'prompt': 'Hi'}
+2025-05-28 19:18:01,100 | ERROR | EndPoints | Error occurred in /generate: index out of range in self
+2025-05-28 19:20:36,886 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 19:20:39,498 | INFO | EndPoints | New model trained and saved.
+2025-05-28 19:20:39,500 | INFO | EndPoints | Starting Flask server...
+2025-05-28 19:20:58,377 | INFO | EndPoints | Received request: {'prompt': 'hi'}
+2025-05-28 19:20:59,349 | ERROR | EndPoints | Error occurred in /generate: index out of range in self
+2025-05-28 19:25:35,023 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 19:25:37,893 | INFO | EndPoints | New model trained and saved.
+2025-05-28 19:25:37,895 | INFO | EndPoints | Starting Flask server...
+2025-05-28 19:25:43,735 | INFO | EndPoints | Received request: {'prompt': 'hi'}
+2025-05-28 19:25:44,758 | ERROR | EndPoints | Error occurred in /generate: index out of range in self
+2025-05-28 19:28:07,595 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 19:28:10,296 | INFO | EndPoints | New model trained and saved.
+2025-05-28 19:28:10,299 | INFO | EndPoints | Starting Flask server...
+2025-05-28 19:28:14,504 | INFO | EndPoints | Received request: {'prompt': 'hi'}
+2025-05-28 19:28:15,425 | ERROR | EndPoints | Error occurred in /generate: index out of range in self
+2025-05-28 19:29:58,185 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 19:30:01,029 | INFO | EndPoints | New model trained and saved.
+2025-05-28 19:30:01,032 | INFO | EndPoints | Starting Flask server...
+2025-05-28 19:30:06,418 | INFO | EndPoints | Received request: {'prompt': 'hi'}
+2025-05-28 19:30:06,442 | ERROR | EndPoints | Error occurred in /generate: index out of range in self
+2025-05-28 19:31:56,716 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 19:31:59,564 | INFO | EndPoints | New model trained and saved.
+2025-05-28 19:31:59,565 | INFO | EndPoints | Starting Flask server...
+2025-05-28 19:32:03,976 | INFO | EndPoints | Received request: {'prompt': 'hi'}
+2025-05-28 19:32:04,881 | ERROR | EndPoints | Error occurred in /generate: index out of range in self
+2025-05-28 19:35:13,099 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 19:35:15,845 | INFO | EndPoints | New model trained and saved.
+2025-05-28 19:35:15,847 | INFO | EndPoints | Starting Flask server...
+2025-05-28 19:35:20,472 | INFO | EndPoints | Received request: {'prompt': 'hi'}
+2025-05-28 19:35:21,338 | ERROR | EndPoints | Error occurred in /generate: index out of range in self
+2025-05-28 19:36:18,630 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 19:36:21,327 | INFO | EndPoints | New model trained and saved.
+2025-05-28 19:36:21,331 | INFO | EndPoints | Starting Flask server...
+2025-05-28 19:36:28,630 | INFO | EndPoints | Received request: {'prompt': 'hi'}
+2025-05-28 19:41:39,766 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 19:41:42,679 | INFO | EndPoints | New model trained and saved.
+2025-05-28 19:41:42,681 | INFO | EndPoints | Starting Flask server...
+2025-05-28 19:41:59,514 | INFO | EndPoints | Received request: {'prompt': 'hi'}
+2025-05-28 19:45:17,294 | ERROR | EndPoints | Error occurred in /generate: index out of range in self
+2025-05-28 19:45:30,582 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 19:45:33,264 | INFO | EndPoints | New model trained and saved.
+2025-05-28 19:45:33,266 | INFO | EndPoints | Starting Flask server...
+2025-05-28 19:45:41,938 | INFO | EndPoints | Received request: {'prompt': 'hi'}
+2025-05-28 19:45:41,963 | ERROR | EndPoints | Error occurred in /generate: index out of range in self
+2025-05-28 19:48:51,672 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 19:48:54,274 | INFO | EndPoints | New model trained and saved.
+2025-05-28 19:48:54,276 | INFO | EndPoints | Starting Flask server...
+2025-05-28 19:49:20,000 | INFO | EndPoints | Received request: {'prompt': 'hi'}
+2025-05-28 19:49:20,030 | ERROR | EndPoints | Error occurred in /generate: index out of range in self
+2025-05-28 19:49:42,568 | INFO | EndPoints | Received request: {'prompt': 'whats your name ?'}
+2025-05-28 19:49:42,590 | ERROR | EndPoints | Error occurred in /generate: index out of range in self
+2025-05-28 19:51:14,781 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 19:51:17,297 | INFO | EndPoints | New model trained and saved.
+2025-05-28 19:51:17,299 | INFO | EndPoints | Starting Flask server...
+2025-05-28 19:56:11,871 | INFO | EndPoints | Received request: {'prompt': 'hi'}
+2025-05-28 19:56:11,897 | ERROR | EndPoints | Error occurred in /generate: index out of range in self
+2025-05-28 20:07:20,217 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 20:07:22,972 | INFO | EndPoints | New model trained and saved.
+2025-05-28 20:07:22,974 | INFO | EndPoints | Starting Flask server...
+2025-05-28 20:07:33,728 | INFO | EndPoints | Received request: {'prompt': 'hi'}
+2025-05-28 20:07:33,752 | ERROR | EndPoints | Error occurred in /generate: index out of range in self
+2025-05-28 20:12:28,678 | WARNING | EndPoints | Modellen hittades inte – tränar ny modell... (Model not initialized. You must train or preprocess first.)
+2025-05-28 20:12:31,658 | INFO | EndPoints | Ny modell tränad och sparad.
+2025-05-28 20:12:31,660 | INFO | EndPoints | Startar Flask-server...
+2025-05-28 20:12:39,415 | INFO | EndPoints | Mottog begäran: {'prompt': 'hi'}
+2025-05-28 20:12:39,438 | ERROR | EndPoints | Fel inträffade i /generate: index out of range in self
+2025-05-28 20:12:53,943 | INFO | EndPoints | Mottog begäran: {'prompt': 'hi'}
+2025-05-28 20:12:53,961 | ERROR | EndPoints | Fel inträffade i /generate: index out of range in self
+2025-05-28 20:13:47,039 | WARNING | EndPoints | Modellen hittades inte – tränar ny modell... (Model not initialized. You must train or preprocess first.)
+2025-05-28 20:13:49,722 | INFO | EndPoints | Ny modell tränad och sparad.
+2025-05-28 20:13:49,724 | INFO | EndPoints | Startar Flask-server...
+2025-05-28 20:14:13,998 | WARNING | EndPoints | Modellen hittades inte – tränar ny modell... (Model not initialized. You must train or preprocess first.)
+2025-05-28 20:14:16,750 | INFO | EndPoints | Ny modell tränad och sparad.
+2025-05-28 20:14:16,753 | INFO | EndPoints | Startar Flask-server...
+2025-05-28 20:15:34,355 | WARNING | EndPoints | Modellen hittades inte – tränar ny modell... (Model not initialized. You must train or preprocess first.)
+2025-05-28 20:15:35,927 | INFO | EndPoints | Ny modell tränad och sparad.
+2025-05-28 20:15:35,928 | INFO | EndPoints | Startar Flask-server...
+2025-05-28 20:15:37,961 | WARNING | EndPoints | Modellen hittades inte – tränar ny modell... (Model not initialized. You must train or preprocess first.)
+2025-05-28 20:15:39,603 | INFO | EndPoints | Ny modell tränad och sparad.
+2025-05-28 20:15:39,604 | INFO | EndPoints | Startar Flask-server...
+2025-05-28 20:15:47,813 | INFO | EndPoints | Mottog begäran: {'prompt': 'hi'}
+2025-05-28 20:15:47,828 | ERROR | EndPoints | Fel inträffade i /generate: index out of range in self
+2025-05-28 20:16:29,324 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 20:16:31,970 | INFO | EndPoints | New model trained and saved.
+2025-05-28 20:16:31,973 | INFO | EndPoints | Starting Flask server...
+2025-05-28 20:17:06,133 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 20:17:08,794 | INFO | EndPoints | New model trained and saved.
+2025-05-28 20:17:08,797 | INFO | EndPoints | Starting Flask server...
+2025-05-28 20:18:10,479 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 20:18:13,202 | INFO | EndPoints | New model trained and saved.
+2025-05-28 20:18:13,205 | INFO | EndPoints | Starting Flask server...
+2025-05-28 20:21:46,651 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 20:21:50,686 | INFO | EndPoints | New model trained and saved.
+2025-05-28 20:21:50,689 | INFO | EndPoints | Starting Flask server...
+2025-05-28 20:24:25,032 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 20:24:27,745 | INFO | EndPoints | New model trained and saved.
+2025-05-28 20:24:27,747 | INFO | EndPoints | Starting Flask server...
+2025-05-28 20:26:59,066 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 20:27:01,705 | INFO | EndPoints | New model trained and saved.
+2025-05-28 20:27:01,708 | INFO | EndPoints | Starting Flask server...
+2025-05-28 20:30:27,908 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 20:30:30,630 | INFO | EndPoints | New model trained and saved.
+2025-05-28 20:30:30,631 | INFO | EndPoints | Starting Flask server...
+2025-05-28 20:31:14,539 | INFO | EndPoints | Received request: {'prompt': 'hi'}
+2025-05-28 20:31:14,567 | ERROR | EndPoints | Error occurred in /generate: index out of range in self
+2025-05-28 20:37:25,130 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 20:37:27,826 | INFO | EndPoints | New model trained and saved.
+2025-05-28 20:37:27,828 | INFO | EndPoints | Starting Flask server...
+2025-05-28 21:04:18,291 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 21:04:21,014 | INFO | EndPoints | New model trained and saved.
+2025-05-28 21:04:21,016 | INFO | EndPoints | Starting Flask server...
+2025-05-28 21:04:25,805 | INFO | EndPoints | Received request: {'prompt': 'hi'}
+2025-05-28 21:05:29,307 | INFO | EndPoints | Received request: {'prompt': 'hi'}
+2025-05-28 21:06:32,986 | INFO | EndPoints | Received request: {'prompt': 'what´s is the capital of sweden ?'}
+2025-05-28 21:06:32,990 | ERROR | EndPoints | Error occurred in /generate: index out of range in self
+2025-05-28 21:06:48,353 | INFO | EndPoints | Received request: {'prompt': 'what´s is the capital of sweden ?'}
+2025-05-28 21:06:48,357 | ERROR | EndPoints | Error occurred in /generate: index out of range in self
+2025-05-28 21:08:21,087 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 21:08:24,066 | INFO | EndPoints | New model trained and saved.
+2025-05-28 21:08:24,068 | INFO | EndPoints | Starting Flask server...
+2025-05-28 21:08:26,811 | INFO | EndPoints | Received request: {'prompt': 'hi'}
+2025-05-28 21:08:37,558 | INFO | EndPoints | Received request: {'prompt': 'whats your name ?'}
+2025-05-28 21:15:39,646 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 21:15:42,462 | INFO | EndPoints | New model trained and saved.
+2025-05-28 21:15:42,464 | INFO | EndPoints | Starting Flask server...
+2025-05-28 21:15:47,014 | INFO | EndPoints | Received request: {'prompt': 'what´s is the capital of sweden ?'}
+2025-05-28 21:16:24,423 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 21:16:27,139 | INFO | EndPoints | New model trained and saved.
+2025-05-28 21:16:27,141 | INFO | EndPoints | Starting Flask server...
+2025-05-28 21:16:31,320 | INFO | EndPoints | Received request: {'prompt': 'what´s is the capital of sweden ?'}
+2025-05-28 21:17:07,510 | INFO | EndPoints | Received request: {'prompt': 'what´s is the capital of sweden ?'}
+2025-05-28 21:19:54,913 | INFO | EndPoints | Received request: {'prompt': 'wikipedia what´s is the capital of sweden ?'}
+2025-05-28 21:19:56,392 | WARNING | EndPoints | JSON decoding failed, returning raw output
+2025-05-28 21:20:49,144 | INFO | EndPoints | Received request: {'prompt': 'what´s is the capital of sweden ?'}
+2025-05-28 21:25:01,366 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 21:25:04,039 | INFO | EndPoints | New model trained and saved.
+2025-05-28 21:25:04,041 | INFO | EndPoints | Starting Flask server...
+2025-05-28 21:25:50,468 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 21:25:53,162 | INFO | EndPoints | New model trained and saved.
+2025-05-28 21:25:53,164 | INFO | EndPoints | Starting Flask server...
+2025-05-28 21:25:57,754 | INFO | EndPoints | Received request: {'prompt': 'whats your name ?'}
+2025-05-28 21:27:33,321 | INFO | EndPoints | Received request: {'prompt': 'hi'}
+2025-05-28 21:29:41,263 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 21:29:43,693 | INFO | EndPoints | New model trained and saved.
+2025-05-28 21:29:43,696 | INFO | EndPoints | Starting Flask server...
+2025-05-28 21:30:13,707 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 21:30:16,179 | INFO | EndPoints | New model trained and saved.
+2025-05-28 21:30:16,181 | INFO | EndPoints | Starting Flask server...
+2025-05-28 21:30:38,729 | INFO | EndPoints | Received request: {'prompt': 'what´s is the capital of sweden ?'}
+2025-05-28 21:35:33,750 | INFO | EndPoints | Received request: {'prompt': 'hi'}
+2025-05-28 21:36:09,934 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 21:36:12,670 | INFO | EndPoints | New model trained and saved.
+2025-05-28 21:36:12,672 | INFO | EndPoints | Starting Flask server...
+2025-05-28 21:36:40,221 | INFO | EndPoints | Received request: {'prompt': 'what´s is the capital of sweden ?'}
+2025-05-28 21:43:33,223 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 21:43:36,041 | INFO | EndPoints | New model trained and saved.
+2025-05-28 21:43:36,043 | INFO | EndPoints | Starting Flask server...
+2025-05-28 21:43:40,445 | INFO | EndPoints | Received request: {'prompt': 'what´s is the capital of sweden ?'}
+2025-05-28 21:44:28,000 | INFO | EndPoints | Received request: {'prompt': 'how do i loop code in C++'}
+2025-05-28 21:53:08,113 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 21:53:10,814 | INFO | EndPoints | New model trained and saved.
+2025-05-28 21:53:10,816 | INFO | EndPoints | Starting Flask server...
+2025-05-28 21:53:18,157 | INFO | EndPoints | Received request: {'prompt': 'how do i loop code in C++'}
+2025-05-28 21:55:03,796 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 21:55:06,715 | INFO | EndPoints | New model trained and saved.
+2025-05-28 21:55:06,717 | INFO | EndPoints | Starting Flask server...
+2025-05-28 21:58:30,375 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 21:58:32,833 | INFO | EndPoints | New model trained and saved.
+2025-05-28 21:58:32,835 | INFO | EndPoints | Starting Flask server...
+2025-05-28 21:58:37,568 | INFO | EndPoints | Received request: {'prompt': 'how do i loop code in C++'}
+2025-05-28 22:02:11,821 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 22:02:14,395 | INFO | EndPoints | New model trained and saved.
+2025-05-28 22:02:14,398 | INFO | EndPoints | Starting Flask server...
+2025-05-28 22:02:42,282 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 22:02:44,654 | INFO | EndPoints | New model trained and saved.
+2025-05-28 22:02:44,656 | INFO | EndPoints | Starting Flask server...
+2025-05-28 22:03:36,899 | INFO | EndPoints | Received request: {'prompt': 'what´s is the capital of sweden ?'}
+2025-05-28 22:08:08,208 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 22:08:10,915 | INFO | EndPoints | New model trained and saved.
+2025-05-28 22:08:10,917 | INFO | EndPoints | Starting Flask server...
+2025-05-28 22:08:19,381 | INFO | EndPoints | Received request: {'prompt': 'wahts your name'}
+2025-05-28 22:09:14,208 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 22:09:16,738 | INFO | EndPoints | New model trained and saved.
+2025-05-28 22:09:16,740 | INFO | EndPoints | Starting Flask server...
+2025-05-28 22:09:22,384 | INFO | EndPoints | Received request: {'prompt': 'whats your name ?'}
+2025-05-28 22:12:53,351 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 22:12:56,193 | INFO | EndPoints | New model trained and saved.
+2025-05-28 22:12:56,195 | INFO | EndPoints | Starting Flask server...
+2025-05-28 22:14:32,351 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 22:14:35,036 | INFO | EndPoints | New model trained and saved.
+2025-05-28 22:14:35,038 | INFO | EndPoints | Starting Flask server...
+2025-05-28 22:14:42,082 | INFO | EndPoints | Received request: {'prompt': 'whats your name ?'}
+2025-05-28 22:15:41,628 | INFO | EndPoints | Received request: {'prompt': 'what´s is the capital of sweden ?'}
+2025-05-28 22:17:49,215 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 22:17:52,043 | INFO | EndPoints | New model trained and saved.
+2025-05-28 22:17:52,046 | INFO | EndPoints | Starting Flask server...
+2025-05-28 22:17:56,033 | INFO | EndPoints | Received request: {'prompt': 'wahts your name'}
+2025-05-28 22:20:18,995 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 22:20:22,322 | INFO | EndPoints | New model trained and saved.
+2025-05-28 22:20:22,325 | INFO | EndPoints | Starting Flask server...
+2025-05-28 22:20:30,782 | INFO | EndPoints | Received request: {'prompt': 'whats your name ?'}
+2025-05-28 22:22:11,417 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 22:22:14,728 | INFO | EndPoints | New model trained and saved.
+2025-05-28 22:22:14,729 | INFO | EndPoints | Starting Flask server...
+2025-05-28 22:22:21,767 | INFO | EndPoints | Received request: {'prompt': 'whats your name ?'}
+2025-05-28 22:22:21,893 | ERROR | EndPoints | Error occurred in /generate: index out of range in self
+2025-05-28 22:24:09,620 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 22:24:12,248 | INFO | EndPoints | New model trained and saved.
+2025-05-28 22:24:12,250 | INFO | EndPoints | Starting Flask server...
+2025-05-28 22:24:21,566 | INFO | EndPoints | Received request: {'prompt': 'whats your name ?'}
+2025-05-28 22:25:10,335 | INFO | EndPoints | Received request: {'prompt': 'hi'}
+2025-05-28 22:31:47,046 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 22:31:49,470 | INFO | EndPoints | New model trained and saved.
+2025-05-28 22:31:49,472 | INFO | EndPoints | Starting Flask server...
+2025-05-28 22:31:58,443 | INFO | EndPoints | Received request: {'prompt': 'what´s is the capital of sweden ?'}
+2025-05-28 22:31:58,496 | ERROR | EndPoints | Error occurred in /generate: index out of range in self
+2025-05-28 22:32:50,034 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 22:32:52,387 | INFO | EndPoints | New model trained and saved.
+2025-05-28 22:32:52,390 | INFO | EndPoints | Starting Flask server...
+2025-05-28 22:33:00,131 | INFO | EndPoints | Received request: {'prompt': 'whats your name ?'}
+2025-05-28 23:05:34,330 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 23:05:37,038 | INFO | EndPoints | New model trained and saved.
+2025-05-28 23:05:37,040 | INFO | EndPoints | Starting Flask server...
+2025-05-28 23:06:26,159 | INFO | EndPoints | Received request: {'prompt': 'hi'}
+2025-05-28 23:09:47,592 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 23:10:23,387 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 23:10:26,039 | INFO | EndPoints | New model trained and saved.
+2025-05-28 23:10:26,042 | INFO | EndPoints | Starting Flask server...
+2025-05-28 23:10:32,644 | INFO | EndPoints | Received request: {'prompt': 'whats your name ?'}
+2025-05-28 23:11:45,032 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 23:11:47,720 | INFO | EndPoints | New model trained and saved.
+2025-05-28 23:11:47,723 | INFO | EndPoints | Starting Flask server...
+2025-05-28 23:12:00,884 | INFO | EndPoints | Received request: {'prompt': 'whats your name ?'}
+2025-05-28 23:24:47,603 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 23:24:50,288 | INFO | EndPoints | New model trained and saved.
+2025-05-28 23:24:50,290 | INFO | EndPoints | Starting Flask server...
+2025-05-28 23:24:59,090 | INFO | EndPoints | Received request: {'prompt': 'hi'}
+2025-05-28 23:25:06,128 | INFO | EndPoints | Received request: {'prompt': 'whats your name ?'}
+2025-05-28 23:29:09,277 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 23:29:11,936 | INFO | EndPoints | New model trained and saved.
+2025-05-28 23:29:11,938 | INFO | EndPoints | Starting Flask server...
+2025-05-28 23:29:22,995 | INFO | EndPoints | Received request: {'prompt': 'hi'}
+2025-05-28 23:29:34,372 | INFO | EndPoints | Received request: {'prompt': 'wahts your name'}
+2025-05-28 23:29:34,392 | ERROR | EndPoints | Error occurred in /generate: index out of range in self
+2025-05-28 23:37:00,748 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 23:38:12,616 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 23:39:19,998 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 23:41:47,322 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 23:42:17,202 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 23:42:19,630 | INFO | EndPoints | New model trained and saved.
+2025-05-28 23:42:19,630 | INFO | EndPoints | Starting Flask server...
+2025-05-28 23:43:49,090 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 23:43:51,636 | INFO | EndPoints | New model trained and saved.
+2025-05-28 23:43:51,638 | INFO | EndPoints | Starting Flask server...
+2025-05-28 23:43:54,578 | INFO | EndPoints | Received request: {'prompt': 'train model'}
+2025-05-28 23:43:55,041 | WARNING | EndPoints | JSON decoding failed, returning raw output
+2025-05-28 23:44:35,786 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 23:44:38,427 | INFO | EndPoints | New model trained and saved.
+2025-05-28 23:44:38,429 | INFO | EndPoints | Starting Flask server...
+2025-05-28 23:44:47,796 | INFO | EndPoints | Received request: {'prompt': 'train model'}
+2025-05-28 23:44:48,178 | WARNING | EndPoints | JSON decoding failed, returning raw output
+2025-05-28 23:45:09,319 | INFO | EndPoints | Received request: {'prompt': 'what´s is the capital of sweden ?'}
+2025-05-28 23:46:23,017 | INFO | EndPoints | Received request: {'prompt': 'train model'}
+2025-05-28 23:46:23,481 | WARNING | EndPoints | JSON decoding failed, returning raw output
+2025-05-28 23:48:50,281 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 23:48:53,006 | INFO | EndPoints | New model trained and saved.
+2025-05-28 23:48:53,009 | INFO | EndPoints | Starting Flask server...
+2025-05-28 23:49:02,133 | INFO | EndPoints | Received request: {'prompt': 'whats your name ?'}
+2025-05-28 23:49:06,875 | INFO | EndPoints | Received request: {'prompt': 'train model'}
+2025-05-28 23:49:07,340 | WARNING | EndPoints | JSON decoding failed, returning raw output
+2025-05-28 23:50:19,478 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 23:50:22,201 | INFO | EndPoints | New model trained and saved.
+2025-05-28 23:50:22,201 | INFO | EndPoints | Starting Flask server...
+2025-05-28 23:50:33,902 | INFO | EndPoints | Received request: {'prompt': 'train model'}
+2025-05-28 23:50:34,353 | WARNING | EndPoints | JSON decoding failed, returning raw output
+2025-05-28 23:54:38,580 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-28 23:54:41,032 | INFO | EndPoints | New model trained and saved.
+2025-05-28 23:54:41,032 | INFO | EndPoints | Starting Flask server...
+2025-05-28 23:54:48,250 | INFO | EndPoints | Received request: {'prompt': 'train model'}
+2025-05-28 23:54:48,666 | WARNING | EndPoints | JSON decoding failed, returning raw output
+2025-05-28 23:56:01,046 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-29 00:01:22,656 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-29 00:05:59,585 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-29 00:18:06,646 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-29 00:18:09,607 | INFO | EndPoints | New model trained and saved.
+2025-05-29 00:18:09,609 | INFO | EndPoints | Starting Flask server...
+2025-05-29 00:18:25,942 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-29 01:19:06,433 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-29 01:26:51,277 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-29 01:27:35,300 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-29 01:27:37,749 | INFO | EndPoints | New model trained and saved.
+2025-05-29 01:27:37,751 | INFO | EndPoints | Starting Flask server...
+2025-05-29 01:29:08,389 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-29 02:23:04,573 | INFO | EndPoints | New model trained and saved.
+2025-05-29 02:23:04,576 | INFO | EndPoints | Starting Flask server...
+2025-05-29 02:26:18,150 | INFO | EndPoints | Received request: {'prompt': 'exit'}
+2025-05-29 02:27:00,724 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-29 02:27:03,365 | INFO | EndPoints | New model trained and saved.
+2025-05-29 02:27:03,365 | INFO | EndPoints | Starting Flask server...
+2025-05-29 02:27:10,316 | INFO | EndPoints | Received request: {'prompt': 'hi'}
+2025-05-29 02:27:36,071 | INFO | EndPoints | Received request: {'prompt': 'whats your name ?'}
+2025-05-29 02:29:14,604 | INFO | EndPoints | Received request: {'prompt': 'what´s is the capital of sweden ?'}
+2025-05-29 02:29:33,127 | INFO | EndPoints | Received request: {'prompt': 'it a town '}
+2025-05-29 02:29:57,361 | INFO | EndPoints | Received request: {'prompt': 'its a town'}
+2025-05-29 02:30:35,888 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-29 02:30:38,546 | INFO | EndPoints | New model trained and saved.
+2025-05-29 02:30:38,548 | INFO | EndPoints | Starting Flask server...
+2025-05-29 02:31:02,036 | INFO | EndPoints | Received request: {'prompt': 'its a town'}
+2025-05-29 02:32:15,244 | INFO | EndPoints | Received request: {'prompt': 'whats your name ?'}
+2025-05-29 02:35:53,235 | INFO | EndPoints | Received request: {'prompt': 'how do i loop code in C++'}
+2025-05-29 02:36:51,616 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-29 02:36:54,392 | INFO | EndPoints | New model trained and saved.
+2025-05-29 02:36:54,401 | INFO | EndPoints | Starting Flask server...
+2025-05-29 02:37:01,152 | INFO | EndPoints | Received request: {'prompt': 'what´s is the capital of sweden ?'}
+2025-05-29 02:37:09,166 | INFO | EndPoints | Received request: {'prompt': 'how do i loop code in C++'}
+2025-05-29 02:37:25,318 | INFO | EndPoints | Received request: {'prompt': 'whats your name ?'}
+2025-05-29 02:37:36,802 | INFO | EndPoints | Received request: {'prompt': 'my name is O'}
+2025-05-29 02:49:13,509 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-29 02:49:16,167 | INFO | EndPoints | New model trained and saved.
+2025-05-29 02:49:16,167 | INFO | EndPoints | Starting Flask server...
+2025-05-29 02:49:42,051 | INFO | EndPoints | Received request: {'prompt': 'what´s is the capital of sweden ?'}
+2025-05-29 02:49:54,652 | INFO | EndPoints | Received request: {'prompt': 'my name is q'}
+2025-05-29 02:49:54,655 | ERROR | EndPoints | Error occurred in /generate: 'SimpleTokenizer' object has no attribute 'max_vocab_size'
+2025-05-29 02:56:33,888 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-29 02:56:36,526 | INFO | EndPoints | New model trained and saved.
+2025-05-29 02:56:36,526 | INFO | EndPoints | Starting Flask server...
+2025-05-29 02:57:05,509 | INFO | EndPoints | Received request: {'prompt': 'what´s is the capital of sweden ?'}
+2025-05-29 02:57:17,029 | INFO | EndPoints | Received request: {'prompt': 'its a big town'}
+2025-05-29 02:59:48,089 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-29 02:59:50,695 | INFO | EndPoints | New model trained and saved.
+2025-05-29 02:59:50,697 | INFO | EndPoints | Starting Flask server...
+2025-05-29 02:59:57,147 | INFO | EndPoints | Received request: {'prompt': 'what´s is the capital of sweden ?'}
+2025-05-29 03:00:08,309 | INFO | EndPoints | Received request: {'prompt': 'how is king in swenden ?'}
+2025-05-29 03:08:06,360 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-29 03:08:09,057 | INFO | EndPoints | New model trained and saved.
+2025-05-29 03:08:09,057 | INFO | EndPoints | Starting Flask server...
+2025-05-29 03:08:20,445 | INFO | EndPoints | Received request: {'prompt': 'whats your name ?'}
+2025-05-29 03:08:38,446 | INFO | EndPoints | Received request: {'prompt': 'im from a town named Gävle'}
+2025-05-29 03:09:06,517 | INFO | EndPoints | Received request: {'prompt': 'ho are you '}
+2025-05-29 03:10:35,727 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-29 21:52:40,576 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-29 21:53:34,150 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-29 21:53:39,935 | INFO | EndPoints | New model trained and saved.
+2025-05-29 21:53:39,937 | INFO | EndPoints | Starting Flask server...
+2025-05-29 21:54:00,374 | INFO | EndPoints | Received request: {'prompt': 'whats your name ?'}
+2025-05-29 21:54:17,995 | INFO | EndPoints | Received request: {'prompt': 'how do i loop code in C++'}
+2025-05-29 21:54:41,322 | INFO | EndPoints | Received request: {'prompt': 'in sweden there is a town named söderhamn'}
+2025-05-29 22:01:59,705 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-29 22:02:02,456 | INFO | EndPoints | New model trained and saved.
+2025-05-29 22:02:02,456 | INFO | EndPoints | Starting Flask server...
+2025-05-29 22:02:33,733 | INFO | EndPoints | Received request: {'prompt': 'give me a name of a town ?'}
+2025-05-29 22:06:37,745 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-29 22:06:41,634 | INFO | EndPoints | New model trained and saved.
+2025-05-29 22:06:41,636 | INFO | EndPoints | Starting Flask server...
+2025-05-29 22:06:58,052 | INFO | EndPoints | Received request: {'prompt': 'what´s is the capital of sweden ?'}
+2025-05-29 22:07:31,182 | INFO | EndPoints | Received request: {'prompt': 'the name of the capital of sweden is stockholm'}
+2025-05-29 22:09:20,005 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-29 22:09:22,737 | INFO | EndPoints | New model trained and saved.
+2025-05-29 22:09:22,739 | INFO | EndPoints | Starting Flask server...
+2025-05-29 22:10:41,945 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-29 22:10:44,584 | INFO | EndPoints | New model trained and saved.
+2025-05-29 22:10:44,586 | INFO | EndPoints | Starting Flask server...
+2025-05-29 22:11:11,212 | INFO | EndPoints | Received request: {'prompt': 'hello whats your name ?'}
+2025-05-29 22:13:28,009 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-29 22:13:30,698 | INFO | EndPoints | New model trained and saved.
+2025-05-29 22:13:30,699 | INFO | EndPoints | Starting Flask server...
+2025-05-29 22:14:00,993 | INFO | EndPoints | Received request: {'prompt': 'give me a name of a street in sweden ?'}
+2025-05-29 22:15:11,986 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-29 22:15:14,645 | INFO | EndPoints | New model trained and saved.
+2025-05-29 22:15:14,648 | INFO | EndPoints | Starting Flask server...
+2025-05-29 22:15:18,691 | INFO | EndPoints | Received request: {'prompt': 'what´s is the capital of sweden ?'}
+2025-05-29 22:15:40,681 | INFO | EndPoints | Received request: {'prompt': 'how do you feel give me a anser good or bad'}
+2025-05-29 22:18:51,864 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-29 22:18:54,748 | INFO | EndPoints | New model trained and saved.
+2025-05-29 22:18:54,748 | INFO | EndPoints | Starting Flask server...
+2025-05-29 22:19:19,675 | INFO | EndPoints | Received request: {'prompt': 'give me names ?'}
+2025-05-29 22:21:59,820 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-29 22:22:02,596 | INFO | EndPoints | New model trained and saved.
+2025-05-29 22:22:02,596 | INFO | EndPoints | Starting Flask server...
+2025-05-29 22:22:08,758 | INFO | EndPoints | Received request: {'prompt': 'what´s is the capital of sweden ?'}
+2025-05-29 22:22:34,402 | INFO | EndPoints | Received request: {'prompt': 'give me two names ?'}
+2025-05-29 22:24:47,709 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-29 22:24:50,590 | INFO | EndPoints | New model trained and saved.
+2025-05-29 22:24:50,592 | INFO | EndPoints | Starting Flask server...
+2025-05-29 22:25:10,347 | INFO | EndPoints | Received request: {'prompt': 'give me names of towns in sweden '}
+2025-05-29 22:29:04,947 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-29 22:29:07,670 | INFO | EndPoints | New model trained and saved.
+2025-05-29 22:29:07,672 | INFO | EndPoints | Starting Flask server...
+2025-05-29 22:29:13,342 | INFO | EndPoints | Received request: {'prompt': 'what´s is the capital of sweden ?'}
+2025-05-29 22:29:27,403 | INFO | EndPoints | Received request: {'prompt': 'whats your name ?'}
+2025-05-29 22:30:16,438 | INFO | EndPoints | Received request: {'prompt': 'The sun is shining brightly today.'}
+2025-05-29 22:30:50,028 | INFO | EndPoints | Received request: {'prompt': 'I love reading books in my free time.'}
+2025-05-29 22:31:27,662 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-29 22:31:30,318 | INFO | EndPoints | New model trained and saved.
+2025-05-29 22:31:30,321 | INFO | EndPoints | Starting Flask server...
+2025-05-29 22:31:40,246 | INFO | EndPoints | Received request: {'prompt': 'We had pizza for dinner last night.'}
+2025-05-29 22:37:45,131 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-29 22:37:47,938 | INFO | EndPoints | New model trained and saved.
+2025-05-29 22:37:47,940 | INFO | EndPoints | Starting Flask server...
+2025-05-29 22:38:01,846 | INFO | EndPoints | Received request: {'prompt': 'My cat is sleeping on the sofa.'}
+2025-05-29 22:38:30,034 | INFO | EndPoints | Received request: {'prompt': 'It often rains in the spring.'}
+2025-05-29 22:38:55,485 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-29 22:38:58,256 | INFO | EndPoints | New model trained and saved.
+2025-05-29 22:38:58,259 | INFO | EndPoints | Starting Flask server...
+2025-05-29 22:39:26,228 | INFO | EndPoints | Received request: {'prompt': 'I forgot my umbrella at the restaurant.'}
+2025-05-29 22:39:58,226 | INFO | EndPoints | Received request: {'prompt': 'We listened to music during the long drive.'}
+2025-05-29 22:42:29,826 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-29 22:42:32,739 | INFO | EndPoints | New model trained and saved.
+2025-05-29 22:42:32,741 | INFO | EndPoints | Starting Flask server...
+2025-05-29 22:43:03,822 | INFO | EndPoints | Received request: {'prompt': 'They planted flowers in the garden.'}
+2025-05-29 23:05:39,739 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-29 23:05:42,485 | INFO | EndPoints | New model trained and saved.
+2025-05-29 23:05:42,485 | INFO | EndPoints | Starting Flask server...
+2025-05-29 23:06:03,212 | INFO | EndPoints | Received request: {'prompt': 'He fixed his bike with some tools.'}
+2025-05-29 23:06:29,854 | INFO | EndPoints | Received request: {'prompt': 'The ice cream melted in the sun.'}
+2025-05-29 23:09:57,197 | INFO | EndPoints | Received request: {'prompt': 'We watched the fireworks from the balcony.'}
+2025-05-29 23:23:24,498 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-29 23:23:27,326 | INFO | EndPoints | New model trained and saved.
+2025-05-29 23:23:27,330 | INFO | EndPoints | Starting Flask server...
+2025-05-29 23:34:27,733 | WARNING | EndPoints | Model not found – training new model... (Error(s) in loading state_dict for StackedTransformer:
+	size mismatch for embedding.weight: copying a param with shape torch.Size([160, 256]) from checkpoint, the shape in current model is torch.Size([243, 256]).
+	size mismatch for fc_out.weight: copying a param with shape torch.Size([160, 256]) from checkpoint, the shape in current model is torch.Size([243, 256]).
+	size mismatch for fc_out.bias: copying a param with shape torch.Size([160]) from checkpoint, the shape in current model is torch.Size([243]).)
+2025-05-29 23:34:27,917 | INFO | EndPoints | New model trained and saved.
+2025-05-29 23:34:27,920 | INFO | EndPoints | Starting Flask server...
+2025-05-29 23:34:44,322 | WARNING | EndPoints | Model not found – training new model... (Error(s) in loading state_dict for StackedTransformer:
+	size mismatch for embedding.weight: copying a param with shape torch.Size([160, 256]) from checkpoint, the shape in current model is torch.Size([243, 256]).
+	size mismatch for fc_out.weight: copying a param with shape torch.Size([160, 256]) from checkpoint, the shape in current model is torch.Size([243, 256]).
+	size mismatch for fc_out.bias: copying a param with shape torch.Size([160]) from checkpoint, the shape in current model is torch.Size([243]).)
+2025-05-29 23:34:44,520 | INFO | EndPoints | New model trained and saved.
+2025-05-29 23:34:44,520 | INFO | EndPoints | Starting Flask server...
+2025-05-29 23:36:07,388 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-29 23:36:10,044 | INFO | EndPoints | New model trained and saved.
+2025-05-29 23:36:10,047 | INFO | EndPoints | Starting Flask server...
+2025-05-29 23:44:09,644 | WARNING | EndPoints | Model not found – training new model... (Error(s) in loading state_dict for StackedTransformer:
+	size mismatch for embedding.weight: copying a param with shape torch.Size([160, 256]) from checkpoint, the shape in current model is torch.Size([243, 256]).
+	size mismatch for fc_out.weight: copying a param with shape torch.Size([160, 256]) from checkpoint, the shape in current model is torch.Size([243, 256]).
+	size mismatch for fc_out.bias: copying a param with shape torch.Size([160]) from checkpoint, the shape in current model is torch.Size([243]).)
+2025-05-29 23:45:47,531 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-29 23:45:50,284 | INFO | EndPoints | New model trained and saved.
+2025-05-29 23:45:50,292 | INFO | EndPoints | Starting Flask server...
+2025-05-29 23:50:12,972 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-29 23:50:15,778 | INFO | EndPoints | New model trained and saved.
+2025-05-29 23:50:15,781 | INFO | EndPoints | Starting Flask server...
+2025-05-29 23:53:27,747 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-29 23:53:30,540 | INFO | EndPoints | New model trained and saved.
+2025-05-29 23:53:30,543 | INFO | EndPoints | Starting Flask server...
+2025-05-29 23:55:00,833 | INFO | EndPoints | Received request: {'prompt': 'He found a coin under the table.'}
+2025-05-29 23:55:08,281 | INFO | EndPoints | Received request: {'prompt': 'hi'}
+2025-05-30 17:27:30,480 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-30 17:27:34,454 | INFO | EndPoints | New model trained and saved.
+2025-05-30 17:27:34,457 | INFO | EndPoints | Starting Flask server...
+2025-05-30 17:28:14,272 | INFO | EndPoints | Received request: {'prompt': 'The bus arrived ten minutes late.'}
+2025-05-30 17:30:26,496 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-30 17:30:29,506 | INFO | EndPoints | New model trained and saved.
+2025-05-30 17:30:29,508 | INFO | EndPoints | Starting Flask server...
+2025-05-30 17:30:42,324 | INFO | EndPoints | Received request: {'prompt': 'He fixed his bike with some tools.'}
+2025-05-30 17:31:05,995 | INFO | EndPoints | Received request: {'prompt': 'The movie was funny and exciting.'}
+2025-05-30 17:32:31,576 | INFO | EndPoints | Received request: {'prompt': 'We traveled by train across the country.'}
+2025-05-30 17:42:35,196 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-30 17:45:58,352 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-30 17:46:01,458 | INFO | EndPoints | New model trained and saved.
+2025-05-30 17:46:01,461 | INFO | EndPoints | Starting Flask server...
+2025-05-30 17:46:23,419 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-30 17:46:27,583 | INFO | EndPoints | New model trained and saved.
+2025-05-30 17:46:27,586 | INFO | EndPoints | Starting Flask server...
+2025-05-30 17:46:39,011 | INFO | EndPoints | Received request: {'prompt': 'Lightning flashed across the night sky.'}
+2025-05-30 17:58:06,704 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-30 17:58:10,191 | INFO | EndPoints | New model trained and saved.
+2025-05-30 17:58:10,194 | INFO | EndPoints | Starting Flask server...
+2025-05-30 17:58:26,691 | INFO | EndPoints | Received request: {'prompt': 'She lit a candle when the lights went out.'}
+2025-05-30 17:59:09,791 | INFO | EndPoints | Received request: {'prompt': 'The wind blew the leaves off the trees.'}
+2025-05-30 18:02:23,207 | WARNING | EndPoints | Model not found – training new model... (Model not initialized. You must train or preprocess first.)
+2025-05-30 18:02:26,787 | INFO | EndPoints | New model trained and saved.
+2025-05-30 18:02:26,790 | INFO | EndPoints | Starting Flask server...
+2025-05-30 18:02:43,524 | INFO | EndPoints | Received request: {'prompt': 'She slipped on the wet floor.'}
