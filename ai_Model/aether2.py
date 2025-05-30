@@ -374,10 +374,33 @@ class AetherAgent:
         torch.save(self.model.state_dict(), filename)
 
     def load_model(self, filename="aether_model.pth"):
+        # Ladda config och initiera modell
+        config = self.load_config("ai_Model/config.json")
+        self.initialize_model(config)
+
         if self.model is None:
             raise RuntimeError("Model not initialized. You must train or preprocess first.")
-        self.model.load_state_dict(torch.load(filename, map_location=self.device))
-        self.model.eval()
+
+        try:
+            state_dict = torch.load(filename, map_location=self.device)
+            self.model.load_state_dict(state_dict)
+            self.model.eval()
+            logger.info(f"Model loaded successfully from {filename}.")
+
+        except FileNotFoundError:
+            logger.warning(f"Model file '{filename}' not found. Training new model...")
+            self.train_model(config_path="ai_Model/config.json")
+            self.save_model(filename)
+
+        except RuntimeError as e:
+            if "size mismatch" in str(e):
+                logger.warning(f"Size mismatch error when loading model: {e}")
+                logger.warning("Vocabulary or architecture changed — retraining model...")
+                self.train_model(config_path="ai_Model/config.json")
+                self.save_model(filename)
+            else:
+                raise
+
 
     def generate_text(self, prompt):
         if self.model is None:
