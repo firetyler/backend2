@@ -194,3 +194,28 @@
 2025-05-30 18:02:43,725 | WARNING | AetherMemory | Updating embed_model's token embedding layer to match new vocab size (280)
 2025-05-30 18:02:43,759 | INFO | AetherMemory | Model successfully updated to match new vocab size.
 2025-05-30 18:02:43,766 | INFO | AetherMemory | Memory added: 'She slipped on the wet floor....'
+2025-05-30 23:29:18,008 | WARNING | AetherMemory | Updating embed_model's token embedding layer to match new vocab size (282)
+2025-05-30 23:29:18,034 | INFO | AetherMemory | Model successfully updated to match new vocab size.
+2025-05-30 23:29:18,038 | INFO | AetherMemory | Memory added: 'tell me a question ?...'
+2025-05-30 23:48:18,296 | WARNING | AetherMemory | Updating embed_model's token embedding layer to match new vocab size (283)
+2025-05-30 23:48:18,320 | INFO | AetherMemory | Model successfully updated to match new vocab size.
+2025-05-30 23:48:18,324 | INFO | AetherMemory | Memory added: 'how was your day today ?...'
+2025-05-30 23:50:27,742 | WARNING | AetherMemory | Updating embed_model's token embedding layer to match new vocab size (288)
+2025-05-30 23:50:27,767 | INFO | AetherMemory | Model successfully updated to match new vocab size.
+2025-05-30 23:50:27,773 | INFO | AetherMemory | Memory added: 'He wore gloves because it was cold outside....'
+2025-05-31 00:21:26,930 | WARNING | AetherMemory | Updating embed_model's token embedding layer to match new vocab size (291)
+2025-05-31 00:21:26,957 | INFO | AetherMemory | Model successfully updated to match new vocab size.
+2025-05-31 00:21:26,962 | INFO | AetherMemory | Memory added: 'I saved the document on my computer....'
+2025-05-31 00:21:57,550 | INFO | AetherMemory | Memory added: 'She slipped on the wet floor....'
+2025-05-31 00:22:13,732 | WARNING | AetherMemory | Updating embed_model's token embedding layer to match new vocab size (296)
+2025-05-31 00:22:13,762 | INFO | AetherMemory | Model successfully updated to match new vocab size.
+2025-05-31 00:22:13,767 | INFO | AetherMemory | Memory added: 'The kids jumped into the swimming pool....'
+2025-05-31 02:13:35,774 | WARNING | AetherMemory | Updating embed_model's token embedding layer to match new vocab size (298)
+2025-05-31 02:13:35,801 | INFO | AetherMemory | Model successfully updated to match new vocab size.
+2025-05-31 02:13:35,806 | INFO | AetherMemory | Memory added: 'She planted a tree in the backyard....'
+2025-05-31 02:13:51,820 | WARNING | AetherMemory | Updating embed_model's token embedding layer to match new vocab size (300)
+2025-05-31 02:13:51,841 | INFO | AetherMemory | Model successfully updated to match new vocab size.
+2025-05-31 02:13:51,850 | INFO | AetherMemory | Memory added: 'The stars twinkled brightly in the night sky....'
+2025-05-31 04:01:03,683 | INFO | AetherMemory | Memory added: 'whats your name ?...'
+2025-05-31 04:01:25,676 | INFO | AetherMemory | Memory added: 'your name is Aether...'
+2025-05-31 04:01:53,146 | INFO | AetherMemory | Memory added: 'whats your name ?...'

@@ -13,7 +13,7 @@ sys.stdout.reconfigure(encoding='utf-8')  # Forces UTF-8 output
 from DatabaseConnector import DatabaseConnector
 from logger_setup import get_logger
 from code_executor import CodeExecutor
-from train_model import Trainer
+from ai_Model.Traning.train_model import Trainer
 
 logger = get_logger("aether2")
 class ChatDataset(Dataset):
@@ -226,6 +226,7 @@ class AetherAgent:
         lr = config.get("learning_rate", 0.001)
         batch_size = config.get("batch_size", 32)
         filenames = config.get("train_data_paths", [])
+        num_layers = config.get("num_layers", 4)
 
         logger.info(f"Training files listed in config: {filenames}")
         logger.info(f"Current working directory: {os.getcwd()}")
@@ -272,7 +273,7 @@ class AetherAgent:
         self.model = StackedTransformer(
             embed_size=config.get("embedding_dim", 256),
             vocab_size=vocab_size,
-            num_layers=config.get("num_layers", 6),
+            num_layers=config.get("num_layers", 4),
             heads=config.get("heads", 8),
             forward_expansion=config.get("forward_expansion", 4),
             dropout=config.get("dropout", 0.1)
@@ -302,7 +303,10 @@ class AetherAgent:
             epochs = start_epoch + 10
 
         logger.info(f"Starting model training for {epochs} epochs...")
+        best_loss = float('inf')  
+        patience_counter = 0      
 
+        early_stopping_patience = config.get("early_stopping_patience", 3)
         for epoch in range(start_epoch, epochs):
             total_loss = 0.0
             for x, y in dataloader:
@@ -326,6 +330,20 @@ class AetherAgent:
 
             avg_loss = total_loss / len(dataloader)
             logger.info(f"Epoch {epoch + 1}: Loss = {avg_loss:.4f}")
+            #stänger av om ingen ändring sker
+            if avg_loss < best_loss:
+                best_loss = avg_loss
+                patience_counter = 0
+                self.save_checkpoint(epoch + 1, optimizer, checkpoint_path)
+                logger.info(f"Epoch {epoch + 1}: Loss improved to {avg_loss:.4f}, checkpoint saved.")
+            else:
+                patience_counter += 1
+                logger.info(f"Epoch {epoch + 1}: No improvement. Patience counter = {patience_counter}/{early_stopping_patience}")
+
+            if patience_counter >= early_stopping_patience:
+                logger.info(f"No improvement for {early_stopping_patience} epochs. Early stopping at epoch {epoch + 1}.")
+                break
+            
             self.save_checkpoint(epoch + 1, optimizer, checkpoint_path)
 
         logger.info("Training complete! Model saved successfully.")
@@ -424,7 +442,7 @@ class AetherAgent:
             self.model = StackedTransformer(
                 embed_size=config.get("embedding_dim", 256),
                 vocab_size=vocab_size,
-                num_layers=config.get("num_layers", 6),
+                num_layers=config.get("num_layers", 4),
                 heads=config.get("heads", 8),
                 forward_expansion=config.get("forward_expansion", 4),
                 dropout=config.get("dropout", 0.1)

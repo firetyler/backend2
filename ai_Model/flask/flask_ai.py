@@ -98,7 +98,7 @@ def clean_response(raw_output):
         logger.warning("JSON decoding failed, returning raw output")
         return raw_output
 
-@app.route("/ask/<instance_id>", methods=["POST"])
+@app.route("/generate/<instance_id>", methods=["POST"])
 def ask_ai(instance_id):
     if instance_id not in agents:
         return jsonify({"error": f"AI instance {instance_id} does not exist."}), 404

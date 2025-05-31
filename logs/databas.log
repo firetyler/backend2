@@ -763,3 +763,131 @@
 2025-05-30 18:02:43,935 | INFO | DatabaseConnector | Conversation saved successfully.
 2025-05-30 18:05:20,449 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
 2025-05-30 21:56:17,459 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-30 23:26:16,493 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-30 23:27:09,439 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-30 23:29:18,093 | INFO | DatabaseConnector | Database connection established.
+2025-05-30 23:29:18,104 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-30 23:29:18,157 | INFO | DatabaseConnector | Database connection established.
+2025-05-30 23:29:18,159 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-30 23:29:18,210 | INFO | DatabaseConnector | Database connection established.
+2025-05-30 23:29:18,213 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-30 23:38:40,523 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-30 23:39:00,396 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-30 23:41:41,042 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-30 23:43:56,562 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-30 23:45:22,355 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-30 23:47:46,828 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-30 23:48:18,376 | INFO | DatabaseConnector | Database connection established.
+2025-05-30 23:48:18,391 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-30 23:48:18,441 | INFO | DatabaseConnector | Database connection established.
+2025-05-30 23:48:18,444 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-30 23:48:18,588 | INFO | DatabaseConnector | Database connection established.
+2025-05-30 23:48:18,590 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-30 23:49:55,007 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-30 23:50:27,923 | INFO | DatabaseConnector | Database connection established.
+2025-05-30 23:50:27,933 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-30 23:50:27,984 | INFO | DatabaseConnector | Database connection established.
+2025-05-30 23:50:27,987 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-30 23:50:28,034 | INFO | DatabaseConnector | Database connection established.
+2025-05-30 23:50:28,037 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-30 23:50:53,813 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-30 23:55:32,950 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-30 23:56:10,034 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-30 23:56:33,709 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-30 23:58:33,755 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-31 00:01:13,067 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-31 00:03:49,530 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-31 00:04:46,403 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-31 00:06:23,856 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-31 00:09:35,137 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-31 00:09:58,823 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-31 00:10:21,480 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-31 00:10:34,482 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-31 00:11:59,826 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-31 00:12:34,964 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-31 00:14:09,072 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-31 00:15:26,138 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-31 00:15:49,989 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-31 00:16:26,612 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-31 00:18:19,056 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-31 00:20:08,284 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-31 00:20:36,727 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-31 00:21:27,113 | INFO | DatabaseConnector | Database connection established.
+2025-05-31 00:21:27,117 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-31 00:21:27,165 | INFO | DatabaseConnector | Database connection established.
+2025-05-31 00:21:27,168 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-31 00:21:27,212 | INFO | DatabaseConnector | Database connection established.
+2025-05-31 00:21:27,215 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-31 00:21:57,603 | INFO | DatabaseConnector | Database connection established.
+2025-05-31 00:21:57,607 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-31 00:21:57,662 | INFO | DatabaseConnector | Database connection established.
+2025-05-31 00:21:57,665 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-31 00:21:57,715 | INFO | DatabaseConnector | Database connection established.
+2025-05-31 00:21:57,718 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-31 00:22:13,826 | INFO | DatabaseConnector | Database connection established.
+2025-05-31 00:22:13,836 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-31 00:22:13,901 | INFO | DatabaseConnector | Database connection established.
+2025-05-31 00:22:13,905 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-31 00:22:13,962 | INFO | DatabaseConnector | Database connection established.
+2025-05-31 00:22:13,964 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-31 00:22:56,586 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-31 01:41:12,040 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-31 01:41:28,866 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-31 01:42:24,246 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-31 01:43:15,783 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-31 01:45:50,562 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-31 01:53:56,083 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-31 01:55:30,004 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-31 01:56:32,487 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-31 01:58:54,010 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-31 02:09:58,093 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-31 02:13:35,864 | INFO | DatabaseConnector | Database connection established.
+2025-05-31 02:13:35,878 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-31 02:13:35,932 | INFO | DatabaseConnector | Database connection established.
+2025-05-31 02:13:35,932 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-31 02:13:35,989 | INFO | DatabaseConnector | Database connection established.
+2025-05-31 02:13:35,989 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-31 02:13:51,906 | INFO | DatabaseConnector | Database connection established.
+2025-05-31 02:13:51,914 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-31 02:13:51,973 | INFO | DatabaseConnector | Database connection established.
+2025-05-31 02:13:51,973 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-31 02:13:52,030 | INFO | DatabaseConnector | Database connection established.
+2025-05-31 02:13:52,033 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-31 02:14:08,579 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-31 02:15:38,542 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-31 02:16:02,305 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-31 02:16:21,173 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-31 02:21:47,662 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-31 02:22:02,860 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-31 02:22:44,903 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-31 02:23:04,444 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-31 02:23:45,644 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-31 02:25:10,567 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-31 02:27:24,631 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-31 02:29:25,921 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-31 02:53:02,854 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-31 02:58:59,427 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-31 03:04:02,385 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-31 04:01:03,741 | INFO | DatabaseConnector | Database connection established.
+2025-05-31 04:01:03,754 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-31 04:01:03,809 | INFO | DatabaseConnector | Database connection established.
+2025-05-31 04:01:03,812 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-31 04:01:03,860 | INFO | DatabaseConnector | Database connection established.
+2025-05-31 04:01:03,866 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-31 04:01:25,726 | INFO | DatabaseConnector | Database connection established.
+2025-05-31 04:01:25,738 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-31 04:01:25,789 | INFO | DatabaseConnector | Database connection established.
+2025-05-31 04:01:25,791 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-31 04:01:25,848 | INFO | DatabaseConnector | Database connection established.
+2025-05-31 04:01:25,850 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-31 04:01:53,196 | INFO | DatabaseConnector | Database connection established.
+2025-05-31 04:01:53,208 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-31 04:01:53,253 | INFO | DatabaseConnector | Database connection established.
+2025-05-31 04:01:53,258 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-31 04:01:53,307 | INFO | DatabaseConnector | Database connection established.
+2025-05-31 04:01:53,310 | INFO | DatabaseConnector | Conversation saved successfully.
+2025-05-31 13:05:13,119 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-31 13:05:59,808 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-31 13:06:33,066 | INFO | DatabaseConnector | DatabaseConnector initialized: host=localhost, port=5432, dbname=backenddb, user=springuser
+2025-05-31 13:18:26,651 | INFO | DatabaseConnector | Database connection established.
+2025-05-31 13:18:26,664 | INFO | DatabaseConnector | Conversation saved successfully.

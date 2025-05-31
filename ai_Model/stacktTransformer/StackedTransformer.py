@@ -1,102 +1,57 @@
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
-import math
 
 class PositionalEncoding(nn.Module):
-    def __init__(self, embed_size, max_len=512, learned=False):
+    def __init__(self, d_model, dropout=0.1, max_len=5000):
         super().__init__()
-        self.learned = learned
-
-        if learned:
-            self.pe = nn.Parameter(torch.randn(1, max_len, embed_size))
-        else:
-            pe = torch.zeros(max_len, embed_size)
-            position = torch.arange(0, max_len).unsqueeze(1)
-            div_term = torch.exp(torch.arange(0, embed_size, 2) * -(math.log(10000.0) / embed_size))
-            pe[:, 0::2] = torch.sin(position * div_term)
-            pe[:, 1::2] = torch.cos(position * div_term)
-            self.register_buffer("pe", pe.unsqueeze(0))  # shape: (1, max_len, embed_size)
+        self.dropout = nn.Dropout(dropout)
+        position = torch.arange(max_len).unsqueeze(1)
+        div_term = torch.exp(torch.arange(0, d_model, 2) * (-torch.log(torch.tensor(10000.0)) / d_model))
+        pe = torch.zeros(1, max_len, d_model)
+        pe[0, :, 0::2] = torch.sin(position * div_term)
+        pe[0, :, 1::2] = torch.cos(position * div_term)
+        self.register_buffer("pe", pe)
 
     def forward(self, x):
-        return x + self.pe[:, :x.size(1)] if not self.learned else x + self.pe[:, :x.size(1), :]
+        x = x + self.pe[:, :x.size(1)]
+        return self.dropout(x)
 
-
-class StackedTransformer(nn.Module):
-    def __init__(
-        self,
-        vocab_size,
-        embed_size=256,
-        num_layers=6,
-        num_heads=8,
-        dropout=0.1,
-        max_len=512,
-        forward_expansion=4,
-        learned_positional_encoding=True,
-        pooling="cls"  # 'cls', 'mean', 'max'
-    ):
+class TransformerBlock(nn.Module):
+    def __init__(self, embed_size, heads, dropout, forward_expansion):
         super().__init__()
-
-        self.pooling = pooling
-        self.embed_size = embed_size
-
-        # Embeddings
-        self.token_embedding = nn.Embedding(vocab_size, embed_size, padding_idx=0)
-        self.position_encoding = PositionalEncoding(embed_size, max_len=max_len, learned=learned_positional_encoding)
-
-        # CLS token
-        self.cls_token = nn.Parameter(torch.randn(1, 1, embed_size)) if pooling == "cls" else None
+        self.attention = nn.MultiheadAttention(embed_size, heads, dropout=dropout, batch_first=True)
+        self.norm1 = nn.LayerNorm(embed_size)
+        self.norm2 = nn.LayerNorm(embed_size)
+        self.feed_forward = nn.Sequential(
+            nn.Linear(embed_size, forward_expansion * embed_size),
+            nn.ReLU(),
+            nn.Linear(forward_expansion * embed_size, embed_size),
+        )
         self.dropout = nn.Dropout(dropout)
 
-        # Transformer Encoder
-        encoder_layer = nn.TransformerEncoderLayer(
-            d_model=embed_size,
-            nhead=num_heads,
-            dim_feedforward=embed_size * forward_expansion,
-            dropout=dropout,
-            activation='gelu',
-            batch_first=True
+    def forward(self, value, key, query, mask):
+        attn_output, _ = self.attention(query, key, value, attn_mask=mask)
+        x = self.dropout(self.norm1(attn_output + query))
+        forward = self.feed_forward(x)
+        out = self.dropout(self.norm2(forward + x))
+        return out
+
+class AdvancedStackedTransformer(nn.Module):
+    def __init__(self, vocab_size, embed_size=512, num_layers=8, heads=8, forward_expansion=4, dropout=0.1):
+        super().__init__()
+        self.embedding = nn.Embedding(vocab_size, embed_size)
+        self.positional_encoding = PositionalEncoding(embed_size, dropout)
+
+        self.layers = nn.ModuleList(
+            [TransformerBlock(embed_size, heads, dropout, forward_expansion) for _ in range(num_layers)]
         )
-        self.encoder = nn.TransformerEncoder(encoder_layer, num_layers=num_layers)
         self.norm = nn.LayerNorm(embed_size)
+        self.fc_out = nn.Linear(embed_size, vocab_size)
 
-        # Output projection
-        self.projection = nn.Linear(embed_size, embed_size)
-
-    def forward(self, input_ids, attention_mask=None):
-        B, S = input_ids.shape
-
-        x = self.token_embedding(input_ids)
-        x = self.position_encoding(x)
-
-        # Prepend CLS token if used
-        if self.cls_token is not None:
-            cls = self.cls_token.expand(B, 1, -1)
-            x = torch.cat([cls, x], dim=1)
-            if attention_mask is not None:
-                cls_mask = torch.ones(B, 1, device=attention_mask.device, dtype=attention_mask.dtype)
-                attention_mask = torch.cat([cls_mask, attention_mask], dim=1)
-
-        key_padding_mask = (attention_mask == 0) if attention_mask is not None else None
-
-        x = self.dropout(x)
-        x = self.encoder(x, src_key_padding_mask=key_padding_mask)
+    def forward(self, x, mask=None):
+        x = self.embedding(x)
+        x = self.positional_encoding(x)
+        for layer in self.layers:
+            x = layer(x, x, x, mask)
         x = self.norm(x)
-
-        # Pooling
-        if self.pooling == "cls":
-            x = x[:, 0]
-        elif self.pooling == "mean":
-            if attention_mask is not None:
-                mask = attention_mask.unsqueeze(-1).float()
-                x = (x * mask).sum(dim=1) / mask.sum(dim=1).clamp(min=1e-9)
-            else:
-                x = x.mean(dim=1)
-        elif self.pooling == "max":
-            if attention_mask is not None:
-                x = x.masked_fill((attention_mask == 0).unsqueeze(-1), float("-inf"))
-            x = x.max(dim=1).values
-        else:
-            raise ValueError(f"Unknown pooling mode: {self.pooling}")
-
-        return self.projection(x)
+        return self.fc_out(x)
