@@ -7814,3 +7814,11 @@
 2025-05-31 13:18:26,222 | INFO | aether2 | Tokenizer vocab reloaded with 300 tokens.
 2025-05-31 13:18:26,456 | INFO | aether2 | Model reloaded and ready for inference.
 2025-05-31 13:18:26,502 | INFO | aether2 | Training finished.
+2025-05-31 14:25:16,065 | INFO | aether2 | Vocab loaded with size: 300
+2025-05-31 14:25:16,066 | INFO | aether2 | Token embedding initialized with vocab size: 300
+2025-05-31 14:25:16,275 | INFO | aether2 | Model loaded successfully from aether_model.pth.
+2025-05-31 14:25:30,409 | INFO | aether2 | Vocab loaded with size: 300
+2025-05-31 14:25:30,410 | INFO | aether2 | Token embedding initialized with vocab size: 300
+2025-05-31 14:25:30,606 | INFO | aether2 | Model loaded successfully from aether_model.pth.
+2025-05-31 14:26:07,127 | INFO | aether2 | GOAL: what´s is the capital of sweden ?
+2025-05-31 14:26:07,146 | INFO | aether2 | Tokenized input: [1, 156, 157, 50, 77, 158, 159, 98, 2]

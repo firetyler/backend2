@@ -13,7 +13,7 @@ sys.stdout.reconfigure(encoding='utf-8')  # Forces UTF-8 output
 from DatabaseConnector import DatabaseConnector
 from logger_setup import get_logger
 from code_executor import CodeExecutor
-from ai_Model.Traning.train_model import Trainer
+
 
 logger = get_logger("aether2")
 class ChatDataset(Dataset):
