@@ -4,6 +4,9 @@
 
 This is a full-stack backend project developed in **Java (Spring Boot)** with an integrated **AI module written in Python**, and **PostgreSQL** as the database. The system is designed for intelligent data processing and decision-making.
 
+
+
+To get GUI downlod the grafiks https://github.com/firetyler/frontend.git this is a simpel version of grafiks to check if model is working this is needed to talk to the model. you can use your on grafiks if you want just use the same ports as in my test verison. 
 ---
 
 ## 🚀 Features
